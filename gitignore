@@ -1,0 +1,36 @@
+# Compilados
+*.class
+*.jar
+*.war
+*.ear
+target/
+bin/
+build/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+*.launch
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+gradlew
+gradlew.bat
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE genéricos (caso use outra além do Eclipse)
+.idea/
+*.iml
