@@ -1,4 +1,4 @@
-package main.models;
+package main.modelos;
 
 public class Curriculo {
 

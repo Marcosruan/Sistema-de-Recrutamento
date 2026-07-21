@@ -1,4 +1,4 @@
-package main.models.enums;
+package main.modelos.enums;
 
 public enum TipoUsuario {
 

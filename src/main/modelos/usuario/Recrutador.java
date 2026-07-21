@@ -1,4 +1,4 @@
-package main.models.usuario;
+package main.modelos.usuario;
 
 public class Recrutador {
 

@@ -1,4 +1,4 @@
-package main.models.interfaces;
+package main.modelos.interfaces;
 
 public interface ControleAcesso {
 
