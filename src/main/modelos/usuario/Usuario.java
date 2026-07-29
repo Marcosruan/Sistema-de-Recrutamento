@@ -2,6 +2,8 @@ package main.modelos.usuario;
 
 import java.util.Objects;
 
+import main.modelos.enums.TipoUsuario;
+
 public abstract class Usuario {
 	private String nome;
 	private String cpf;
@@ -33,6 +35,8 @@ public abstract class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	public abstract TipoUsuario getTipo();
 	
 	@Override
 	public int hashCode() {
