@@ -14,25 +14,31 @@ public abstract class Usuario {
 		this.email = email;
 		this.senha = senha;
 	}
+	
 	public boolean altenticar(String email,String senha) {
 		if(this.email.equals(email) && this.senha.equals(senha)) {
 			return true;
 		}
 		return false;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(cpf);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,6 +50,4 @@ public abstract class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
-	
-	
 }
