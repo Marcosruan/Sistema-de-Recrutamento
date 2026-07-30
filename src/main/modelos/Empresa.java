@@ -1,6 +1,5 @@
 package main.modelos;
 
-
 import main.modelos.interfaces.ControleAcesso;
 import main.modelos.usuario.Usuario;
 
@@ -22,17 +21,17 @@ public class Empresa implements ControleAcesso {
     }
 
     @Override
-    public boolean podeVisualizarUsuario(Usuario usuario) {
+    public boolean podeVisualizar() {
         return false;
     }
 
     @Override
-    public boolean podeEditar(Usuario usuario) {
+    public boolean podeEditar() {
         return false;
     }
 
     @Override
-    public boolean podeRemover(Usuario usuario) {
+    public boolean podeRemover() {
         return false;
     }
 }
