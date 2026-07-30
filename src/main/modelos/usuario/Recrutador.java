@@ -1,5 +1,43 @@
 package main.modelos.usuario;
 
-public class Recrutador {
+import java.util.ArrayList;
+import java.util.List;
 
+import main.modelos.Empresa;
+import main.modelos.Vaga;
+import main.modelos.enums.TipoUsuario;
+
+public class Recrutador extends Usuario{
+
+	private Empresa empresa;
+	private List<Vaga> vagasCriadas;
+	
+	public Recrutador(String nome, String cpf, String email, String senha, Empresa empresa) {
+		super(nome, cpf, email, senha);
+		this.empresa = empresa;
+		this.vagasCriadas = new ArrayList<Vaga>();
+	}
+
+	@Override
+	public TipoUsuario getTipo() {
+		return TipoUsuario.RECRUTADOR;
+	}
+	
+	public boolean cadastrarVaga(Vaga vaga) {
+		return vagasCriadas.add(vaga);
+	}
+	
+	public boolean editarVaga(int indice, Vaga vaga) {
+		if(indice >= 0 && indice < vagasCriadas.size()) {
+			vagasCriadas.set(indice, vaga);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean removerVaga(Vaga vaga) {
+		return vagasCriadas.remove(vaga);
+	}
+	
 }
