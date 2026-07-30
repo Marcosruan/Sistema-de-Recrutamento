@@ -1,6 +1,6 @@
 package main.modelos.usuario;
 
-import java.util.Objects;
+public class Usuario {
 
 import main.modelos.enums.TipoUsuario;
 
