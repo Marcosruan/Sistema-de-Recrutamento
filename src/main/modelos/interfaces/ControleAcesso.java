@@ -4,9 +4,9 @@ import main.modelos.usuario.Usuario;
 
 public interface ControleAcesso {
 
-	boolean podeVisualizarUsuario(Usuario usuario);
+	boolean podeVisualizar();
 	
-	boolean podeEditar(Usuario usuario);
+	boolean podeEditar();
 	
-	boolean podeRemover(Usuario usuario);
+	boolean podeRemover();
 }
