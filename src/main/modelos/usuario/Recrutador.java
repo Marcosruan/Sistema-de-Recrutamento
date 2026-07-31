@@ -3,8 +3,10 @@ package main.modelos.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.modelos.Candidatura;
 import main.modelos.Empresa;
 import main.modelos.Vaga;
+import main.modelos.enums.StatusCandidatura;
 import main.modelos.enums.TipoUsuario;
 
 public class Recrutador extends Usuario{
@@ -28,7 +30,7 @@ public class Recrutador extends Usuario{
 	}
 	
 	public boolean editarVaga(int indice, Vaga vaga) {
-		if(indice >= 0 && indice < vagasCriadas.size()) {
+		if((indice >= 0 && indice < vagasCriadas.size()) && vaga != null ) {
 			vagasCriadas.set(indice, vaga);
 			return true;
 		}
@@ -40,4 +42,15 @@ public class Recrutador extends Usuario{
 		return vagasCriadas.remove(vaga);
 	}
 	
+	public boolean alterarStatusCandidatura(Candidatura candidatura, StatusCandidatura status) {
+		return candidatura.alterarStatus(status);
+	}
+	
+	public String visualizarCandidatosDaEmpresa() {
+		String relatorio = "";
+		
+		for(Vaga v : vagasCriadas) {
+			// TODO
+		}
+	}
 }
