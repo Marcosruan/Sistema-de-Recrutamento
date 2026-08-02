@@ -46,11 +46,14 @@ public class Recrutador extends Usuario{
 		return candidatura.alterarStatus(status);
 	}
 	
-	public String visualizarCandidatosDaEmpresa() {
+	public String visualizarCandidatosDaEmpresa(Vaga vaga) {
 		String relatorio = "";
+		List<String> inscritos = vaga.getCandidatos();
 		
-		for(Vaga v : vagasCriadas) {
-			// TODO
+		for(String v : inscritos) {
+			relatorio += v;
 		}
+		
+		return relatorio;
 	}
 }
