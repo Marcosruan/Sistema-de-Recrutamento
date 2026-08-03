@@ -14,10 +14,22 @@ public class Recrutador extends Usuario{
 	private Empresa empresa;
 	private List<Vaga> vagasCriadas;
 	
-	public Recrutador(String nome, String cpf, String email, String senha, Empresa empresa) {
+	public Recrutador(String nome, String cpf, String email, String senha, Empresa empresa) throws Exception {
 		super(nome, cpf, email, senha);
+		if(empresa == null) {
+			throw new Exception("Empresa inválida");
+		}
+		
 		this.empresa = empresa;
 		this.vagasCriadas = new ArrayList<Vaga>();
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	@Override
