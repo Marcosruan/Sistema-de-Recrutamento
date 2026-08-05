@@ -1,10 +1,13 @@
 package main.modelos.interfaces;
 
+import main.modelos.usuario.Usuario;
+
 public interface ControleAcesso {
 
-	boolean podeVisualizar();
+	boolean podeVisualizar(Usuario usuario);
 	
-	boolean podeEditar();
+	boolean podeEditar(Usuario usuario);
 	
-	boolean podeRemover();
+	boolean podeRemover(Usuario usuario);
+
 }

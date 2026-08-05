@@ -6,22 +6,20 @@ import main.modelos.enums.TipoUsuario;
 
 
 public abstract class Usuario {
-	private String nome;
-	private String cpf;
-	private String email;
-	private String senha;
+	protected String nome;
+	protected String cpf;
+	protected String email;
+	protected String senha;
 	
-	public Usuario(String nome,String cpf,String email,String senha) {
+	public Usuario(String nome, String cpf, String email, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
 	}
 	
-	public boolean altenticar(String email,String senha) {
-		if(this.email.equals(email) && this.senha.equals(senha)) {
-			return true;
-		}
+	public boolean autenticar(String senha) {
+		if(this.senha.equals(senha)) return true;
 		return false;
 	}
 	

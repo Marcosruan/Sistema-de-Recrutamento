@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.modelos.Candidatura;
-import main.modelos.Empresa;
 import main.modelos.Vaga;
 import main.modelos.enums.StatusCandidatura;
 import main.modelos.enums.TipoUsuario;
 
 public class Recrutador extends Usuario{
 
-	private Empresa empresa;
+	private String empresa;
 	private List<Vaga> vagasCriadas;
 	
-	public Recrutador(String nome, String cpf, String email, String senha, Empresa empresa) throws Exception {
+	public Recrutador(String nome, String cpf, String email, String senha, String empresa) throws Exception {
 		super(nome, cpf, email, senha);
 		if(empresa == null) {
 			throw new Exception("Empresa inválida");
@@ -24,11 +23,11 @@ public class Recrutador extends Usuario{
 		this.vagasCriadas = new ArrayList<Vaga>();
 	}
 	
-	public Empresa getEmpresa() {
+	public String getEmpresa() {
 		return empresa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
 

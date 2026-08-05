@@ -1,5 +1,107 @@
 package main.modelos;
 
-public class Vaga {
+import java.util.ArrayList;
+import java.util.List;
 
+import main.modelos.interfaces.ControleAcesso;
+import main.modelos.usuario.Candidato;
+import main.modelos.usuario.Usuario;
+
+public class Vaga implements ControleAcesso{
+	
+	private String codigo;
+	private String titulo;
+	private String descricao;
+	private String requisitos;
+	private double salario;
+	private String cidade;
+	private String empresa;
+	private boolean aberta;
+	private List<Candidato> candidatos;
+	
+	public Vaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
+		this.codigo = codigo;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.requisitos = requisitos;
+		this.salario = salario;
+		this.cidade = cidade;
+		this.empresa = empresa;
+		this.aberta = aberta;
+		this.candidatos = new ArrayList<Candidato>();
+	}
+
+	public void abrirVaga() {
+		this.aberta = true;
+	}
+	
+	public void fecharVaga() {
+		this.aberta = true;
+	}
+
+	@Override
+	public boolean podeVisualizar(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean podeEditar(Usuario usuario) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean podeRemover(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getRequisitos() {
+		return requisitos;
+	}
+
+	public void setRequisitos(String requisitos) {
+		this.requisitos = requisitos;
+	}
+
+	public double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(double salario) {
+		this.salario = salario;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	
+	public List<Candidato> getCandidatos() {
+		return candidatos;
+	}
 }
