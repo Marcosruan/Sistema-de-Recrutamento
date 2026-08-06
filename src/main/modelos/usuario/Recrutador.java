@@ -7,16 +7,17 @@ import main.modelos.Candidatura;
 import main.modelos.Vaga;
 import main.modelos.enums.StatusCandidatura;
 import main.modelos.enums.TipoUsuario;
+import main.modelos.interfaces.ControleAcesso;
 
-public class Recrutador extends Usuario{
+public class Recrutador extends Usuario {
 
 	private String empresa;
 	private List<Vaga> vagasCriadas;
 	
-	public Recrutador(String nome, String cpf, String email, String senha, String empresa) throws Exception {
+	public Recrutador(String nome, String cpf, String email, String senha, String empresa) throws IllegalArgumentException {
 		super(nome, cpf, email, senha);
 		if(empresa == null) {
-			throw new Exception("Empresa inválida");
+			throw new IllegalArgumentException("Empresa inválida");
 		}
 		
 		this.empresa = empresa;

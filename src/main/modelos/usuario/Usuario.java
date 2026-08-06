@@ -6,6 +6,7 @@ import main.modelos.enums.TipoUsuario;
 
 
 public abstract class Usuario {
+	
 	protected String nome;
 	protected String cpf;
 	protected String email;

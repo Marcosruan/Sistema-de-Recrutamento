@@ -3,11 +3,11 @@ package main.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.modelos.interfaces.ControleAcesso;
+import main.modelos.enums.TipoUsuario;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Usuario;
 
-public class Vaga implements ControleAcesso{
+public class Vaga {
 	
 	private String codigo;
 	private String titulo;
@@ -17,9 +17,9 @@ public class Vaga implements ControleAcesso{
 	private String cidade;
 	private String empresa;
 	private boolean aberta;
-	private List<Candidato> candidatos;
+	private List<Candidatura> candidaturas;
 	
-	public Vaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
+	public Vaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -27,8 +27,8 @@ public class Vaga implements ControleAcesso{
 		this.salario = salario;
 		this.cidade = cidade;
 		this.empresa = empresa;
-		this.aberta = aberta;
-		this.candidatos = new ArrayList<Candidato>();
+		this.aberta = true;
+		this.candidaturas = new ArrayList<Candidatura>();
 	}
 
 	public void abrirVaga() {
@@ -37,24 +37,6 @@ public class Vaga implements ControleAcesso{
 	
 	public void fecharVaga() {
 		this.aberta = true;
-	}
-
-	@Override
-	public boolean podeVisualizar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean podeEditar(Usuario usuario) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean podeRemover(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public String getCodigo() {
@@ -101,7 +83,7 @@ public class Vaga implements ControleAcesso{
 		this.cidade = cidade;
 	}
 	
-	public List<Candidato> getCandidatos() {
-		return candidatos;
+	public List<Candidatura> getCandidatos() {
+		return candidaturas;
 	}
 }

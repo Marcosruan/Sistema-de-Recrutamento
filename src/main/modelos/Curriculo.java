@@ -5,11 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import main.modelos.interfaces.ControleAcesso;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Usuario;
 
-public class Curriculo implements ControleAcesso{
+public class Curriculo {
 	private String formacao;
 	private String experiencia;
 	private Set<String> habilidades;
@@ -51,23 +50,5 @@ public class Curriculo implements ControleAcesso{
 	
 	public void adicionarIdioma(String[] idiomas) {
 		
-	}
-
-	@Override
-	public boolean podeVisualizar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean podeEditar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean podeRemover(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

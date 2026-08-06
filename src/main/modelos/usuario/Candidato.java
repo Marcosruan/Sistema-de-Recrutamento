@@ -7,7 +7,7 @@ import main.modelos.Candidatura;
 import main.modelos.Curriculo;
 import main.modelos.enums.TipoUsuario;
 
-public class Candidato extends Usuario{
+public class Candidato extends Usuario {
 	
 	private Curriculo curriculo;
 	private List<Candidatura> candidaturas;
@@ -27,5 +27,4 @@ public class Candidato extends Usuario{
 	public TipoUsuario getTipo() {
 		return TipoUsuario.CANDIDATO;
 	}
-
 }

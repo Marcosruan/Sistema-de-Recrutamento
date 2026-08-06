@@ -1,8 +1,6 @@
 package main.modelos;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import main.modelos.enums.TipoUsuario;
@@ -12,12 +10,12 @@ import main.modelos.usuario.Usuario;
 
 public class Sistema {
 	private Map<String, Usuario> usuarios;
-	private List<Vaga> vagas;
+	private Map<String, Vaga> vagas;
 	private Usuario usuarioLogado;
 	
 	public Sistema() {
 		this.usuarios = new HashMap<String, Usuario>();
-		this.vagas = new ArrayList<Vaga>();
+		this.vagas = new HashMap<String, Vaga>();
 	}
 	
 	
@@ -26,7 +24,7 @@ public class Sistema {
 			Usuario novoUsuario = new Candidato(nome, cpf, email, senha);
 			usuarios.put(email, novoUsuario);
 			return true;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -37,7 +35,7 @@ public class Sistema {
 			Usuario novoUsuario = new Recrutador(nome, cpf, email, senha, empresa);
 			usuarios.put(email, novoUsuario);
 			return true;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -51,39 +49,33 @@ public class Sistema {
 				return true;
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 	}
 	
-	//seção do recrutador
-
 	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa, aberta);
-				return vagas.add(novaVaga);		
-			}
-			return false;
-		} catch (Exception e) {
+			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+			vagas.put(codigo, novaVaga);
+			return true;
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
-		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						vaga.setTitulo(novoTitulo);
-						return true;
-					}
+		try {	
+			for (Vaga vaga: vagas) {
+				if (vaga.getCodigo() == codigo) {
+					vaga.setTitulo(novoTitulo);
+					return true;
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -100,7 +92,7 @@ public class Sistema {
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -117,7 +109,7 @@ public class Sistema {
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -134,7 +126,7 @@ public class Sistema {
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -145,7 +137,8 @@ public class Sistema {
 			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
 				for (Vaga vaga: vagas) {
 					if (vaga.getCodigo() == codigo) {
-						if (vaga.podeEditar(usuarioLogado)) {
+						
+						if (controle.podeEditarVaga()) {
 							vaga.setCidade(novoCidade);
 							return true;							
 						}
@@ -153,7 +146,7 @@ public class Sistema {
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -170,7 +163,7 @@ public class Sistema {
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -187,7 +180,7 @@ public class Sistema {
 				}
 			}
 			return false;
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
