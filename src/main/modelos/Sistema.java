@@ -3,7 +3,6 @@ package main.modelos;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.modelos.enums.TipoUsuario;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Recrutador;
 import main.modelos.usuario.Usuario;
@@ -68,12 +67,7 @@ public class Sistema {
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
 		try {	
-			for (Vaga vaga: vagas) {
-				if (vaga.getCodigo() == codigo) {
-					vaga.setTitulo(novoTitulo);
-					return true;
-				}
-			}
+			vagas.get(codigo).setTitulo(novoTitulo);
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -83,14 +77,7 @@ public class Sistema {
 	
 	public boolean alterarDescricaoVaga(String codigo, String novoDescricao) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						vaga.setDescricao(novoDescricao);
-						return true;
-					}
-				}
-			}
+			vagas.get(codigo).setDescricao(novoDescricao);
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -100,14 +87,7 @@ public class Sistema {
 	
 	public boolean alterarRequisitosVaga(String codigo, String novoRequisitos) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						vaga.setRequisitos(novoRequisitos);
-						return true;
-					}
-				}
-			}
+			vagas.get(codigo).setRequisitos(novoRequisitos);
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -117,14 +97,7 @@ public class Sistema {
 	
 	public boolean alterarSalarioVaga(String codigo, double novoSalario) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						vaga.setSalario(novoSalario);
-						return true;
-					}
-				}
-			}
+			vagas.get(codigo).setSalario(novoSalario);
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -134,17 +107,7 @@ public class Sistema {
 	
 	public boolean alterarCidadeVaga(String codigo, String novoCidade) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						
-						if (controle.podeEditarVaga()) {
-							vaga.setCidade(novoCidade);
-							return true;							
-						}
-					}
-				}
-			}
+			vagas.get(codigo).setCidade(novoCidade);
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -154,14 +117,7 @@ public class Sistema {
 	
 	public boolean abrirVaga(String codigo) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						vaga.abrirVaga();
-						return true;
-					}
-				}
-			}
+			vagas.get(codigo).abrirVaga();
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -171,14 +127,7 @@ public class Sistema {
 	
 	public boolean fecharVaga(String codigo) {
 		try {
-			if (usuarioLogado.getTipo() == TipoUsuario.RECRUTADOR) {
-				for (Vaga vaga: vagas) {
-					if (vaga.getCodigo() == codigo) {
-						vaga.fecharVaga();
-						return true;
-					}
-				}
-			}
+			vagas.get(codigo).fecharVaga();
 			return false;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());

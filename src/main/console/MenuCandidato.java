@@ -3,16 +3,22 @@ package main.console;
 import main.controlador.Controlador;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
 
-public class MenuCandidato implements EstrategiaMenuUsuario{
+public class MenuCandidato implements EstrategiaMenuUsuario {
 
+	private Controlador controlador;
+	
+	public MenuCandidato(Controlador controlador) {
+		this.controlador = controlador;
+	}
+	
 	@Override
-	public void menu(Controlador controlador) {
+	public void menu() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void cadastrar(Controlador controlador) {
+	public void cadastrar() {
 		// TODO Auto-generated method stub
 		
 	}

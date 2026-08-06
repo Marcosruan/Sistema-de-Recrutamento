@@ -33,7 +33,7 @@ public class SistemaConsole {
 		String senha = Main.lerTexto("Senha: ");
 		boolean sucesso = controlador.login(email, senha);
 		if (sucesso) {
-			estrategia.menu(controlador);		
+			estrategia.menu();
 		} else {
 			System.out.println("Não foi possível fazer login.");
 		}
@@ -41,7 +41,7 @@ public class SistemaConsole {
 	
 	private void cadastrarUsuario() {
 		escolherTipo();
-		estrategia.cadastrar(controlador);
+		estrategia.cadastrar();
 	}
 
 	private void escolherTipo() {
@@ -50,8 +50,8 @@ public class SistemaConsole {
 			exibirTipos();
 			opcao = Main.lerInteiro("Sua escolha: ");
 			switch (opcao) {
-			case 1 -> mudarEstrategia(new MenuCandidato());
-			case 2 -> mudarEstrategia(new MenuRecrutador());
+			case 1 -> mudarEstrategia(new MenuCandidato(controlador));
+			case 2 -> mudarEstrategia(new MenuRecrutador(controlador));
 			default -> System.out.println("Opção inválida.");
 			}
 		} while(opcao <= 0 || opcao > 2);
