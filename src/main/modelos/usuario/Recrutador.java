@@ -7,7 +7,6 @@ import main.modelos.Candidatura;
 import main.modelos.Vaga;
 import main.modelos.enums.StatusCandidatura;
 import main.modelos.enums.TipoUsuario;
-import main.modelos.interfaces.ControleAcesso;
 
 public class Recrutador extends Usuario {
 
@@ -60,9 +59,9 @@ public class Recrutador extends Usuario {
 	
 	public String visualizarCandidatosDaVaga(Vaga vaga) {
 		String relatorio = "";
-		List<Candidato> inscritos = vaga.getCandidatos();
+		List<Candidatura> inscritos = vaga.getCandidaturas();
 		
-		for(Candidato v : inscritos) {
+		for(Candidatura v : inscritos) {
 			relatorio += v.toString() + "\n";
 		}
 		

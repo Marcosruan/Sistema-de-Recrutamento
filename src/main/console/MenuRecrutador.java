@@ -8,13 +8,15 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	public MenuRecrutador() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void exibirMenu() {
 
+	@Override
+	public void menu(Controlador controlador) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void escolha(int opcao, Controlador controlador) {
+	public void cadastrar(Controlador controlador) {
 		// TODO Auto-generated method stub
 		
 	}

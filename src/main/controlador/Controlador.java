@@ -10,7 +10,11 @@ public class Controlador {
 		this.sistema = new Sistema();
 	}
 	
-	public boolean cadastrarCandidato(String nome,String cpf,String email,String senha) {
+	public boolean cadastrarCandidato(String nome, String cpf, String email, String senha) {
 		return sistema.cadastrarCandidato(nome, cpf, email, senha);
+	}
+	
+	public boolean login(String email, String senha) {
+		return sistema.login(email, senha);
 	}
 }

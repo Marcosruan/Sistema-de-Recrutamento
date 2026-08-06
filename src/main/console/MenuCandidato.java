@@ -6,13 +6,13 @@ import main.modelos.interfaces.EstrategiaMenuUsuario;
 public class MenuCandidato implements EstrategiaMenuUsuario{
 
 	@Override
-	public void exibirMenu() {
+	public void menu(Controlador controlador) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void escolha(int opcao, Controlador controlador) {
+	public void cadastrar(Controlador controlador) {
 		// TODO Auto-generated method stub
 		
 	}

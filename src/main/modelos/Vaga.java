@@ -83,7 +83,7 @@ public class Vaga {
 		this.cidade = cidade;
 	}
 	
-	public List<Candidatura> getCandidatos() {
+	public List<Candidatura> getCandidaturas() {
 		return candidaturas;
 	}
 }
