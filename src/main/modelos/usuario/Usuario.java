@@ -32,16 +32,39 @@ public abstract class Usuario {
 		return idade;
 	}
 	
+	public void setNome(String nome) throws IllegalArgumentException{
+		if(nome.isBlank() || nome == null) {
+			throw new IllegalArgumentException("Nome inválido");
+		}
+		this.nome = nome;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) throws IllegalArgumentException{
+		if(senha.isBlank() || senha == null) {
+			throw new IllegalArgumentException("Senha inválida");
+		}
+		if(senha.equals(this.senha)) {
+			throw new IllegalArgumentException("Nova senha igual a anterior");
+		}
+		
+		this.senha = senha;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 	
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public abstract String toSummaryString();
+	
+	@Override
+	public String toString() {
+		return "Nome: " + nome + " | CPF: " + cpf + " | Email: " + email + " | Senha: " + senha;
 	}
-	
-	public abstract TipoUsuario getTipo();
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(cpf);

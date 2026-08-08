@@ -1,8 +1,10 @@
 package main.modelos;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import main.modelos.enums.StatusCandidatura;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Recrutador;
 import main.modelos.usuario.Usuario;
@@ -18,9 +20,9 @@ public class Sistema {
 	}
 	
 	
-	public boolean cadastrarCandidato(String nome, String cpf, String email, String senha) {
+	public boolean cadastrarCandidato(String nome, int idade, String cpf, String email, String senha) {
 		try {
-			Usuario novoUsuario = new Candidato(nome, cpf, email, senha);
+			Usuario novoUsuario = new Candidato(nome, idade, cpf, email, senha);
 			usuarios.put(email, novoUsuario);
 			return true;
 		} catch (IllegalArgumentException e) {
@@ -29,9 +31,9 @@ public class Sistema {
 		}
 	}
 	
-	public boolean cadastrarRecrutador(String nome, String cpf, String email, String senha, String empresa) {
+	public boolean cadastrarRecrutador(String nome, int idade, String cpf, String email, String senha, String empresa) {
 		try {
-			Usuario novoUsuario = new Recrutador(nome, cpf, email, senha, empresa);
+			Usuario novoUsuario = new Recrutador(nome, idade, cpf, email, senha, empresa);
 			usuarios.put(email, novoUsuario);
 			return true;
 		} catch (IllegalArgumentException e) {
@@ -48,6 +50,42 @@ public class Sistema {
 				return true;
 			}
 			return false;
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	public String exibirDadosDoUsuario() {
+		return usuarioLogado.toString();
+	}
+	
+	public boolean alterarNome(String novoNome) {
+		try {
+			usuarioLogado.setNome(novoNome);
+			return true;
+		} catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean alterarSenha(String novaSenha) {
+		try {
+			usuarioLogado.setSenha(novaSenha);;
+			return true;
+		} catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean alterarEmpresa(String empresa) {
+		Recrutador recrutadorLogado = (Recrutador) usuarioLogado;
+		
+		try {
+			recrutadorLogado.setEmpresa(empresa);
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -134,4 +172,73 @@ public class Sistema {
 			return false;
 		}
 	}
+	
+	public String verCadidaturas(String codigo) {
+		String logCandidaturas = "";
+		
+		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+		if(candidaturasDaVaga.isEmpty()) {
+			return "Não há candidaturas para esta vaga";
+		}
+		
+		for(Candidatura c: candidaturasDaVaga) {
+			logCandidaturas += c.toString() + "\n";
+		}
+		
+		return logCandidaturas;
+	}
+	
+	public Candidatura getCandidatura(String codigo, int id) {
+		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+		for(Candidatura c: candidaturasDaVaga) {
+			if(c.getId() == id) {
+				return c;
+			}
+		}
+		
+		return null;
+	}
+	
+	public boolean colocarCandidaturaEmAnalise(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.EM_ANALISE);
+		return true;
+	}
+	
+	public boolean marcarEntrevista(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.ENTREVISTA);
+		return true;
+	}
+	
+	public boolean aprovarCadidatura(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.APROVADO);
+		fecharVaga(codigo);
+		return true;
+	}
+	
+	public boolean reprovarCandidatura(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
+		return true;
+	}
+	
+	
 }

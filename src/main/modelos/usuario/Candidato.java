@@ -42,7 +42,10 @@ public class Candidato extends Usuario {
 	}
 
 	@Override
-	public TipoUsuario getTipo() {
-		return TipoUsuario.CANDIDATO;
+	public String toSummaryString() {
+		return "[Candidato] Nome: " + getNome() + " | Email: " + getEmail() + " | Formação: " + curriculo;
 	}
+	
+
+
 }
