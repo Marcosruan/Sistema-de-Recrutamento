@@ -1,6 +1,7 @@
 package main.modelos;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import main.modelos.usuario.Candidato;
@@ -133,5 +134,16 @@ public class Sistema {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+	
+	public String verCadidaturas(String codigo) {
+		String logCandidaturas = "";
+		
+		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+		for(Candidatura c: candidaturasDaVaga) {
+			logCandidaturas += "";
+		}
+		
+		return logCandidaturas;
 	}
 }

@@ -36,7 +36,7 @@ public class Vaga {
 	}
 	
 	public void fecharVaga() {
-		this.aberta = true;
+		this.aberta = false;
 	}
 
 	public String getCodigo() {
