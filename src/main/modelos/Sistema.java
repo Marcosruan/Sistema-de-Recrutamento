@@ -20,9 +20,9 @@ public class Sistema {
 	}
 	
 	
-	public boolean cadastrarCandidato(String nome, String cpf, String email, String senha) {
+	public boolean cadastrarCandidato(String nome, int idade, String cpf, String email, String senha) {
 		try {
-			Usuario novoUsuario = new Candidato(nome, cpf, email, senha);
+			Usuario novoUsuario = new Candidato(nome, idade, cpf, email, senha);
 			usuarios.put(email, novoUsuario);
 			return true;
 		} catch (IllegalArgumentException e) {
@@ -31,9 +31,9 @@ public class Sistema {
 		}
 	}
 	
-	public boolean cadastrarRecrutador(String nome, String cpf, String email, String senha, String empresa) {
+	public boolean cadastrarRecrutador(String nome, int idade, String cpf, String email, String senha, String empresa) {
 		try {
-			Usuario novoUsuario = new Recrutador(nome, cpf, email, senha, empresa);
+			Usuario novoUsuario = new Recrutador(nome, idade, cpf, email, senha, empresa);
 			usuarios.put(email, novoUsuario);
 			return true;
 		} catch (IllegalArgumentException e) {

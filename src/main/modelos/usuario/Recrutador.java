@@ -4,8 +4,8 @@ public class Recrutador extends Usuario {
 
 	private String empresa;
 	
-	public Recrutador(String nome, String cpf, String email, String senha, String empresa) throws IllegalArgumentException {
-		super(nome, cpf, email, senha);
+	public Recrutador(String nome, int idade, String cpf, String email, String senha, String empresa) throws IllegalArgumentException {
+		super(nome, idade, cpf, email, senha);
 		if(empresa == null) {
 			throw new IllegalArgumentException("Empresa inválida");
 		}

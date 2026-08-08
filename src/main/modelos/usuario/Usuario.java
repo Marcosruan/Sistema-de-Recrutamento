@@ -8,11 +8,12 @@ import main.modelos.enums.TipoUsuario;
 public abstract class Usuario {
 	
 	protected String nome;
+	protected int idade;
 	protected String cpf;
 	protected String email;
 	protected String senha;
 	
-	public Usuario(String nome, String cpf, String email, String senha) {
+	public Usuario(String nome, int idade, String cpf, String email, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -26,6 +27,9 @@ public abstract class Usuario {
 	
 	public String getNome() {
 		return nome;
+	}
+	public Object getIdade() {
+		return idade;
 	}
 	
 	public void setNome(String nome) throws IllegalArgumentException{
