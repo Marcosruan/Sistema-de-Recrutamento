@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import main.modelos.enums.StatusCandidatura;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Recrutador;
 import main.modelos.usuario.Usuario;
@@ -140,10 +141,66 @@ public class Sistema {
 		String logCandidaturas = "";
 		
 		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+		if(candidaturasDaVaga.isEmpty()) {
+			return "Não há candidaturas para esta vaga";
+		}
+		
 		for(Candidatura c: candidaturasDaVaga) {
-			logCandidaturas += "";
+			logCandidaturas += c.toString() + "\n";
 		}
 		
 		return logCandidaturas;
+	}
+	
+	public Candidatura getCandidatura(String codigo, int id) {
+		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+		for(Candidatura c: candidaturasDaVaga) {
+			if(c.getId() == id) {
+				return c;
+			}
+		}
+		
+		return null;
+	}
+	
+	public boolean colocarCandidaturaEmAnalise(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.EM_ANALISE);
+		return true;
+	}
+	
+	public boolean marcarEntrevista(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.ENTREVISTA);
+		return true;
+	}
+	
+	public boolean aprovarCadidatura(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.APROVADO);
+		fecharVaga(codigo);
+		return true;
+	}
+	
+	public boolean reprovarCandidatura(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
+		return true;
 	}
 }
