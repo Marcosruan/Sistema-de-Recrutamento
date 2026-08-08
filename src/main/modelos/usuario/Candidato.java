@@ -17,11 +17,29 @@ public class Candidato extends Usuario {
 		this.candidaturas = new ArrayList<Candidatura>();
 	}
 	
-	public void cadastrarCurriculo() {}
-	public void editarCurriculo() {}
-	public void candidatarVaga() {}
-	public void cancelarCandidatura() {}
-	public void visualizarCandidaturas() {}
+	public void cadastrarCurriculo(Curriculo curriculo) {
+		this.curriculo = curriculo;
+	}
+	public void editarCurriculo(Curriculo novoCurriculo) {
+	    if (novoCurriculo == null) {
+	        throw new IllegalArgumentException("O novo currículo não pode ser nulo.");
+	    }
+	    this.curriculo = novoCurriculo;
+	}
+	public void candidatarVaga(Candidatura candidatura) {
+		candidaturas.add(candidatura);
+	}
+	public void cancelarCandidatura() {
+		
+	}
+	public String visualizarCandidaturas() {
+		if(candidaturas.size() == 0) return "Sem candidaturas registrada!";
+		List<String> TextoCandidaturas = new ArrayList<String>();
+		for(Candidatura candidatura: candidaturas) {
+			TextoCandidaturas.add(candidatura.toString());
+		}
+		return String.join("\n", TextoCandidaturas);
+	}
 
 	@Override
 	public TipoUsuario getTipo() {
