@@ -27,7 +27,11 @@ public class Recrutador extends Usuario {
 		return empresa;
 	}
 
-	public void setEmpresa(String empresa) {
+	public void setEmpresa(String empresa) throws IllegalArgumentException{
+		if(empresa.isBlank() || empresa == null) {
+			throw new IllegalArgumentException("Nome de empresa inválido");
+		}
+		
 		this.empresa = empresa;
 	}
 

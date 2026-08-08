@@ -28,12 +28,30 @@ public abstract class Usuario {
 		return nome;
 	}
 	
-	public String getEmail() {
-		return email;
+	public void setNome(String nome) throws IllegalArgumentException{
+		if(nome.isBlank() || nome == null) {
+			throw new IllegalArgumentException("Nome inválido");
+		}
+		this.nome = nome;
 	}
 	
+	public String getSenha() {
+		return senha;
+	}
+
 	public void setSenha(String senha) {
+		if(senha.isBlank() || senha == null) {
+			throw new IllegalArgumentException("Senha inválida");
+		}
+		if(senha.equals(this.senha)) {
+			throw new IllegalArgumentException("Nova senha igual a anterior");
+		}
+		
 		this.senha = senha;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 	
 	public abstract TipoUsuario getTipo();

@@ -56,6 +56,42 @@ public class Sistema {
 		}
 	}
 	
+	public String exibirDadosDoUsuario() {
+		return usuarioLogado.toString();
+	}
+	
+	public boolean alterarNome(String novoNome) {
+		try {
+			usuarioLogado.setNome(novoNome);
+			return true;
+		} catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean alterarSenha(String novaSenha) {
+		try {
+			usuarioLogado.setSenha(novaSenha);;
+			return true;
+		} catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean alterarEmpresa(String empresa) {
+		Recrutador recrutadorLogado = (Recrutador) usuarioLogado;
+		
+		try {
+			recrutadorLogado.setEmpresa(empresa);
+			return true;
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
 	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
 		try {
 			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
@@ -203,4 +239,6 @@ public class Sistema {
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
 		return true;
 	}
+	
+	
 }
