@@ -12,8 +12,8 @@ public class Candidato extends Usuario {
 	private Curriculo curriculo;
 	private List<Candidatura> candidaturas;
 
-	public Candidato(String nome, String cpf, String email, String senha) throws IllegalArgumentException {
-		super(nome, cpf, email, senha);
+	public Candidato(String nome, int idade, String cpf, String email, String senha) throws IllegalArgumentException {
+		super(nome, idade, cpf, email, senha);
 		this.candidaturas = new ArrayList<Candidatura>();
 	}
 	
