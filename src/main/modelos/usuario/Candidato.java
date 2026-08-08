@@ -16,15 +16,12 @@ public class Candidato extends Usuario {
 		super(nome, cpf, email, senha);
 		this.candidaturas = new ArrayList<Candidatura>();
 	}
-	
-	public void cadastrarCurriculo() {}
-	public void editarCurriculo() {}
-	public void candidatarVaga() {}
-	public void cancelarCandidatura() {}
-	public void visualizarCandidaturas() {}
 
 	@Override
-	public TipoUsuario getTipo() {
-		return TipoUsuario.CANDIDATO;
+	public String toSummaryString() {
+		return "[Candidato] Nome: " + getNome() + " | Email: " + getEmail() + " | Formação: " + curriculo.getFormacao();
 	}
+	
+
+
 }

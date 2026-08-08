@@ -39,7 +39,7 @@ public abstract class Usuario {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
+	public void setSenha(String senha) throws IllegalArgumentException{
 		if(senha.isBlank() || senha == null) {
 			throw new IllegalArgumentException("Senha inválida");
 		}
@@ -54,8 +54,13 @@ public abstract class Usuario {
 		return email;
 	}
 	
-	public abstract TipoUsuario getTipo();
+	public abstract String toSummaryString();
 	
+	@Override
+	public String toString() {
+		return "Nome: " + nome + " | CPF: " + cpf + " | Email: " + email + " | Senha: " + senha;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(cpf);
