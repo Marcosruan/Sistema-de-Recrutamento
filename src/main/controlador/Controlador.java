@@ -1,7 +1,5 @@
 package main.controlador;
 
-import java.util.Set;
-
 import main.modelos.Candidatura;
 import main.modelos.Sistema;
 import main.modelos.Vaga;
@@ -45,6 +43,7 @@ public class Controlador {
 	public Vaga buscarVaga(String codigo) {
 		return sistema.buscarVaga(codigo);
 	}
+	
 	public String verVagas() {
 		return sistema.verVagas();
 	}
@@ -96,34 +95,8 @@ public class Controlador {
 	public int calcularTotalVagas() {
 		return sistema.calcularTotalVagas();
 	}
-	public boolean cadastrarCurriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas) {
-		return sistema.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
-	}
-	public boolean adicionarExperienciaCurriculo(String experiencia) {
-		return sistema.adicionarExperienciaCurriculo(experiencia);
-	}
-	public boolean adicionarFormacaoCurriculo(String Formacao) {
-		return sistema.adicionarFormacaoCurriculo(Formacao);
-	}
-	public boolean adicionarHabilidadeCurriculo(String habilidade) {
-		return sistema.adicionarHabilidadeCurriculo(habilidade);
-	}
-	public boolean adicionarIdiomaCurriculo(String idioma) {
-		return sistema.adicionarIdiomaCurriculo(idioma);
-	}
-	public boolean editarExperienciaCurriculo(String experienciaNova) {
-		return sistema.editarExperienciaCurriculo(experienciaNova);
-	}
-	public boolean editarFormacoesCurriculo(String formacaoAntiga,String formacaoNova) {
-		return sistema.editarFormacoesCurriculo(formacaoAntiga, formacaoNova);
-	}
-	public boolean editarHabilidadesCurriculo(String habilidadeAntiga,String habilidadeNova) {
-		return sistema.editarHabilidadesCurriculo(habilidadeAntiga, habilidadeNova);
-	}
-	public boolean editarIdiomasoCurriculo(String idiomaAntiga,String idiomaNovo) {
-		return sistema.editarIdiomasCurriculo(idiomaAntiga, idiomaNovo);
-	}
-	public boolean excluirCurriculo() {
-		return sistema.excluirCurriculo();
-	}
+
+
+
+
 }

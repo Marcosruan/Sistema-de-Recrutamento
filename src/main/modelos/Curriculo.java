@@ -7,7 +7,6 @@ import java.util.Set;
 
 
 import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
 
 public class Curriculo {
 	private Set<String> formacoes;
