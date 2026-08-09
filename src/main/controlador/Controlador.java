@@ -42,6 +42,8 @@ public class Controlador {
 	}
 	public Vaga buscarVaga(String codigo) {
 		return sistema.buscarVaga(codigo);
+	public String verVagas() {
+		return sistema.verVagas();
 	}
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
 		return sistema.alterarTituloVaga(codigo, novoTitulo);
@@ -79,8 +81,8 @@ public class Controlador {
 	public boolean marcarEntrevista(String codigo, int id) {
 		return sistema.marcarEntrevista(codigo, id);
 	}
-	public boolean aprovarCadidatura(String codigo, int id) {
-		return sistema.aprovarCadidatura(codigo, id);
+	public boolean aprovarCandidatura(String codigo, int id) {
+		return sistema.aprovarCandidatura(codigo, id);
 	}
 	public boolean reprovarCandidatura(String codigo, int id) {
 		return sistema.reprovarCandidatura(codigo, id);

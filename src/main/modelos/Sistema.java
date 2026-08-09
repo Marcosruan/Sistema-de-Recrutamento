@@ -110,6 +110,20 @@ public class Sistema {
 		}
 	}
 	
+	public String verVagas() {
+		if(vagas.isEmpty()) {
+			return "Nenhuma vaga cadastrada.";
+		}
+		
+		String logDeVagas = "";
+		
+		for(Map.Entry<String, Vaga> v : vagas.entrySet()) {
+			logDeVagas += v.toString();
+		}
+		
+		return logDeVagas;
+	}
+	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
 		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
@@ -271,7 +285,7 @@ public class Sistema {
 		return true;
 	}
 	
-	public boolean aprovarCadidatura(String codigo, int id) {
+	public boolean aprovarCandidatura(String codigo, int id) {
 		Candidatura candidatura = getCandidatura(codigo, id);
 		if(candidatura == null) {
 			return false;
