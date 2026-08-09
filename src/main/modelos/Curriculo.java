@@ -15,7 +15,7 @@ public class Curriculo {
 	private Set<String> idiomas;
 	private Candidato candidatoDono;
 	
-	public Curriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas,Candidato candidatoDono) {
+	public Curriculo(Set<String> formacoes, String experiencia, Set<String> habilidades, Set<String> idiomas, Candidato candidatoDono) {
 		this.formacoes = new HashSet<String>(formacoes);
 		this.experiencia = experiencia;
 		this.habilidades = new HashSet<String>(habilidades);
@@ -47,7 +47,7 @@ public class Curriculo {
 		validaString(experiencia);
 		this.experiencia = experiencia;
 	}
-	public void editarFormacao(String formacaoAntiga,String formacaoNova) throws IllegalArgumentException{
+	public void editarFormacao(String formacaoAntiga, String formacaoNova) throws IllegalArgumentException{
 		validaString(formacaoAntiga);
 		validaString(formacaoNova);
 		if (this.habilidades.contains(formacaoAntiga)) {
@@ -57,7 +57,7 @@ public class Curriculo {
 	        throw new IllegalArgumentException("Formação não encontrada para edição.");
 	    }
 	}
-	public void editarHabilidade(String habilidadeAntiga,String habilidadeNova) throws IllegalArgumentException {
+	public void editarHabilidade(String habilidadeAntiga, String habilidadeNova) throws IllegalArgumentException {
 		validaString(habilidadeAntiga);
 		validaString(habilidadeNova);
 		if (this.habilidades.contains(habilidadeAntiga)) {
@@ -68,7 +68,7 @@ public class Curriculo {
 	    }
 	}
 	
-	public void editarIdiomas(String IdiomaAntigo,String idiomaNovo) throws IllegalArgumentException{
+	public void editarIdiomas(String IdiomaAntigo, String idiomaNovo) throws IllegalArgumentException{
 		validaString(IdiomaAntigo);
 		validaString(idiomaNovo);
 		if (this.habilidades.contains(IdiomaAntigo)) {
@@ -144,7 +144,7 @@ public class Curriculo {
 		return curriculo;
 				
 	}
-	private static List<String> quebrarTexto(String texto,String delimitador, int tamanhoMaximo) {
+	private static List<String> quebrarTexto(String texto, String delimitador, int tamanhoMaximo) {
 	    List<String> linhas = new ArrayList<String>();
 
 	    String[] palavras = texto.split(delimitador);

@@ -1,5 +1,8 @@
 package main.console;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import main.Main;
 import main.controlador.Controlador;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
@@ -124,47 +127,137 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void cadastrarCurriculo() {
+		Set<String> formacoes = cadastrarFormacoes();
+		String experiencia = Main.lerTexto("Digite a experiência: ");
+		Set<String> habilidades = cadastrarHabilidades();
+		Set<String> idiomas = cadastrarIdiomas();
 		
+		boolean resultado = controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+		if(resultado) {
+			System.out.println("Currículo cadastrado com sucesso.");
+		} else {
+			System.out.println("Não foi possível cadastrar o currículo.");
+		}
 	}
 	
-	private void adicionarIdiomas() {
-		// TODO Auto-generated method stub
+	private Set<String> cadastrarFormacoes() {
+		String opcao = "";
+		Set<String> formacoes = new HashSet<String>();
+		do {
+			String formacao = Main.lerTexto("Digite a formação: ");
+			formacoes.add(formacao);
+			opcao = Main.lerTexto("Deseja adicionar mais formações? (N/S) ");
+		} while(opcao.equalsIgnoreCase("S"));
 		
+		return formacoes;
+	}
+	
+	private Set<String> cadastrarHabilidades() {
+		String opcao = "";
+		Set<String> habilidades = new HashSet<String>();
+		do {
+			String habilidade = Main.lerTexto("Digite a habilidade: ");
+			habilidades.add(habilidade);
+			opcao = Main.lerTexto("Deseja adicionar mais habilidades? (N/S) ");
+		} while(opcao.equalsIgnoreCase("S"));
+		
+		return habilidades;
+	}
+	
+	private Set<String> cadastrarIdiomas() {
+		String opcao = "";
+		Set<String> idiomas = new HashSet<String>();
+		do {
+			String idioma = Main.lerTexto("Digite o idioma: ");
+			idiomas.add(idioma);
+			opcao = Main.lerTexto("Deseja adicionar mais idiomas? (N/S) ");
+		} while(opcao.equalsIgnoreCase("S"));
+		
+		return idiomas;
+	}
+
+	private void adicionarFormacao() {
+		String formacao = Main.lerTexto("Digite a formação: ");
+		boolean resultado = controlador.adicionarFormacao(formacao);
+		if(resultado) {
+			System.out.println("Formação adicionada com sucesso.");
+		} else {
+			System.out.println("Não foi possível adicionar a formação.");
+		}
 	}
 	
 	private void alterarFormacao() {
-		// TODO Auto-generated method stub
-		
+		String formacaoAntiga = Main.lerTexto("Digite a formação que deseja alterar: ");
+		String formacaoNova = Main.lerTexto("Digite a nova formação: ");
+		boolean resultado = controlador.editarFormacao(formacaoAntiga, formacaoNova);
+		if(resultado) {
+			System.out.println("Formação alterada com sucesso.");
+		} else {
+			System.out.println("Não foi possível alterar a formação.");
+		}		
 	}
+
 	
-	private void adicionarHabilidades() {
-		// TODO Auto-generated method stub
-		
+	private void adicionarExperiencia() {
+		String experiencia = Main.lerTexto("Digite a experiência: ");
+		boolean resultado = controlador.adicionarExperiencia(experiencia);
+		if(resultado) {
+			System.out.println("Experiência adicionada com sucesso.");
+		} else {
+			System.out.println("Não foi possível adicionar a experiência.");
+		}		
 	}
 	
 	private void alterarExperiencia() {
-		// TODO Auto-generated method stub
-		
+		String experiencia = Main.lerTexto("Digite a nova experiência: ");
+		boolean resultado = controlador.editarExperiencia(experiencia);
+		if(resultado) {
+			System.out.println("Experiência alterada com sucesso.");
+		} else {
+			System.out.println("Não foi possível alterar a experiência.");
+		}		
 	}
 	
-	private void adicionarExperiencia() {
-		// TODO Auto-generated method stub
-		
+	private void adicionarHabilidades() {
+		String habilidade = Main.lerTexto("Digite a habilidade: ");
+		boolean resultado = controlador.adicionarHabilidade(habilidade);
+		if(resultado) {
+			System.out.println("Habilidade adicionada com sucesso.");
+		} else {
+			System.out.println("Não foi possível adicionar a habilidade.");
+		}		
 	}
 		
 	private void alterarHabilidades() {
-		// TODO Auto-generated method stub
-		
+		String habilidadeAntiga = Main.lerTexto("Digite a habilidade que deseja alterar: ");
+		String habilidadeNova = Main.lerTexto("Digite a nova habilidade: ");
+		boolean resultado = controlador.editarHabilidade(habilidadeAntiga, habilidadeNova);
+		if(resultado) {
+			System.out.println("Habilidade alterada com sucesso.");
+		} else {
+			System.out.println("Não foi possível alterar a habilidade.");
+		}		
 	}
 	
-	private void adicionarFormacao() {
-		// TODO Auto-generated method stub
-		
+	private void adicionarIdiomas() {
+		String idioma = Main.lerTexto("Digite o idioma: ");
+		boolean resultado = controlador.adicionarIdioma(idioma);
+		if(resultado) {
+			System.out.println("Idioma adicionado com sucesso.");
+		} else {
+			System.out.println("Não foi possível adicionar o idioma.");
+		}
 	}
 	
 	private void alterarIdiomas() {
-		// TODO Auto-generated method stub
-		
+		String idiomaAntigo = Main.lerTexto("Digite o idioma que deseja alterar: ");
+		String idiomaNova = Main.lerTexto("Digite o novo idioma: ");
+		boolean resultado = controlador.editarIdioma(idiomaAntigo, idiomaNova);
+		if(resultado) {
+			System.out.println("Idioma alterado com sucesso.");
+		} else {
+			System.out.println("Não foi possível alterar o idioma.");
+		}			
 	}
 
 	private void exibirMenuCandidatura() {
@@ -186,7 +279,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 				System.out.println(controlador.verVagas());
 				break;
 			case 2:
-				verCandidaturas();
+				System.out.println(controlador.getCandidaturaDoCandidato());
 				break;
 			case 3:
 				candidatar();
@@ -197,11 +290,6 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 			default:
 				System.out.println("Opção inválida.");
 		}
-	}
-	
-	private void verCandidaturas() {
-		String resultado = controlador.getCandidaturaDoCandidato();
-		System.out.println(resultado.toString());
 	}
 	
 	private void candidatar() {
@@ -241,7 +329,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 				System.out.println("Voltando...");
 				break;
 			case 1:
-				System.out.println(controlador.verVagas());
+				System.out.println(controlador.exibirDadosDoUsuario());
 				break;
 			case 2:
 				alterarNome();

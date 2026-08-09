@@ -1,5 +1,7 @@
 package main.controlador;
 
+import java.util.Set;
+
 import main.modelos.Candidatura;
 import main.modelos.Sistema;
 import main.modelos.Vaga;
@@ -136,4 +138,40 @@ public class Controlador {
 		return sistema.cancelarCandidatura(codigoDaVaga, idDaCandidatura);
 	}
 
+	public boolean adicionarFormacao(String formacao) {
+		return sistema.adicionarFormacaoCurriculo(formacao);
+	}
+
+	public boolean adicionarHabilidade(String habilidade) {
+		return sistema.adicionarHabilidadeCurriculo(habilidade);	
+	}
+
+	public boolean adicionarExperiencia(String experiencia) {
+		return sistema.adicionarExperienciaCurriculo(experiencia);
+	}
+
+	public boolean adicionarIdioma(String idioma) {
+		return sistema.adicionarExperienciaCurriculo(idioma);
+	}
+
+	public boolean editarFormacao(String formacaoAntiga, String formacaoNova) {
+		return sistema.editarFormacoesCurriculo(formacaoAntiga, formacaoNova);
+	}
+
+	public boolean editarExperiencia(String experiencia) {
+		return sistema.editarExperienciaCurriculo(experiencia);
+	}
+
+	public boolean editarHabilidade(String habilidadeAntiga, String habilidadeNova) {
+		return sistema.editarHabilidadesCurriculo(habilidadeAntiga, habilidadeNova);
+	}
+
+	public boolean editarIdioma(String idiomaAntigo, String idiomaNova) {
+		return sistema.editarIdiomasCurriculo(idiomaAntigo, idiomaNova);
+	}
+
+	public boolean cadastrarCurriculo(Set<String> formacoes, String experiencia, Set<String> habilidades,
+			Set<String> idiomas) {
+		return sistema.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	}
 }

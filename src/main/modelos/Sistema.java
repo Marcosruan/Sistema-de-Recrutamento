@@ -58,6 +58,7 @@ public class Sistema {
 			return false;
 		}
 	}
+	
 	public boolean logout() {
 		if(usuarioLogado == null) return false;
 		usuarioLogado = null;
@@ -216,10 +217,12 @@ public class Sistema {
 			return false;
 		}
 	}
+	
 	public Vaga buscarVaga(String codigo) {
 		if(calcularTotalUsuarios() == 0) return null;
 		return vagas.get(codigo);
 	}
+	
 	public boolean registrarCandidatura(String codigo) {
 		if(vagas.size() == 0) return false;
 		Vaga vaga = buscarVaga(codigo);
@@ -234,6 +237,7 @@ public class Sistema {
 		}
 		
 	}
+	
 	public String verCadidaturasPorVaga(String codigo) {
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return "Vaga não foi encontrada!";
@@ -330,17 +334,18 @@ public class Sistema {
 		return true;
 	}
 	
-	public boolean cadastrarCurriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas) {
+	public boolean cadastrarCurriculo(Set<String> formacoes, String experiencia, Set<String> habilidades, Set<String> idiomas) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
-			Curriculo curriculo = new Curriculo(formacoes,experiencia,habilidades,idiomas,candidato);
+			Curriculo curriculo = new Curriculo(formacoes, experiencia, habilidades, idiomas, candidato);
 			candidato.cadastrarCurriculo(curriculo);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
+	
 	public boolean adicionarExperienciaCurriculo(String experiencia) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
@@ -355,6 +360,7 @@ public class Sistema {
 		} 
 		return false;
 	}
+	
 	public boolean adicionarFormacaoCurriculo(String Formacao) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
@@ -369,6 +375,7 @@ public class Sistema {
 		} 
 		return false;
 	}
+	
 	public boolean adicionarHabilidadeCurriculo(String habilidade) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
@@ -383,6 +390,7 @@ public class Sistema {
 		} 
 		return false;
 	}
+	
 	public boolean adicionarIdiomaCurriculo(String idioma) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
@@ -397,6 +405,7 @@ public class Sistema {
 		} 
 		return false;
 	}
+	
 	public boolean editarExperienciaCurriculo(String experienciaNova) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
@@ -411,7 +420,8 @@ public class Sistema {
 		} 
 		return false;
 	}
-	public boolean editarFormacoesCurriculo(String formacaoAntiga,String formacaoNova) {
+	
+	public boolean editarFormacoesCurriculo(String formacaoAntiga, String formacaoNova) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
@@ -425,7 +435,8 @@ public class Sistema {
 		} 
 		return false;
 	}
-	public boolean editarHabilidadesCurriculo(String habilidadeAntiga,String habilidadeNova) {
+	
+	public boolean editarHabilidadesCurriculo(String habilidadeAntiga, String habilidadeNova) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
@@ -439,7 +450,8 @@ public class Sistema {
 		} 
 		return false;
 	}
-	public boolean editarIdiomasCurriculo(String idiomaAntiga,String idiomaNovo) {
+	
+	public boolean editarIdiomasCurriculo(String idiomaAntiga, String idiomaNovo) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
@@ -453,6 +465,7 @@ public class Sistema {
 		} 
 		return false;
 	}
+	
 	public boolean excluirCurriculo() {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		  try {
@@ -464,6 +477,7 @@ public class Sistema {
 				return false;
 		  }
 	}
+	
 	public int calcularTotalUsuarios() {
 		return usuarios.size();
 	}
@@ -486,4 +500,7 @@ public class Sistema {
 		}
 	}
 
+	public String verCurriculo() {
+		return null;
+	}
 }
