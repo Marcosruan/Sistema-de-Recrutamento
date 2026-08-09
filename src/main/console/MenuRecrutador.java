@@ -13,6 +13,24 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	@Override
+	public void cadastrar() {
+		String nome = Main.lerTexto("Digite o nome: ");
+		int idade = Main.lerInteiro("Digite a idade: ");
+		String cpf = Main.lerTexto("Digite o cpf: ");
+		String email = Main.lerTexto("Digite o email: ");
+		String senha = Main.lerTexto("Digite a senha: ");
+		String empresa = Main.lerTexto("Digite a empresa: ");
+		
+		boolean resultado = controlador.cadastrarRecrutador(nome, idade, cpf, email, senha, empresa);
+		
+		if(resultado) {
+			System.out.println("Recrutador cadastrado com sucesso.");
+		} else {
+			System.out.println("Não foi possível cadastrar o recrutador.");
+		}
+	}
+	
+	@Override
 	public void menu() {
 		int opcao;
 		
@@ -64,7 +82,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void opcoesDeVaga() {
-		int opcao = Main.lerInteiro("Selecione uma opaco: ");
+		int opcao = Main.lerInteiro("Selecione uma opcao: ");
 		switch(opcao) {
 			case 0:
 				System.out.println("Voltando...");
@@ -111,6 +129,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 		String empresa = Main.lerTexto("Digite a empresa: ");
 		
 		boolean resultado = controlador.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+		
 		if(resultado) {
 			System.out.println("Vaga cadastrada com sucesso.");
 		} else {
@@ -238,7 +257,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	private void verCandidaturas() {
 		String codigoDaVaga = Main.lerTexto("Informe o codigo da vaga: ");
 		System.out.println("Candidaturas para esta vaga: ");
-		System.out.println(controlador.verCadidaturas(codigoDaVaga));
+		System.out.println(controlador.verCandidaturasPorVaga(codigoDaVaga));
 	}
 	
 	private void candidaturaEmAnalise() {
@@ -354,11 +373,4 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 			System.out.println("Não foi possível alterar a empresa.");
 		}
 	}
-	
-	@Override
-	public void cadastrar() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

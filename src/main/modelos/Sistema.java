@@ -233,8 +233,7 @@ public class Sistema {
 		}
 		
 	}
-	public String verCadidaturas(String codigo) {
-		
+	public String verCadidaturasPorVaga(String codigo) {
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return "Vaga não foi encontrada!";
 		
@@ -246,7 +245,9 @@ public class Sistema {
 		List<String> logCandidaturas = new ArrayList<String>();
 		
 		for(Candidatura c: candidaturasDaVaga) {
-			logCandidaturas.add(c.toString());
+			if (c.getStatus() != StatusCandidatura.CANCELADA) {
+				logCandidaturas.add(c.toString());				
+			}
 		}
 		
 		return String.join("\n", logCandidaturas);
@@ -263,6 +264,18 @@ public class Sistema {
 		}
 		
 		return null;
+	}
+	
+	public String getCandidaturaDoCandidato() {
+		Candidato usuarioCandidato = (Candidato) usuarioLogado;
+		List<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
+		String texto = "";
+		for (Candidatura c: candidaturas) {
+			if (c.getStatus() != StatusCandidatura.CANCELADA) {
+				texto += c.toString() + "\n";				
+			}
+		}
+		return texto.trim();
 	}
 	
 	public boolean colocarCandidaturaEmAnalise(String codigo, int id) {
@@ -305,11 +318,37 @@ public class Sistema {
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
 		return true;
 	}
+	
+	public boolean cancelarCandidatura(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.CANCELADA);
+		return true;
+	}
+	
 	public int calcularTotalUsuarios() {
 		return usuarios.size();
 	}
+	
 	public int calcularTotalVagas() {
 		return vagas.size();
 	}
-	
+
+	public boolean candidatar(String codigo) {
+		try {
+			Vaga vaga = buscarVaga(codigo);
+			if(vaga == null) return false;
+			Candidato usuarioCandidato = (Candidato) usuarioLogado;
+			Candidatura novaCandidatura = new Candidatura(usuarioCandidato, vaga);
+			usuarioCandidato.setCandidaturas(novaCandidatura);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
 }

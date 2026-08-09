@@ -7,7 +7,6 @@ import java.util.Set;
 
 
 import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
 
 public class Curriculo {
 	private Set<String> formacoes;
@@ -51,7 +50,7 @@ public class Curriculo {
 		validaCandidato(idioma);
 		idiomas.add(idioma);
 	}
-	public void editarrFormacao(String formacao) throws IllegalArgumentException{
+	public void editarFormacao(String formacao) throws IllegalArgumentException{
 		validaString(formacao);
 		formacoes.clear();
 		formacoes.add(formacao);

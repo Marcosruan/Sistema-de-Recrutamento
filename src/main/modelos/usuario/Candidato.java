@@ -20,18 +20,22 @@ public class Candidato extends Usuario {
 	public void cadastrarCurriculo(Curriculo curriculo) {
 		this.curriculo = curriculo;
 	}
+	
 	public void editarCurriculo(Curriculo novoCurriculo) {
 	    if (novoCurriculo == null) {
 	        throw new IllegalArgumentException("O novo currículo não pode ser nulo.");
 	    }
 	    this.curriculo = novoCurriculo;
 	}
+	
 	public void candidatarVaga(Candidatura candidatura) {
 		candidaturas.add(candidatura);
 	}
+	
 	public void cancelarCandidatura() {
 		
 	}
+	
 	public String visualizarCandidaturas() {
 		if(candidaturas.size() == 0) return "Sem candidaturas registrada!";
 		List<String> TextoCandidaturas = new ArrayList<String>();
@@ -45,6 +49,7 @@ public class Candidato extends Usuario {
 	public String toSummaryString() {
 		return "[Candidato] Nome: " + getNome() + " | Email: " + getEmail();
 	}
+	
 	@Override
 	public boolean ehPermitidoCadastrarVagas() {
 		return false;
@@ -55,6 +60,11 @@ public class Candidato extends Usuario {
 		return false;
 	}
 	
+	public List<Candidatura> getCandidaturas() {
+		return candidaturas;
+	}
 
-
+	public void setCandidaturas(Candidatura candidatura) {
+		this.candidaturas.add(candidatura);
+	}
 }

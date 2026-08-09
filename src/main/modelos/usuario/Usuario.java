@@ -58,7 +58,8 @@ public abstract class Usuario {
 	public String getNome() {
 		return nome;
 	}
-	public Object getIdade() {
+	
+	public int getIdade() {
 		return idade;
 	}
 	

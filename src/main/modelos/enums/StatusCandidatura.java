@@ -4,5 +4,6 @@ public enum StatusCandidatura {
 	EM_ANALISE,
 	ENTREVISTA,
 	APROVADO,
-	REPROVADO;
+	REPROVADO,
+	CANCELADA;
 }

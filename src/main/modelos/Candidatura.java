@@ -48,6 +48,10 @@ public class Candidatura {
 		this.status = novoStatus;
 		return this.status;
 	}
+	
+	public StatusCandidatura getStatus() {
+		return status;
+	}
 
 	@Override
 	public String toString() {
