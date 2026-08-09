@@ -40,5 +40,9 @@ public class Recrutador extends Usuario {
 	public boolean ehPermitidoAlterarVagas() {
 		return true;
 	}
+	@Override
+	public boolean ehPermitidoCadastrarAlterarCurriculo() {
+		return false;
+	}
 
 }
