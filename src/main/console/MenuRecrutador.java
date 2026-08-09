@@ -20,6 +20,9 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 			exibirMenu();
 			opcao = Main.lerInteiro("Sua escolha: ");
 			switch(opcao) {
+				case 0:
+					System.out.println("Voltando...");
+					break;
 				case 1:
 					exibirMenuVaga();
 					opcoesDeVaga();
@@ -31,6 +34,9 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 				case 3:
 					exibirMenuDadosPessoais();
 					opcoesDeDadosPessoais();
+					break;
+				default:
+					System.out.println("Opcao inválida.");
 			}
 		} while(opcao != 0);
 	}
