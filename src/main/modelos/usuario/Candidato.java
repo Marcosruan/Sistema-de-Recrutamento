@@ -45,6 +45,15 @@ public class Candidato extends Usuario {
 	public String toSummaryString() {
 		return "[Candidato] Nome: " + getNome() + " | Email: " + getEmail() + " | Formação: " + curriculo;
 	}
+	@Override
+	public boolean ehPermitidoCadastrarVagas() {
+		return false;
+	}
+
+	@Override
+	public boolean ehPermitidoAlterarVagas() {
+		return false;
+	}
 	
 
 

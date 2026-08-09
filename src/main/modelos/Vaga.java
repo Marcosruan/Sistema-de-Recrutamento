@@ -78,12 +78,28 @@ public class Vaga {
 	public String getCidade() {
 		return cidade;
 	}
-
+	public boolean getAberta() {
+		return aberta;
+	}
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 	
 	public List<Candidatura> getCandidaturas() {
 		return candidaturas;
+	}
+	@Override
+	public String toString() {
+		String estado = aberta == true ? "Aberta" : "Fechada";
+		return String.format("Codigo: %s | Titulo: %s | Descricao: %s | Requisitos: %s | Salario: %,.2f | Cidade: %s | Empresa: %s | Estado: %s",
+				codigo,
+				titulo,
+				descricao,
+				requisitos,
+				salario,
+				cidade,
+				empresa,
+				estado
+				);
 	}
 }

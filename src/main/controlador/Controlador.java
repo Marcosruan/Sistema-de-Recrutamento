@@ -2,6 +2,7 @@ package main.controlador;
 
 import main.modelos.Candidatura;
 import main.modelos.Sistema;
+import main.modelos.Vaga;
 
 public class Controlador {
 	
@@ -20,6 +21,10 @@ public class Controlador {
 	public boolean login(String email, String senha) {
 		return sistema.login(email, senha);
 	}
+	public boolean logout() {
+		return sistema.logout();
+	}
+
 	public String exibirDadosDoUsuario() {
 		return sistema.exibirDadosDoUsuario();
 	}
@@ -32,14 +37,17 @@ public class Controlador {
 	public boolean alterarEmpresa(String empresa) {
 		return sistema.alterarEmpresa(empresa);
 	}
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
-		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa, aberta);
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
+		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+	}
+	public Vaga buscarVaga(String codigo) {
+		return sistema.buscarVaga(codigo);
 	}
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
 		return sistema.alterarTituloVaga(codigo, novoTitulo);
 	}
 	public boolean alterarDescricaoVaga(String codigo, String novoDescricao) {
-		return alterarDescricaoVaga(codigo, novoDescricao);
+		return sistema.alterarDescricaoVaga(codigo, novoDescricao);
 	}
 	public boolean alterarRequisitosVaga(String codigo, String novoRequisitos) {
 		return sistema.alterarRequisitosVaga(codigo, novoRequisitos);
@@ -55,6 +63,9 @@ public class Controlador {
 	}
 	public boolean fecharVaga(String codigo) {
 		return sistema.fecharVaga(codigo);
+	}
+	public boolean registrarCandidatura(String codigo) {
+		return sistema.registrarCandidatura(codigo);
 	}
 	public String verCadidaturas(String codigo) {
 		return sistema.verCadidaturas(codigo);
@@ -74,16 +85,13 @@ public class Controlador {
 	public boolean reprovarCandidatura(String codigo, int id) {
 		return sistema.reprovarCandidatura(codigo, id);
 	}
+	public int calcularTotalUsuarios() {
+		return sistema.calcularTotalUsuarios();
+	}
+	public int calcularTotalVagas() {
+		return sistema.calcularTotalVagas();
+	}
 
-
-
-	
-
-
-
-
-
-	
 
 
 
