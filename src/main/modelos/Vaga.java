@@ -3,10 +3,6 @@ package main.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.modelos.enums.TipoUsuario;
-import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
-
 public class Vaga {
 	
 	private String codigo;
