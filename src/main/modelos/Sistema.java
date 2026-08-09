@@ -92,7 +92,7 @@ public class Sistema {
 		}
 	}
 	
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
 		try {
 			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
 			vagas.put(codigo, novaVaga);
@@ -101,6 +101,20 @@ public class Sistema {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+	
+	public String verVagas() {
+		if(vagas.isEmpty()) {
+			return "Nenhuma vaga cadastrada.";
+		}
+		
+		String logDeVagas = "";
+		
+		for(Map.Entry<String, Vaga> v : vagas.entrySet()) {
+			logDeVagas += v.toString();
+		}
+		
+		return logDeVagas;
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
@@ -156,7 +170,7 @@ public class Sistema {
 	public boolean abrirVaga(String codigo) {
 		try {
 			vagas.get(codigo).abrirVaga();
-			return false;
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -166,7 +180,7 @@ public class Sistema {
 	public boolean fecharVaga(String codigo) {
 		try {
 			vagas.get(codigo).fecharVaga();
-			return false;
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -219,7 +233,7 @@ public class Sistema {
 		return true;
 	}
 	
-	public boolean aprovarCadidatura(String codigo, int id) {
+	public boolean aprovarCandidatura(String codigo, int id) {
 		Candidatura candidatura = getCandidatura(codigo, id);
 		if(candidatura == null) {
 			return false;

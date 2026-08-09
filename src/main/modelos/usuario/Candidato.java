@@ -43,7 +43,7 @@ public class Candidato extends Usuario {
 
 	@Override
 	public String toSummaryString() {
-		return "[Candidato] Nome: " + getNome() + " | Email: " + getEmail() + " | Formação: " + curriculo;
+		return "[Candidato] Nome: " + getNome() + " | Email: " + getEmail();
 	}
 	
 

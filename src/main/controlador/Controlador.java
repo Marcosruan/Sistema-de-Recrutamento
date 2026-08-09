@@ -32,8 +32,11 @@ public class Controlador {
 	public boolean alterarEmpresa(String empresa) {
 		return sistema.alterarEmpresa(empresa);
 	}
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa, boolean aberta) {
-		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa, aberta);
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
+		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+	}
+	public String verVagas() {
+		return sistema.verVagas();
 	}
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
 		return sistema.alterarTituloVaga(codigo, novoTitulo);
@@ -68,8 +71,8 @@ public class Controlador {
 	public boolean marcarEntrevista(String codigo, int id) {
 		return sistema.marcarEntrevista(codigo, id);
 	}
-	public boolean aprovarCadidatura(String codigo, int id) {
-		return sistema.aprovarCadidatura(codigo, id);
+	public boolean aprovarCandidatura(String codigo, int id) {
+		return sistema.aprovarCandidatura(codigo, id);
 	}
 	public boolean reprovarCandidatura(String codigo, int id) {
 		return sistema.reprovarCandidatura(codigo, id);

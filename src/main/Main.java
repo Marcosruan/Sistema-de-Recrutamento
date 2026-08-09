@@ -27,6 +27,20 @@ public class Main {
 			}
 		}
 	}
+	
+	public static double lerDouble(String mensagem) {
+		while (true) {
+			System.out.print(mensagem);
+			String entrada = scanner.nextLine();
+
+			try {
+				return Double.parseDouble(entrada);
+
+			} catch (NumberFormatException e) {
+				System.out.println("Digite um numero real valido.");
+			}
+		}
+	}
 
 	public static String lerTexto(String mensagem) {
 		System.out.print(mensagem);
