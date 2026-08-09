@@ -59,14 +59,14 @@ public class SistemaConsole {
 	}
 
 	private void exibirMenu() {
-		System.out.println("=== Menu Inicial ===");
+		System.out.println("\n=== Menu Inicial ===");
 		System.out.println("1 - Cadastrar");
 		System.out.println("2 - Login");
 		System.out.println("0 - Sair");
 	}
 	
 	private void exibirTipos() {
-		System.out.println("Deseja continuar como:");
+		System.out.println("\nDeseja continuar como:");
 		System.out.println("1 - Candidato");
 		System.out.println("2 - Recrutador");
 	}

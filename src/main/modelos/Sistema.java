@@ -501,6 +501,7 @@ public class Sistema {
 	}
 
 	public String verCurriculo() {
-		return null;
+		Candidato usuarioCandidato = (Candidato) usuarioLogado;
+		return usuarioCandidato.getCurriculo().toString();
 	}
 }

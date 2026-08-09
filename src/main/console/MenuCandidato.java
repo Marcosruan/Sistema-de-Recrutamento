@@ -62,7 +62,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 		
 	private void exibirMenu() {
-		System.out.println("=== Menu Candidato ===");
+		System.out.println("\n=== Menu Candidato ===");
 		System.out.println("1 - Curriculo");	
 		System.out.println("2 - Candidaturas");
 		System.out.println("3 - Dados pessoais");
@@ -70,7 +70,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void exibirMenuCurriculo() {
-		System.out.println("=== Menu Curriculo ===");
+		System.out.println("\n=== Menu Curriculo ===");
 		System.out.println("1 - Cadastrar currículo");
 		System.out.println("2 - Ver curriculo");
 		System.out.println("3 - Adicionar formação");
@@ -260,7 +260,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 
 	private void exibirMenuCandidatura() {
-		System.out.println("=== Menu Candidatura ===");
+		System.out.println("\n=== Menu Candidatura ===");
 		System.out.println("1 - Ver vagas");
 		System.out.println("2 - Ver candidaturas");
 		System.out.println("3 - Se candidatar à vaga");
@@ -314,7 +314,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 
 	private void exibirMenuDadosPessoais() {
-		System.out.println("=== Dados Pessoais ===");
+		System.out.println("\n=== Dados Pessoais ===");
 		System.out.println("1 - Ver dados pessoais");
 		System.out.println("2 - Alterar nome");
 		System.out.println("3 - Alterar senha");
