@@ -6,28 +6,39 @@ public class Recrutador extends Usuario {
 	
 	public Recrutador(String nome, int idade, String cpf, String email, String senha, String empresa) throws IllegalArgumentException {
 		super(nome, idade, cpf, email, senha);
-		if(empresa == null) {
-			throw new IllegalArgumentException("Empresa inválida");
-		}
-		
+		validarEmpresa(empresa);
 		this.empresa = empresa;
 	}
-	
+	public void validarEmpresa(String texto) {
+		if(texto == null || texto.isBlank()) {
+			throw new IllegalArgumentException("Nome de empresa inválido");
+		}
+		
+	}
 	public String getEmpresa() {
 		return empresa;
 	}
 
 	public void setEmpresa(String empresa) throws IllegalArgumentException{
-		if(empresa.isBlank() || empresa == null) {
-			throw new IllegalArgumentException("Nome de empresa inválido");
-		}
-		
+		validarEmpresa(empresa);
 		this.empresa = empresa;
 	}
-
+	
+	@Override
+	public String toString() {
+		return super.toString() + String.format(" | Empresa: %s",empresa);
+	}
 	@Override
 	public String toSummaryString() {
 		return "[Recrutador] Nome: " + getNome() + " | Email: " + getEmail() + " | Empresa: " + getEmpresa();
+	}
+	@Override
+	public boolean ehPermitidoCadastrarVagas() {
+		return true;
+	}
+	@Override
+	public boolean ehPermitidoAlterarVagas() {
+		return true;
 	}
 
 }

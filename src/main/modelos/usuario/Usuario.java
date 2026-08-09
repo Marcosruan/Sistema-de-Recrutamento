@@ -14,12 +14,42 @@ public abstract class Usuario {
 	protected String senha;
 	
 	public Usuario(String nome, int idade, String cpf, String email, String senha) {
+		validarNome(nome);
+		validarIdade(idade);
+		validarCPF(cpf);
+		validarEmail(email);
+		validarSenha(senha);
 		this.nome = nome;
+		this.idade = idade;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
 	}
-	
+	private void validarNome(String texto) throws IllegalArgumentException {
+		if(texto == null || texto.isBlank()) {
+			throw new IllegalArgumentException("Nome inválido!");
+		}
+	}
+	private void validarIdade(int idade) {
+		if(idade <= 14 || idade > 100) {
+			throw new IllegalArgumentException("Idade inválida. É preciso ter entre 14 e 100 anos.");
+		}
+	}
+	private void validarCPF(String texto) throws IllegalArgumentException {
+		if (texto == null || texto.isBlank()) {
+			throw new IllegalArgumentException("CPF inválido!");
+		}
+	}
+	private void validarEmail(String texto) throws IllegalArgumentException {
+		if (texto == null || texto.isBlank()) {
+			throw new IllegalArgumentException("Email inválido!");
+		}
+	}
+	private void validarSenha(String texto) throws IllegalArgumentException {
+		if (texto == null || texto.isBlank()) {
+			throw new IllegalArgumentException("Senha inválida!");
+		}
+	}
 	public boolean autenticar(String senha) {
 		if(this.senha.equals(senha)) return true;
 		return false;
@@ -33,9 +63,7 @@ public abstract class Usuario {
 	}
 	
 	public void setNome(String nome) throws IllegalArgumentException{
-		if(nome.isBlank() || nome == null) {
-			throw new IllegalArgumentException("Nome inválido");
-		}
+		validarNome(nome);
 		this.nome = nome;
 	}
 	
@@ -44,9 +72,7 @@ public abstract class Usuario {
 	}
 
 	public void setSenha(String senha) throws IllegalArgumentException{
-		if(senha.isBlank() || senha == null) {
-			throw new IllegalArgumentException("Senha inválida");
-		}
+		validarSenha(senha);
 		if(senha.equals(this.senha)) {
 			throw new IllegalArgumentException("Nova senha igual a anterior");
 		}
@@ -60,9 +86,18 @@ public abstract class Usuario {
 	
 	public abstract String toSummaryString();
 	
+	public abstract boolean ehPermitidoCadastrarVagas();
+	
+	public abstract boolean ehPermitidoAlterarVagas();
+	
 	@Override
 	public String toString() {
-		return "Nome: " + nome + " | CPF: " + cpf + " | Email: " + email + " | Senha: " + senha;
+		return String.format("Nome: %s | Idade: %d | CPF: %s | Email: %s | Senha: %s",
+				nome,
+				idade,
+				cpf,
+				email,
+				senha);
 	}
 
 	@Override

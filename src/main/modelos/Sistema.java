@@ -1,5 +1,6 @@
 package main.modelos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +44,9 @@ public class Sistema {
 	}
 	
 	public boolean login(String email, String senha) {
+		Usuario usuario = usuarios.get(email);
+		if(usuario == null) return false;
 		try {
-			Usuario usuario = usuarios.get(email);
 			if (usuario.autenticar(senha)) {
 				usuarioLogado = usuario;
 				return true;
@@ -54,6 +56,11 @@ public class Sistema {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+	public boolean logout() {
+		if(usuarioLogado == null) return false;
+		usuarioLogado = null;
+		return true;
 	}
 	
 	public String exibirDadosDoUsuario() {
@@ -82,7 +89,6 @@ public class Sistema {
 	
 	public boolean alterarEmpresa(String empresa) {
 		Recrutador recrutadorLogado = (Recrutador) usuarioLogado;
-		
 		try {
 			recrutadorLogado.setEmpresa(empresa);
 			return true;
@@ -93,6 +99,7 @@ public class Sistema {
 	}
 	
 	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
+		if(!usuarioLogado.ehPermitidoCadastrarVagas()) return false;
 		try {
 			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
 			vagas.put(codigo, novaVaga);
@@ -118,9 +125,12 @@ public class Sistema {
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
 		try {	
-			vagas.get(codigo).setTitulo(novoTitulo);
-			return false;
+			vaga.setTitulo(novoTitulo);
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -128,9 +138,12 @@ public class Sistema {
 	}
 	
 	public boolean alterarDescricaoVaga(String codigo, String novoDescricao) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
 		try {
-			vagas.get(codigo).setDescricao(novoDescricao);
-			return false;
+			vaga.setDescricao(novoDescricao);
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -138,9 +151,12 @@ public class Sistema {
 	}
 	
 	public boolean alterarRequisitosVaga(String codigo, String novoRequisitos) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
 		try {
-			vagas.get(codigo).setRequisitos(novoRequisitos);
-			return false;
+			vaga.setRequisitos(novoRequisitos);
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -148,9 +164,12 @@ public class Sistema {
 	}
 	
 	public boolean alterarSalarioVaga(String codigo, double novoSalario) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
 		try {
-			vagas.get(codigo).setSalario(novoSalario);
-			return false;
+			vaga.setSalario(novoSalario);
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -158,9 +177,12 @@ public class Sistema {
 	}
 	
 	public boolean alterarCidadeVaga(String codigo, String novoCidade) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
 		try {
-			vagas.get(codigo).setCidade(novoCidade);
-			return false;
+			vaga.setCidade(novoCidade);
+			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -168,8 +190,12 @@ public class Sistema {
 	}
 	
 	public boolean abrirVaga(String codigo) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
+		if(vaga.getAberta()) return false;
 		try {
-			vagas.get(codigo).abrirVaga();
+			vaga.abrirVaga();
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -178,32 +204,58 @@ public class Sistema {
 	}
 	
 	public boolean fecharVaga(String codigo) {
+		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
 		try {
-			vagas.get(codigo).fecharVaga();
+			vaga.fecharVaga();
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 	}
-	
-	public String verCadidaturas(String codigo) {
-		String logCandidaturas = "";
+	public Vaga buscarVaga(String codigo) {
+		if(calcularTotalUsuarios() == 0) return null;
+		return vagas.get(codigo);
+	}
+	public boolean registrarCandidatura(String codigo) {
+		if(vagas.size() == 0) return false;
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			Candidatura candidatura = new Candidatura(candidato,vaga);
+			candidato.candidatarVaga(candidatura);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 		
-		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+	}
+	public String verCadidaturas(String codigo) {
+		
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return "Vaga não foi encontrada!";
+		
+		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
 		if(candidaturasDaVaga.isEmpty()) {
 			return "Não há candidaturas para esta vaga";
 		}
 		
+		List<String> logCandidaturas = new ArrayList<String>();
+		
 		for(Candidatura c: candidaturasDaVaga) {
-			logCandidaturas += c.toString() + "\n";
+			logCandidaturas.add(c.toString());
 		}
 		
-		return logCandidaturas;
+		return String.join("\n", logCandidaturas);
 	}
 	
 	public Candidatura getCandidatura(String codigo, int id) {
-		List<Candidatura> candidaturasDaVaga = vagas.get(codigo).getCandidaturas();
+		Vaga vaga = buscarVaga(codigo);
+		if(vaga == null) return null;
+		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
 		for(Candidatura c: candidaturasDaVaga) {
 			if(c.getId() == id) {
 				return c;
@@ -253,6 +305,11 @@ public class Sistema {
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
 		return true;
 	}
-	
+	public int calcularTotalUsuarios() {
+		return usuarios.size();
+	}
+	public int calcularTotalVagas() {
+		return vagas.size();
+	}
 	
 }
