@@ -34,7 +34,6 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	
 	@Override
 	public void menu() {
-		exibirMenu();
 		int opcao;
 		
 		do {

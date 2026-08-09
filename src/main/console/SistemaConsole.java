@@ -10,6 +10,7 @@ public class SistemaConsole {
 	private EstrategiaMenuUsuario estrategia;
 	
 	public SistemaConsole() {
+		this.controlador = new Controlador();
 		this.estrategia = null;
 	}
 	
