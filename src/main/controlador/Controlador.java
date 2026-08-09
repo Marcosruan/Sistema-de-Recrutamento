@@ -42,6 +42,8 @@ public class Controlador {
 	}
 	public Vaga buscarVaga(String codigo) {
 		return sistema.buscarVaga(codigo);
+	}
+	
 	public String verVagas() {
 		return sistema.verVagas();
 	}

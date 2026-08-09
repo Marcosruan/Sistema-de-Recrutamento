@@ -7,7 +7,6 @@ import java.util.Set;
 
 
 import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
 
 public class Curriculo {
 	private Set<String> formacoes;
@@ -16,22 +15,16 @@ public class Curriculo {
 	private Set<String> idiomas;
 	private Candidato candidatoDono;
 	
-	public Curriculo(Candidato candidatoDono) {
-		validaCandidato(candidatoDono);
-		this.formacoes = new HashSet<String>();
-		this.habilidades = new HashSet<String>();
-		this.idiomas = new HashSet<String>();
+	public Curriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas,Candidato candidatoDono) {
+		this.formacoes = new HashSet<String>(formacoes);
+		this.experiencia = experiencia;
+		this.habilidades = new HashSet<String>(habilidades);
+		this.idiomas = new HashSet<String>(idiomas);
 		this.candidatoDono = candidatoDono;
 	}
 	
 	private void validaString(String texto) throws IllegalArgumentException {
 		if (texto == null || texto.isBlank()) {
-			throw new IllegalArgumentException();
-		}
-	}
-
-	private void validaCandidato(Object obj) throws IllegalArgumentException {
-		if (obj == null) {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -48,29 +41,43 @@ public class Curriculo {
 		habilidades.add(habilidade);
 	}
 	public void adicionarIdiomas(String idioma) {
-		validaCandidato(idioma);
 		idiomas.add(idioma);
-	}
-	public void editarrFormacao(String formacao) throws IllegalArgumentException{
-		validaString(formacao);
-		formacoes.clear();
-		formacoes.add(formacao);
 	}
 	public void editarExperiencia(String experiencia) throws IllegalArgumentException{
 		validaString(experiencia);
 		this.experiencia = experiencia;
 	}
-	public void editarHabilidade(String habilidade) {
-		validaString(habilidade);
-		habilidades.clear();
-		habilidades.add(habilidade);
+	public void editarFormacao(String formacaoAntiga,String formacaoNova) throws IllegalArgumentException{
+		validaString(formacaoAntiga);
+		validaString(formacaoNova);
+		if (this.habilidades.contains(formacaoAntiga)) {
+	        this.habilidades.remove(formacaoAntiga);
+	        this.habilidades.add(formacaoNova);
+	    } else {
+	        throw new IllegalArgumentException("Formação não encontrada para edição.");
+	    }
 	}
-	public void editarIdiomas(String idioma) {
-		validaCandidato(idioma);
-		idiomas.clear();
-		idiomas.add(idioma);
+	public void editarHabilidade(String habilidadeAntiga,String habilidadeNova) throws IllegalArgumentException {
+		validaString(habilidadeAntiga);
+		validaString(habilidadeNova);
+		if (this.habilidades.contains(habilidadeAntiga)) {
+	        this.habilidades.remove(habilidadeAntiga);
+	        this.habilidades.add(habilidadeNova);
+	    } else {
+	        throw new IllegalArgumentException("Formação não encontrada para edição.");
+	    }
 	}
 	
+	public void editarIdiomas(String IdiomaAntigo,String idiomaNovo) throws IllegalArgumentException{
+		validaString(IdiomaAntigo);
+		validaString(idiomaNovo);
+		if (this.habilidades.contains(IdiomaAntigo)) {
+	        this.habilidades.remove(IdiomaAntigo);
+	        this.habilidades.add(idiomaNovo);
+	    } else {
+	        throw new IllegalArgumentException("Formação não encontrada para edição.");
+	    }
+	}
 	@Override
 	public String toString() {
 		String curriculo = "";
