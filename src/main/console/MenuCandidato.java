@@ -76,12 +76,11 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 		System.out.println("2 - Ver curriculo");
 		System.out.println("3 - Adicionar formação");
 		System.out.println("4 - Alterar formação");
-		System.out.println("5 - Adicionar experiência");
-		System.out.println("6 - Alterar experiência");
-		System.out.println("7 - Adicionar habilidades");
-		System.out.println("8 - Alterar habilidades");
-		System.out.println("9 - Adicionar idiomas");
-		System.out.println("10 - Alterar idiomas");
+		System.out.println("5 - Alterar experiência");
+		System.out.println("6 - Adicionar habilidades");
+		System.out.println("7 - Alterar habilidades");
+		System.out.println("8 - Adicionar idiomas");
+		System.out.println("9 - Alterar idiomas");
 		System.out.println("0 - Sair");
 	}
 	
@@ -104,21 +103,18 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 				alterarFormacao();
 				break;
 			case 5:
-				adicionarExperiencia();
-				break;
-			case 6:
 				alterarExperiencia();
 				break;
-			case 7:
+			case 6:
 				adicionarHabilidades();
 				break;
-			case 8:
+			case 7:
 				alterarHabilidades();
 				break;
-			case 9:
+			case 8:
 				adicionarIdiomas();
 				break;
-			case 10:
+			case 9:
 				alterarIdiomas();
 				break;
 			default:
@@ -195,17 +191,6 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 			System.out.println("Formação alterada com sucesso.");
 		} else {
 			System.out.println("Não foi possível alterar a formação.");
-		}		
-	}
-
-	
-	private void adicionarExperiencia() {
-		String experiencia = Main.lerTexto("\nDigite a experiência: ");
-		boolean resultado = controlador.adicionarExperiencia(experiencia);
-		if(resultado) {
-			System.out.println("Experiência adicionada com sucesso.");
-		} else {
-			System.out.println("Não foi possível adicionar a experiência.");
 		}		
 	}
 	

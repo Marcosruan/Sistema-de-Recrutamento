@@ -406,21 +406,6 @@ public class Sistema {
 		return false;
 	}
 	
-	public boolean editarExperienciaCurriculo(String experienciaNova) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
-		try {
-			Candidato candidato = (Candidato) usuarioLogado;
-			candidato.editarExperienciaCurriculo(experienciaNova);
-			return true;
-		} catch (IllegalStateException e) {
-			System.out.println(e.getMessage());
-		}
-		catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-		} 
-		return false;
-	}
-	
 	public boolean editarFormacoesCurriculo(String formacaoAntiga, String formacaoNova) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {

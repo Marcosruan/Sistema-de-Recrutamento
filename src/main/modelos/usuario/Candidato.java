@@ -49,11 +49,6 @@ public class Candidato extends Usuario {
         this.curriculo.adicionarIdiomas(novoIdioma); 
 	}
 	
-	public void editarExperienciaCurriculo(String novaExperiencia) throws IllegalArgumentException,IllegalStateException {
-        validarCurriculo();
-        this.curriculo.editarExperiencia(novaExperiencia);
-	}
-	
 	public void editarFormacaoCurriculo(String formacaoAntiga,String formacaoNova) throws IllegalArgumentException,IllegalStateException{
         validarCurriculo();
         this.curriculo.editarFormacao(formacaoAntiga,formacaoNova); 

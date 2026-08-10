@@ -146,7 +146,7 @@ public class Controlador {
 		return sistema.adicionarHabilidadeCurriculo(habilidade);	
 	}
 
-	public boolean adicionarExperiencia(String experiencia) {
+	public boolean editarExperiencia(String experiencia) {
 		return sistema.adicionarExperienciaCurriculo(experiencia);
 	}
 
@@ -156,10 +156,6 @@ public class Controlador {
 
 	public boolean editarFormacao(String formacaoAntiga, String formacaoNova) {
 		return sistema.editarFormacoesCurriculo(formacaoAntiga, formacaoNova);
-	}
-
-	public boolean editarExperiencia(String experiencia) {
-		return sistema.editarExperienciaCurriculo(experiencia);
 	}
 
 	public boolean editarHabilidade(String habilidadeAntiga, String habilidadeNova) {
