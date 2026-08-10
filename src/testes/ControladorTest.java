@@ -221,7 +221,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAlterarTituloComCodigoInvalidoComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
+		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -237,7 +237,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAlterarTiutloVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
+		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -253,7 +253,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAlterarDescricaoVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
+		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -269,7 +269,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAlterarRequisitosVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
+		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -285,7 +285,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAlterarSalarioVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
+		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -301,7 +301,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAlterarCidadeVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
+		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
