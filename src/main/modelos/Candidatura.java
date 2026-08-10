@@ -2,7 +2,6 @@ package main.modelos;
 
 import main.modelos.enums.StatusCandidatura;
 import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
 
 public class Candidatura {
 	

@@ -17,6 +17,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	
 	@Override
 	public void cadastrar() {
+		System.out.println("\n=== Cadastro ===");
 		String nome = Main.lerTexto("Digite o nome: ");
 		int idade = Main.lerInteiro("Digite a idade: ");
 		String cpf = Main.lerTexto("Digite o cpf: ");
@@ -126,6 +127,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void cadastrarCurriculo() {
+		System.out.println();
 		Set<String> formacoes = cadastrarFormacoes();
 		String experiencia = Main.lerTexto("Digite a experiência: ");
 		Set<String> habilidades = cadastrarHabilidades();
@@ -176,7 +178,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 
 	private void adicionarFormacao() {
-		String formacao = Main.lerTexto("Digite a formação: ");
+		String formacao = Main.lerTexto("\nDigite a formação: ");
 		boolean resultado = controlador.adicionarFormacao(formacao);
 		if(resultado) {
 			System.out.println("Formação adicionada com sucesso.");
@@ -186,7 +188,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarFormacao() {
-		String formacaoAntiga = Main.lerTexto("Digite a formação que deseja alterar: ");
+		String formacaoAntiga = Main.lerTexto("\nDigite a formação que deseja alterar: ");
 		String formacaoNova = Main.lerTexto("Digite a nova formação: ");
 		boolean resultado = controlador.editarFormacao(formacaoAntiga, formacaoNova);
 		if(resultado) {
@@ -198,7 +200,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 
 	
 	private void adicionarExperiencia() {
-		String experiencia = Main.lerTexto("Digite a experiência: ");
+		String experiencia = Main.lerTexto("\nDigite a experiência: ");
 		boolean resultado = controlador.adicionarExperiencia(experiencia);
 		if(resultado) {
 			System.out.println("Experiência adicionada com sucesso.");
@@ -208,7 +210,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarExperiencia() {
-		String experiencia = Main.lerTexto("Digite a nova experiência: ");
+		String experiencia = Main.lerTexto("\nDigite a nova experiência: ");
 		boolean resultado = controlador.editarExperiencia(experiencia);
 		if(resultado) {
 			System.out.println("Experiência alterada com sucesso.");
@@ -218,7 +220,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void adicionarHabilidades() {
-		String habilidade = Main.lerTexto("Digite a habilidade: ");
+		String habilidade = Main.lerTexto("\nDigite a habilidade: ");
 		boolean resultado = controlador.adicionarHabilidade(habilidade);
 		if(resultado) {
 			System.out.println("Habilidade adicionada com sucesso.");
@@ -228,7 +230,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 		
 	private void alterarHabilidades() {
-		String habilidadeAntiga = Main.lerTexto("Digite a habilidade que deseja alterar: ");
+		String habilidadeAntiga = Main.lerTexto("\nDigite a habilidade que deseja alterar: ");
 		String habilidadeNova = Main.lerTexto("Digite a nova habilidade: ");
 		boolean resultado = controlador.editarHabilidade(habilidadeAntiga, habilidadeNova);
 		if(resultado) {
@@ -239,7 +241,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void adicionarIdiomas() {
-		String idioma = Main.lerTexto("Digite o idioma: ");
+		String idioma = Main.lerTexto("\nDigite o idioma: ");
 		boolean resultado = controlador.adicionarIdioma(idioma);
 		if(resultado) {
 			System.out.println("Idioma adicionado com sucesso.");
@@ -249,7 +251,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarIdiomas() {
-		String idiomaAntigo = Main.lerTexto("Digite o idioma que deseja alterar: ");
+		String idiomaAntigo = Main.lerTexto("\nDigite o idioma que deseja alterar: ");
 		String idiomaNova = Main.lerTexto("Digite o novo idioma: ");
 		boolean resultado = controlador.editarIdioma(idiomaAntigo, idiomaNova);
 		if(resultado) {
@@ -292,7 +294,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void candidatar() {
-		String codigo = Main.lerTexto("Digite o codigo da vaga: ");
+		String codigo = Main.lerTexto("\nDigite o codigo da vaga: ");
 		boolean resultado = controlador.candidatar(codigo);
 		if(resultado) {
 			System.out.println("Candidatura realizada com sucesso.");
@@ -302,7 +304,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void cancelarCandidatura() {
-		String codigoDaVaga = Main.lerTexto("Digite o codigo da vaga: ");
+		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
 		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
 		controlador.reprovarCandidatura(codigoDaVaga, idDaCandidatura);
 		boolean resultado = controlador.cancelarCandidatura(codigoDaVaga, idDaCandidatura);

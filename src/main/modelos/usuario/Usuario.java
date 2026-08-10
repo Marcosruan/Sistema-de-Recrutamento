@@ -2,9 +2,6 @@ package main.modelos.usuario;
 
 import java.util.Objects;
 
-import main.modelos.enums.TipoUsuario;
-
-
 public abstract class Usuario {
 	
 	protected String nome;
