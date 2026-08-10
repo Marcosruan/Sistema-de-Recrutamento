@@ -14,7 +14,7 @@ public class Vaga {
 	private String empresa;
 	private boolean aberta;
 	private List<Candidatura> candidaturas;
-	
+
 	public Vaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -85,6 +85,10 @@ public class Vaga {
 	
 	public List<Candidatura> getCandidaturas() {
 		return candidaturas;
+	}
+	
+	public void setCandidaturas(Candidatura candidatura) {
+		this.candidaturas.add(candidatura);
 	}
 	
 	@Override
