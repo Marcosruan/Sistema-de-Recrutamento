@@ -2,6 +2,7 @@ package main.console;
 
 import main.Main;
 import main.controlador.Controlador;
+import main.modelos.enums.TipoUsuario;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
 
 public class SistemaConsole {
@@ -10,6 +11,7 @@ public class SistemaConsole {
 	private EstrategiaMenuUsuario estrategia;
 	
 	public SistemaConsole() {
+		this.controlador = new Controlador();
 		this.estrategia = null;
 	}
 	
@@ -21,17 +23,18 @@ public class SistemaConsole {
 			switch (opcao) {
 			case 1 -> cadastrarUsuario();
 			case 2 -> fazerLogin();
-			case 0 -> System.out.println("Encerrando...");
+			case 0 -> System.out.println("Programa encerrado.");
 			default -> System.out.println("Opção inválida.");
 			}
 		} while(opcao != 0);
 	}
 	
 	private void fazerLogin() {
-		escolherTipo();
+		TipoUsuario tipo = escolherTipo() == 1 ? TipoUsuario.CANDIDATO : TipoUsuario.RECRUTADOR;
+		System.out.println("\n=== Login ===");
 		String email = Main.lerTexto("E-mail: ");
 		String senha = Main.lerTexto("Senha: ");
-		boolean sucesso = controlador.login(email, senha);
+		boolean sucesso = controlador.login(email, senha, tipo);
 		if (sucesso) {
 			estrategia.menu();
 		} else {
@@ -44,7 +47,7 @@ public class SistemaConsole {
 		estrategia.cadastrar();
 	}
 
-	private void escolherTipo() {
+	private int escolherTipo() {
 		int opcao = 0;
 		do {
 			exibirTipos();
@@ -55,17 +58,19 @@ public class SistemaConsole {
 			default -> System.out.println("Opção inválida.");
 			}
 		} while(opcao <= 0 || opcao > 2);
+		
+		return opcao;
 	}
 
 	private void exibirMenu() {
-		System.out.println("=== Menu Inicial ===");
+		System.out.println("\n=== Menu Inicial ===");
 		System.out.println("1 - Cadastrar");
 		System.out.println("2 - Login");
 		System.out.println("0 - Sair");
 	}
 	
 	private void exibirTipos() {
-		System.out.println("Deseja continuar como:");
+		System.out.println("\nDeseja continuar como:");
 		System.out.println("1 - Candidato");
 		System.out.println("2 - Recrutador");
 	}
