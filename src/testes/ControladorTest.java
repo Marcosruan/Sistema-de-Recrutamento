@@ -172,14 +172,11 @@ public class ControladorTest {
 		
 		controlador.alterarSenha("Minecraft123");
 		
-		boolean resultadoLogOut = controlador.logout();
-		
 		boolean resultadoLoginPosLogOut = controlador.login("Marcos2020@gmail.com", "Minecraft123");
 		
 		String resultado = controlador.exibirDadosDoUsuario();
 		String esperado = "Nome: Marcos | Idade: 20 | CPF: 66677788890 | Email: Marcos2020@gmail.com | Senha: Minecraft123";
 		
-		assertTrue(resultadoLogOut);
 		assertTrue(resultadoLoginPosLogOut);
 		assertEquals(esperado,resultado);
 	}

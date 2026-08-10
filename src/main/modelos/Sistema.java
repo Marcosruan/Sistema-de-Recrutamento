@@ -59,12 +59,6 @@ public class Sistema {
 		}
 	}
 	
-	public boolean logout() {
-		if(usuarioLogado == null) return false;
-		usuarioLogado = null;
-		return true;
-	}
-	
 	public String exibirDadosDoUsuario() {
 		return usuarioLogado.toString();
 	}

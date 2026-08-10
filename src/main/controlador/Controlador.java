@@ -25,10 +25,6 @@ public class Controlador {
 	public boolean login(String email, String senha) {
 		return sistema.login(email, senha);
 	}
-	
-	public boolean logout() {
-		return sistema.logout();
-	}
 
 	public String exibirDadosDoUsuario() {
 		return sistema.exibirDadosDoUsuario();
