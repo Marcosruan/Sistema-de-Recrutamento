@@ -50,19 +50,19 @@ public class Candidato extends Usuario {
         this.curriculo.adicionarIdiomas(novoIdioma); 
 	}
 	
-	public void editarFormacaoCurriculo(String formacaoAntiga,String formacaoNova) throws IllegalArgumentException,IllegalStateException{
+	public void editarFormacaoCurriculo(String formacaoAntiga, String formacaoNova) throws IllegalArgumentException, IllegalStateException{
         validarCurriculo();
-        this.curriculo.editarFormacao(formacaoAntiga,formacaoNova); 
+        this.curriculo.editarFormacao(formacaoAntiga, formacaoNova); 
     }
 	
-	public void editarHabilidadeCurriculo(String habilidadeAntiga,String habilidadeNova) throws IllegalArgumentException,IllegalStateException{
+	public void editarHabilidadeCurriculo(String habilidadeAntiga, String habilidadeNova) throws IllegalArgumentException, IllegalStateException{
         validarCurriculo();
-        this.curriculo.editarHabilidade(habilidadeAntiga,habilidadeNova); 
+        this.curriculo.editarHabilidade(habilidadeAntiga, habilidadeNova); 
 	}
 	
-	public void editarIdiomasCurriculo(String idiomaAntigo,String idiomaNovo) throws IllegalArgumentException,IllegalStateException {
+	public void editarIdiomasCurriculo(String idiomaAntigo, String idiomaNovo) throws IllegalArgumentException, IllegalStateException {
         validarCurriculo();
-        this.curriculo.editarIdiomas(idiomaAntigo,idiomaNovo); 
+        this.curriculo.editarIdiomas(idiomaAntigo, idiomaNovo); 
 	}
 	
 	public void deletarCurriculo()  throws IllegalStateException{
@@ -74,7 +74,7 @@ public class Candidato extends Usuario {
 		return curriculo;
 	}
 	
-	public void candidatarVaga(Candidatura candidatura) throws IllegalArgumentException,IllegalStateException {
+	public void candidatarVaga(Candidatura candidatura) throws IllegalArgumentException, IllegalStateException {
 		candidaturas.add(candidatura);
 	}
 	
