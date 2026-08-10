@@ -454,18 +454,6 @@ public class Sistema {
 		return false;
 	}
 	
-	public boolean excluirCurriculo() {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
-		  try {
-			Candidato candidato = (Candidato) usuarioLogado;
-			candidato.deletarCurriculo();
-			return true;
-		  }catch (IllegalStateException e) {
-				System.out.println(e.getMessage());
-				return false;
-		  }
-	}
-	
 	public int calcularTotalUsuarios() {
 		return usuarios.size();
 	}
