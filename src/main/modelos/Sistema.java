@@ -246,9 +246,9 @@ public class Sistema {
 		
 		List<String> logCandidaturas = new ArrayList<String>();
 		
-		for(Candidatura c: candidaturasDaVaga) {
-			if (c.getStatus() != StatusCandidatura.CANCELADA) {
-				logCandidaturas.add(c.toString());				
+		for(Candidatura candidatura: candidaturasDaVaga) {
+			if (candidatura.getStatus() != StatusCandidatura.CANCELADA) {
+				logCandidaturas.add(candidatura.toString());				
 			}
 		}
 		
@@ -259,13 +259,13 @@ public class Sistema {
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return null;
 		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
-		for(Candidatura c: candidaturasDaVaga) {
-			if(c.getId() == id) {
-				if(c.getStatus() == StatusCandidatura.REPROVADO || c.getStatus() == StatusCandidatura.CANCELADA) {
+		for(Candidatura candidatura: candidaturasDaVaga) {
+			if(candidatura.getId() == id) {
+				if(candidatura.getStatus() == StatusCandidatura.REPROVADO || candidatura.getStatus() == StatusCandidatura.CANCELADA) {
 					return null;
 				}
 				
-				return c;
+				return candidatura;
 			}
 		}
 		
@@ -322,7 +322,6 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
-		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
@@ -333,7 +332,6 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.CANCELADA);
-		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	

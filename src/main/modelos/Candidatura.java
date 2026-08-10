@@ -9,14 +9,13 @@ public class Candidatura {
 	private Candidato candidato;
 	private Vaga vaga;
 	private int id;
-	private static int totalDeCandidaturas;
+
 	
 	public Candidatura(Candidato candidato, Vaga vaga) {
 		this.status = StatusCandidatura.EM_ANALISE;
 		this.candidato = candidato;
 		this.vaga = vaga;
-		this.id = totalDeCandidaturas;
-		totalDeCandidaturas++;
+		this.id = vaga.getTotalDeCandidaturas();
 	}
 
 	public Candidato getCandidato() {
@@ -39,9 +38,7 @@ public class Candidatura {
 		return id;
 	}
 
-	public static int getTotalDeCandidaturas() {
-		return totalDeCandidaturas;
-	}
+
 
 	public StatusCandidatura alterarStatus(StatusCandidatura novoStatus) {
 		this.status = novoStatus;
@@ -54,7 +51,7 @@ public class Candidatura {
 
 	@Override
 	public String toString() {
-		return (id + 1) + "# [" + vaga.getTitulo() + "] Candidatura de: " + candidato.toSummaryString() + "\nStatus da cadidatura: " + status.getTexto();
+		return (id) + "# [" + vaga.getTitulo() + "] Candidatura de: " + candidato.toSummaryString() + "\nStatus da cadidatura: " + status.getTexto();
 	}
 	
 }

@@ -234,7 +234,7 @@ public class ControladorTest {
 		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("03", "Desenvolvedor Java Pleno");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
-		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3,000.00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
+		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertFalse(resultadoAlteracaoTitulo);
 		assertEquals(infoVagaEsperado, infoVaga);
@@ -250,7 +250,7 @@ public class ControladorTest {
 		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("01", "Desenvolvedor Java Pleno");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
-		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Pleno | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3,000.00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
+		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Pleno | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoTitulo);
 		assertEquals(infoVagaEsperado, infoVaga);
@@ -266,7 +266,7 @@ public class ControladorTest {
 		boolean resultadoAlteracaoDescricao = controlador.alterarDescricaoVaga("01", "Desenvolvimento e manutenção de microsserviços Java");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
-		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento e manutenção de microsserviços Java | Requisitos: Java, Spring Boot, Git | Salario: 3,000.00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
+		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento e manutenção de microsserviços Java | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoDescricao);
 		assertEquals(infoVagaEsperado, infoVaga);
@@ -282,7 +282,7 @@ public class ControladorTest {
 		boolean resultadoAlteracaoRequisitos = controlador.alterarRequisitosVaga("01","Java, Spring Boot, Git, Banco de dados, Microserviços");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
-		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git, Banco de dados, Microserviços | Salario: 3,000.00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
+		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git, Banco de dados, Microserviços | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoRequisitos);
 		assertEquals(infoVagaEsperado, infoVaga);
@@ -298,7 +298,7 @@ public class ControladorTest {
 		boolean resultadoAlteracaoSalario = controlador.alterarSalarioVaga("01",2500);
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
-		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 2,500.00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
+		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 2.500,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoSalario);
 		assertEquals(infoVagaEsperado, infoVaga);
@@ -314,7 +314,7 @@ public class ControladorTest {
 		boolean resultadoAlteracaoSalario = controlador.alterarCidadeVaga("01","Patos");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
-		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3,000.00 | Cidade: Patos | Empresa: Microsoft | Estado: Aberta";
+		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: Patos | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoSalario);
 		assertEquals(infoVagaEsperado, infoVaga);
@@ -753,6 +753,7 @@ public class ControladorTest {
 	    assertTrue(resultadoEdicao);
 	    assertEquals(infoCurriculoEsperado,infoCurriculo);
 	}
+	
 	@Test
 	public void testEditarIdiomasCurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
