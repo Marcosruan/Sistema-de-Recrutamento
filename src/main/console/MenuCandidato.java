@@ -280,7 +280,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	
 	private void candidatar() {
 		String codigo = Main.lerTexto("\nDigite o codigo da vaga: ");
-		boolean resultado = controlador.candidatar(codigo);
+		boolean resultado = controlador.registrarCandidatura(codigo);
 		if(resultado) {
 			System.out.println("Candidatura realizada com sucesso.");
 		} else {
