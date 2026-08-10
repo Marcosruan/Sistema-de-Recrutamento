@@ -202,7 +202,7 @@ public class ControladorTest {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
 		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior");
 		
-		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		int qtdVagas = controlador.calcularTotalVagas();
 		
 		assertFalse(resultadoCadastroVaga);
@@ -215,7 +215,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		int qtdVagas = controlador.calcularTotalVagas();
 		
 		assertTrue(resultadoCadastroVaga);
@@ -227,7 +227,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
 		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("03","Desenvolvedor Java Pleno");
 		
@@ -243,7 +243,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
 		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("01","Desenvolvedor Java Pleno");
 		
@@ -259,7 +259,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
 		boolean resultadoAlteracaoDescricao = controlador.alterarDescricaoVaga("01","Desenvolvimento e manutenção de microsserviços Java");
 		
@@ -275,7 +275,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
 		boolean resultadoAlteracaoRequisitos = controlador.alterarRequisitosVaga("01","Java, Spring Boot, Git, Banco de dados, Microserviços");
 		
@@ -291,7 +291,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
 		boolean resultadoAlteracaoSalario = controlador.alterarSalarioVaga("01",2500);
 		
@@ -307,7 +307,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
 		boolean resultadoAlteracaoSalario = controlador.alterarCidadeVaga("01","Patos");
 		
@@ -323,7 +323,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 
 		boolean resultado = controlador.abrirVaga("01");
 		
@@ -335,7 +335,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 
 		boolean resultado = controlador.fecharVaga("01");
 		
@@ -347,7 +347,7 @@ public class ControladorTest {
 		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex");
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo", "Microsoft");
+		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 
 		controlador.fecharVaga("01");
 		

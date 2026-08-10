@@ -127,9 +127,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 		String requisitos = Main.lerTexto("Digite os requisitos: ");
 		double salario = Main.lerDouble("Digite o salario: ");
 		String cidade = Main.lerTexto("Digite a cidade: ");
-		String empresa = Main.lerTexto("Digite a empresa: ");
 		
-		boolean resultado = controlador.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+		boolean resultado = controlador.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade);
 		
 		if(resultado) {
 			System.out.println("Vaga cadastrada com sucesso.");

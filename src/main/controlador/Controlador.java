@@ -46,8 +46,8 @@ public class Controlador {
 		return sistema.alterarEmpresa(empresa);
 	}
 	
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
-		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
+		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade);
 	}
 	
 	public Vaga buscarVaga(String codigo) {

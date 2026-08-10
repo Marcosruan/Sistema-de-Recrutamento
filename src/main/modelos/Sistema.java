@@ -100,10 +100,11 @@ public class Sistema {
 		}
 	}
 	
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
 		if(!usuarioLogado.ehPermitidoCadastrarVagas()) return false;
 		try {
-			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+			Recrutador recrutador = (Recrutador) usuarioLogado;
+			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, recrutador.getEmpresa());
 			vagas.put(codigo, novaVaga);
 			return true;
 		} catch (IllegalArgumentException e) {
@@ -229,7 +230,7 @@ public class Sistema {
 		if(vaga == null) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
-			Candidatura candidatura = new Candidatura(candidato,vaga);
+			Candidatura candidatura = new Candidatura(candidato, vaga);
 			candidato.candidatarVaga(candidatura);
 			return true;
 		} catch (Exception e) {
