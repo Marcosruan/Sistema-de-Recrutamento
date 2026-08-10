@@ -5,6 +5,7 @@ import java.util.List;
 
 import main.modelos.Candidatura;
 import main.modelos.Curriculo;
+import main.modelos.enums.TipoUsuario;
 
 public class Candidato extends Usuario {
 	
@@ -110,5 +111,10 @@ public class Candidato extends Usuario {
 	@Override
 	public boolean ehPermitidoCadastrarAlterarCurriculo() {
 		return true;
+	}
+
+	@Override
+	protected TipoUsuario getTipo() {
+		return TipoUsuario.CANDIDATO;
 	}
 }

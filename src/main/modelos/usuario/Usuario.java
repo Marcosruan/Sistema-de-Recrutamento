@@ -2,6 +2,8 @@ package main.modelos.usuario;
 
 import java.util.Objects;
 
+import main.modelos.enums.TipoUsuario;
+
 public abstract class Usuario {
 	
 	protected String nome;
@@ -116,4 +118,5 @@ public abstract class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
+	public abstract TipoUsuario getTipo();
 }

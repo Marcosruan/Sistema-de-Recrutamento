@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import main.modelos.enums.StatusCandidatura;
+import main.modelos.enums.TipoUsuario;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Recrutador;
 import main.modelos.usuario.Usuario;
@@ -44,9 +45,10 @@ public class Sistema {
 		}
 	}
 	
-	public boolean login(String email, String senha) {
+	public boolean login(String email, String senha, TipoUsuario tipo) {
 		Usuario usuario = usuarios.get(email);
 		if(usuario == null) return false;
+		if(usuario.getTipo() != tipo) return false;
 		try {
 			if (usuario.autenticar(senha)) {
 				usuarioLogado = usuario;

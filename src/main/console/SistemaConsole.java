@@ -2,6 +2,7 @@ package main.console;
 
 import main.Main;
 import main.controlador.Controlador;
+import main.modelos.enums.TipoUsuario;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
 
 public class SistemaConsole {
@@ -29,11 +30,11 @@ public class SistemaConsole {
 	}
 	
 	private void fazerLogin() {
-		escolherTipo();
+		TipoUsuario tipo = escolherTipo() == 1 ? TipoUsuario.CANDIDATO : TipoUsuario.RECRUTADOR;
 		System.out.println("\n=== Login ===");
 		String email = Main.lerTexto("E-mail: ");
 		String senha = Main.lerTexto("Senha: ");
-		boolean sucesso = controlador.login(email, senha);
+		boolean sucesso = controlador.login(email, senha, tipo);
 		if (sucesso) {
 			estrategia.menu();
 		} else {
@@ -46,7 +47,7 @@ public class SistemaConsole {
 		estrategia.cadastrar();
 	}
 
-	private void escolherTipo() {
+	private int escolherTipo() {
 		int opcao = 0;
 		do {
 			exibirTipos();
@@ -57,6 +58,8 @@ public class SistemaConsole {
 			default -> System.out.println("Opção inválida.");
 			}
 		} while(opcao <= 0 || opcao > 2);
+		
+		return opcao;
 	}
 
 	private void exibirMenu() {
