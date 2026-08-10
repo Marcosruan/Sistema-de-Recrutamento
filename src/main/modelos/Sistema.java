@@ -233,7 +233,6 @@ public class Sistema {
 		} catch (Exception e) {
 			return false;
 		}
-		
 	}
 	
 	public String verCadidaturasPorVaga(String codigo) {
