@@ -2,7 +2,6 @@ package main.modelos;
 
 import main.modelos.enums.StatusCandidatura;
 import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
 
 public class Candidatura {
 	
@@ -55,7 +54,7 @@ public class Candidatura {
 
 	@Override
 	public String toString() {
-		return id + "# [" + vaga.getTitulo() + "] Candidatura de: " + candidato.toSummaryString() + "\nStatus da cadidatura: " + status;
+		return (id + 1) + "# [" + vaga.getTitulo() + "] Candidatura de: " + candidato.toSummaryString() + "\nStatus da cadidatura: " + status.getTexto();
 	}
 	
 }

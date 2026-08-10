@@ -25,10 +25,6 @@ public class Controlador {
 	public boolean login(String email, String senha) {
 		return sistema.login(email, senha);
 	}
-	
-	public boolean logout() {
-		return sistema.logout();
-	}
 
 	public String exibirDadosDoUsuario() {
 		return sistema.exibirDadosDoUsuario();
@@ -46,8 +42,8 @@ public class Controlador {
 		return sistema.alterarEmpresa(empresa);
 	}
 	
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
-		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
+		return sistema.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade);
 	}
 	
 	public Vaga buscarVaga(String codigo) {
@@ -146,7 +142,7 @@ public class Controlador {
 		return sistema.adicionarHabilidadeCurriculo(habilidade);	
 	}
 
-	public boolean adicionarExperiencia(String experiencia) {
+	public boolean editarExperiencia(String experiencia) {
 		return sistema.adicionarExperienciaCurriculo(experiencia);
 	}
 
@@ -156,10 +152,6 @@ public class Controlador {
 
 	public boolean editarFormacao(String formacaoAntiga, String formacaoNova) {
 		return sistema.editarFormacoesCurriculo(formacaoAntiga, formacaoNova);
-	}
-
-	public boolean editarExperiencia(String experiencia) {
-		return sistema.editarExperienciaCurriculo(experiencia);
 	}
 
 	public boolean editarHabilidade(String habilidadeAntiga, String habilidadeNova) {

@@ -90,7 +90,9 @@ public class Curriculo {
 		curriculo += String.format("| Idade: %d%n", candidatoDono.getIdade());
 		curriculo += String.format("| Email: %s%n", candidatoDono.getEmail());
 		curriculo += "----------------------------------------\n";
+		
 		List<String> experienciaFormatada = quebrarTexto(experiencia, " ", 40 - 14);
+		
 		for (int i = 0; i < experienciaFormatada.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Experiencia: ") +
@@ -102,6 +104,7 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
+		
 		List<String> formacoesFormatada = quebrarTexto(String.join(", "), ", ", 40 - 13);
 		for (int i = 0; i < formacoesFormatada.size(); i++) {
 		    if (i == 0) {
@@ -114,7 +117,9 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
+		
 		List<String> habilidadesFormatadas = quebrarTexto(String.join(", ", habilidades), ", ", 40 - 15);
+		
 		for (int i = 0; i < habilidadesFormatadas.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Habilidades: ") +
@@ -126,7 +131,9 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
+		
 		List<String> idiomasFormatados = quebrarTexto(String.join(", ",idiomas), ", ", 40 - 11);
+		
 		for (int i = 0; i < idiomasFormatados.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Idiomas: ") +
@@ -139,7 +146,6 @@ public class Curriculo {
 		    }
 		}
 
-				
  		curriculo += "========================================";
 		return curriculo;
 				

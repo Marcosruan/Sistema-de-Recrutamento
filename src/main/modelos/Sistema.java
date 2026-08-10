@@ -59,12 +59,6 @@ public class Sistema {
 		}
 	}
 	
-	public boolean logout() {
-		if(usuarioLogado == null) return false;
-		usuarioLogado = null;
-		return true;
-	}
-	
 	public String exibirDadosDoUsuario() {
 		return usuarioLogado.toString();
 	}
@@ -100,10 +94,11 @@ public class Sistema {
 		}
 	}
 	
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
 		if(!usuarioLogado.ehPermitidoCadastrarVagas()) return false;
 		try {
-			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+			Recrutador recrutador = (Recrutador) usuarioLogado;
+			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, recrutador.getEmpresa());
 			vagas.put(codigo, novaVaga);
 			return true;
 		} catch (IllegalArgumentException e) {
@@ -119,11 +114,11 @@ public class Sistema {
 		
 		String logDeVagas = "";
 		
-		for(Map.Entry<String, Vaga> v : vagas.entrySet()) {
-			logDeVagas += v.toString();
+		for(Map.Entry<String, Vaga> vaga : vagas.entrySet()) {
+			logDeVagas += vaga.getValue().toString() + "\n";
 		}
 		
-		return logDeVagas;
+		return logDeVagas.trim();
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
@@ -229,7 +224,7 @@ public class Sistema {
 		if(vaga == null) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
-			Candidatura candidatura = new Candidatura(candidato,vaga);
+			Candidatura candidatura = new Candidatura(candidato, vaga);
 			candidato.candidatarVaga(candidatura);
 			return true;
 		} catch (Exception e) {
@@ -406,21 +401,6 @@ public class Sistema {
 		return false;
 	}
 	
-	public boolean editarExperienciaCurriculo(String experienciaNova) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
-		try {
-			Candidato candidato = (Candidato) usuarioLogado;
-			candidato.editarExperienciaCurriculo(experienciaNova);
-			return true;
-		} catch (IllegalStateException e) {
-			System.out.println(e.getMessage());
-		}
-		catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-		} 
-		return false;
-	}
-	
 	public boolean editarFormacoesCurriculo(String formacaoAntiga, String formacaoNova) {
 		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
 		try {
@@ -493,6 +473,7 @@ public class Sistema {
 			Candidato usuarioCandidato = (Candidato) usuarioLogado;
 			Candidatura novaCandidatura = new Candidatura(usuarioCandidato, vaga);
 			usuarioCandidato.setCandidaturas(novaCandidatura);
+			vaga.setCandidaturas(novaCandidatura);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

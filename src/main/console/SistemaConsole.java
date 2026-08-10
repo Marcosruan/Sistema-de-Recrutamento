@@ -22,7 +22,7 @@ public class SistemaConsole {
 			switch (opcao) {
 			case 1 -> cadastrarUsuario();
 			case 2 -> fazerLogin();
-			case 0 -> System.out.println("Encerrando...");
+			case 0 -> System.out.println("Programa encerrado.");
 			default -> System.out.println("Opção inválida.");
 			}
 		} while(opcao != 0);
@@ -30,6 +30,7 @@ public class SistemaConsole {
 	
 	private void fazerLogin() {
 		escolherTipo();
+		System.out.println("\n=== Login ===");
 		String email = Main.lerTexto("E-mail: ");
 		String senha = Main.lerTexto("Senha: ");
 		boolean sucesso = controlador.login(email, senha);
