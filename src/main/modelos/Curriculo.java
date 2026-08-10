@@ -7,7 +7,6 @@ import java.util.Set;
 
 
 import main.modelos.usuario.Candidato;
-import main.modelos.usuario.Usuario;
 
 public class Curriculo {
 	private Set<String> formacoes;
@@ -16,11 +15,11 @@ public class Curriculo {
 	private Set<String> idiomas;
 	private Candidato candidatoDono;
 	
-	public Curriculo(Candidato candidatoDono) {
-		validaCandidato(candidatoDono);
-		this.formacoes = new HashSet<String>();
-		this.habilidades = new HashSet<String>();
-		this.idiomas = new HashSet<String>();
+	public Curriculo(Set<String> formacoes, String experiencia, Set<String> habilidades, Set<String> idiomas, Candidato candidatoDono) {
+		this.formacoes = new HashSet<String>(formacoes);
+		this.experiencia = experiencia;
+		this.habilidades = new HashSet<String>(habilidades);
+		this.idiomas = new HashSet<String>(idiomas);
 		this.candidatoDono = candidatoDono;
 	}
 	
@@ -29,46 +28,62 @@ public class Curriculo {
 			throw new IllegalArgumentException();
 		}
 	}
-
-	private void validaCandidato(Object obj) throws IllegalArgumentException {
-		if (obj == null) {
-			throw new IllegalArgumentException();
-		}
-	}
+	
 	public void adicionarFormacao(String formacao) throws IllegalArgumentException{
 		validaString(formacao);
 		formacoes.add(formacao);
 	}
+	
 	public void adicionarExperiencia(String experiencia) throws IllegalArgumentException{
 		validaString(experiencia);
-		this.experiencia = experiencia;
+		this.experiencia += " " + experiencia;
 	}
+	
 	public void adicionarHabilidade(String habilidade) {
 		validaString(habilidade);
 		habilidades.add(habilidade);
 	}
+	
 	public void adicionarIdiomas(String idioma) {
-		validaCandidato(idioma);
 		idiomas.add(idioma);
 	}
-	public void editarrFormacao(String formacao) throws IllegalArgumentException{
-		validaString(formacao);
-		formacoes.clear();
-		formacoes.add(formacao);
-	}
+	
 	public void editarExperiencia(String experiencia) throws IllegalArgumentException{
 		validaString(experiencia);
 		this.experiencia = experiencia;
 	}
-	public void editarHabilidade(String habilidade) {
-		validaString(habilidade);
-		habilidades.clear();
-		habilidades.add(habilidade);
+	
+	public void editarFormacao(String formacaoAntiga, String formacaoNova) throws IllegalArgumentException{
+		validaString(formacaoAntiga);
+		validaString(formacaoNova);
+		if (this.formacoes.contains(formacaoAntiga)) {
+	        this.formacoes.remove(formacaoAntiga);
+	        this.formacoes.add(formacaoNova);
+	    } else {
+	        throw new IllegalArgumentException("Formação não encontrada para edição.");
+	    }
 	}
-	public void editarIdiomas(String idioma) {
-		validaCandidato(idioma);
-		idiomas.clear();
-		idiomas.add(idioma);
+	
+	public void editarHabilidade(String habilidadeAntiga, String habilidadeNova) throws IllegalArgumentException {
+		validaString(habilidadeAntiga);
+		validaString(habilidadeNova);
+		if (this.habilidades.contains(habilidadeAntiga)) {
+	        this.habilidades.remove(habilidadeAntiga);
+	        this.habilidades.add(habilidadeNova);
+	    } else {
+	        throw new IllegalArgumentException("Formação não encontrada para edição.");
+	    }
+	}
+	
+	public void editarIdiomas(String IdiomaAntigo, String idiomaNovo) throws IllegalArgumentException{
+		validaString(IdiomaAntigo);
+		validaString(idiomaNovo);
+		if (this.idiomas.contains(IdiomaAntigo)) {
+	        this.idiomas.remove(IdiomaAntigo);
+	        this.idiomas.add(idiomaNovo);
+	    } else {
+	        throw new IllegalArgumentException("Formação não encontrada para edição.");
+	    }
 	}
 	
 	@Override
@@ -82,8 +97,10 @@ public class Curriculo {
 		curriculo += String.format("| Nome: %s%n", candidatoDono.getNome());
 		curriculo += String.format("| Idade: %d%n", candidatoDono.getIdade());
 		curriculo += String.format("| Email: %s%n", candidatoDono.getEmail());
-		curriculo += "----------------------------------------";
+		curriculo += "----------------------------------------\n";
+
 		List<String> experienciaFormatada = quebrarTexto(experiencia, " ", 40 - 14);
+		
 		for (int i = 0; i < experienciaFormatada.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Experiencia: ") +
@@ -95,7 +112,9 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
-		List<String> formacoesFormatada = quebrarTexto(String.join(", "), ", ", 40 - 13);
+
+		List<String> formacoesFormatada = quebrarTexto(String.join(", ",formacoes), ", ", 40 - 13);
+
 		for (int i = 0; i < formacoesFormatada.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Formações: ") +
@@ -107,7 +126,9 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
+		
 		List<String> habilidadesFormatadas = quebrarTexto(String.join(", ", habilidades), ", ", 40 - 15);
+		
 		for (int i = 0; i < habilidadesFormatadas.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Habilidades: ") +
@@ -119,7 +140,9 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
+		
 		List<String> idiomasFormatados = quebrarTexto(String.join(", ",idiomas), ", ", 40 - 11);
+		
 		for (int i = 0; i < idiomasFormatados.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Idiomas: ") +
@@ -132,12 +155,12 @@ public class Curriculo {
 		    }
 		}
 
-				
  		curriculo += "========================================";
 		return curriculo;
 				
 	}
-	private static List<String> quebrarTexto(String texto,String delimitador, int tamanhoMaximo) {
+	
+	private static List<String> quebrarTexto(String texto, String delimitador, int tamanhoMaximo) {
 	    List<String> linhas = new ArrayList<String>();
 
 	    String[] palavras = texto.split(delimitador);
@@ -146,7 +169,9 @@ public class Curriculo {
 	    for (String palavra : palavras) {
 
 	        if (linhaAtual.length() + palavra.length() + 1 > tamanhoMaximo) {
-	            linhas.add(linhaAtual);
+	            if (!linhaAtual.isEmpty()) {
+	                linhas.add(linhaAtual);
+	            }
 	            linhaAtual = "";
 	        }
 
