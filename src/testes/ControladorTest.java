@@ -16,44 +16,44 @@ public class ControladorTest {
 	private Controlador controlador;
 	
 	@Before
-	public void inicialiarControlador() {
+	public void inicializarControlador() {
 		controlador = new Controlador();
 	}
 	
 	@Test
 	public void testCadastrarCandidatoComNomeVazio() {
-		boolean resultado = controlador.cadastrarCandidato("",19,"11122233345","carlos2000@gmail.com","desenvolvedorknex");
+		boolean resultado = controlador.cadastrarCandidato("", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedorknex");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertFalse(resultado);
-		assertEquals(0,qtdUsuarios);
+		assertEquals(0, qtdUsuarios);
 	
 	}
 	
 	@Test
 	public void testCadastrarCandidatoComIdadeForaIntervalo() {
-		boolean resultado = controlador.cadastrarCandidato("Carlos",1,"11122233345","carlos2000@gmail.com","desenvolvedorknex");
+		boolean resultado = controlador.cadastrarCandidato("Carlos", 1, "11122233345", "carlos2000@gmail.com", "desenvolvedorknex");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertFalse(resultado);
-		assertEquals(0,qtdUsuarios);
+		assertEquals(0, qtdUsuarios);
 	}
 	
 	@Test
 	public void testCadastrarCandidatoComCPFVazio() {
-		boolean resultado = controlador.cadastrarCandidato("Carlos",19,"","carlos2000@gmail.com","desenvolvedorknex");
+		boolean resultado = controlador.cadastrarCandidato("Carlos", 19, "", "carlos2000@gmail.com", "desenvolvedorknex");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertFalse(resultado);
-		assertEquals(0,qtdUsuarios);
+		assertEquals(0, qtdUsuarios);
 	}
 	
 	@Test
 	public void testCadastrarCandidatoComEmailVazio() {
-		boolean resultado = controlador.cadastrarCandidato("Carlos",19,"11122233345","","desenvolvedorknex");
+		boolean resultado = controlador.cadastrarCandidato("Carlos", 19, "11122233345", "", "desenvolvedorknex");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
@@ -63,49 +63,49 @@ public class ControladorTest {
 	
 	@Test
 	public void testCadastrarCandidatoComSenhaVazia() {
-		boolean resultado = controlador.cadastrarCandidato("Carlos",19,"11122233345","carlos2000@gmail.com","");
+		boolean resultado = controlador.cadastrarCandidato("Carlos", 19, "11122233345", "carlos2000@gmail.com", "");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertFalse(resultado);
-		assertEquals(0,qtdUsuarios);
+		assertEquals(0, qtdUsuarios);
 	}
 	
 	@Test 
 	public void testCadastrarCandidatoValido() {
-		boolean resultado = controlador.cadastrarCandidato("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedorknex");
+		boolean resultado = controlador.cadastrarCandidato("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedorknex");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertTrue(resultado);
-		assertEquals(1,qtdUsuarios);
+		assertEquals(1, qtdUsuarios);
 	}
 	
 	@Test 
 	public void testCadastrarRecrutadorEmpresaInvalido() {
-		boolean resultado = controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","");
+		boolean resultado = controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertFalse(resultado);
-		assertEquals(0,qtdUsuarios);
+		assertEquals(0, qtdUsuarios);
 	}
 	
 	@Test 
 	public void testCadastrarRecrutadorValido() {
-		boolean resultado = controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
+		boolean resultado = controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		
 		int qtdUsuarios = controlador.calcularTotalUsuarios();
 		
 		assertTrue(resultado);
-		assertEquals(1,qtdUsuarios);
+		assertEquals(1, qtdUsuarios);
 	}
 	
 	@Test
 	public void testFalhaLoginPorEmailIncorreto() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com","desenvolvedorJunior");
 		
-		boolean resultado = controlador.login("Marcos2020@gmail.com","desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		boolean resultado = controlador.login("Marcos2020@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 		assertFalse(resultado);
 
@@ -113,9 +113,9 @@ public class ControladorTest {
 	
 	@Test
 	public void testFalhaLoginPorSenhaIncorreto() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
 		
-		boolean resultado = controlador.login("jonnas1000@gmail.com","desenvolvedorknex", TipoUsuario.CANDIDATO);
+		boolean resultado = controlador.login("jonnas1000@gmail.com", "desenvolvedorknex", TipoUsuario.CANDIDATO);
 		
 		assertFalse(resultado);
 
@@ -123,9 +123,9 @@ public class ControladorTest {
 	
 	@Test
 	public void testLoginValido() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
 		
-		boolean resultado = controlador.login("jonnas1000@gmail.com","desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		boolean resultado = controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 		assertTrue(resultado);
 
@@ -133,43 +133,43 @@ public class ControladorTest {
 	
 	@Test
 	public void testExibirDadosCandidato() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 		String resultado = controlador.exibirDadosDoUsuario();
 		String esperado = "Nome: Jonnas | Idade: 19 | CPF: 55511133300 | Email: jonnas1000@gmail.com | Senha: desenvolvedorJunior";
 		
-		assertEquals(esperado,resultado);
+		assertEquals(esperado, resultado);
 	}
 	
 	@Test
 	public void testExibirDadosRecrutador() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 		String resultado = controlador.exibirDadosDoUsuario();
 		String esperado = "Nome: Jonnas | Idade: 19 | CPF: 55511133300 | Email: jonnas1000@gmail.com | Senha: desenvolvedorJunior";
 		
-		assertEquals(esperado,resultado);
+		assertEquals(esperado, resultado);
 	}
 	
 	@Test
 	public void testAlterarNome() {
-		controlador.cadastrarCandidato("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex");
-		controlador.login("Marcos2020@gmail.com","desenvolvedorknex", TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex");
+		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.CANDIDATO);
 		
 		controlador.alterarNome("Ruan");
 		
 		String resultado = controlador.exibirDadosDoUsuario();
 		String esperado = "Nome: Ruan | Idade: 20 | CPF: 66677788890 | Email: Marcos2020@gmail.com | Senha: desenvolvedorknex";
 		
-		assertEquals(esperado,resultado);
+		assertEquals(esperado, resultado);
 	}
 	
 	@Test
 	public void testAlterarSenha() {
-		controlador.cadastrarCandidato("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex");
-		controlador.login("Marcos2020@gmail.com","desenvolvedorknex", TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex");
+		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.CANDIDATO);
 		
 		controlador.alterarSenha("Minecraft123");
 		
@@ -179,99 +179,99 @@ public class ControladorTest {
 		String esperado = "Nome: Marcos | Idade: 20 | CPF: 66677788890 | Email: Marcos2020@gmail.com | Senha: Minecraft123";
 		
 		assertTrue(resultadoLoginPosLogOut);
-		assertEquals(esperado,resultado);
+		assertEquals(esperado, resultado);
 	}
 	
 	@Test
 	public void testAlterarEmpresa() {
-		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
-		controlador.login("Marcos2020@gmail.com","desenvolvedorknex", TipoUsuario.RECRUTADOR);
+		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
+		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
 		controlador.alterarEmpresa("Google");
 		
 		String resultado = controlador.exibirDadosDoUsuario();
 		String esperado = "Nome: Marcos | Idade: 20 | CPF: 66677788890 | Email: Marcos2020@gmail.com | Senha: desenvolvedorknex | Empresa: Google";
 		
-		assertEquals(esperado,resultado);
+		assertEquals(esperado, resultado);
 	}
 	
 	@Test
 	public void testCadastroInvalidoComoCandidato() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
 		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		int qtdVagas = controlador.calcularTotalVagas();
 		
 		assertFalse(resultadoCadastroVaga);
-		assertEquals(0,qtdVagas);
+		assertEquals(0, qtdVagas);
 		
 	}
 	
 	@Test
 	public void testCadastrarVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsft");
-		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsft");
+		controlador.login("carlos2000@gmail.com", "desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		int qtdVagas = controlador.calcularTotalVagas();
 		
 		assertTrue(resultadoCadastroVaga);
-		assertEquals(1,qtdVagas);
+		assertEquals(1, qtdVagas);
 	}
 	
 	@Test
 	public void testAlterarTituloComCodigoInvalidoComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
-		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("03","Desenvolvedor Java Pleno");
+		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("03", "Desenvolvedor Java Pleno");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
 		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertFalse(resultadoAlteracaoTitulo);
-		assertEquals(infoVagaEsperado,infoVaga);
+		assertEquals(infoVagaEsperado, infoVaga);
 	}
 	
 	@Test
-	public void testAlterarTiutloVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
+	public void testAlterarTituloVagaComoRecrutador() {
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
-		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("01","Desenvolvedor Java Pleno");
+		boolean resultadoAlteracaoTitulo = controlador.alterarTituloVaga("01", "Desenvolvedor Java Pleno");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
 		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Pleno | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoTitulo);
-		assertEquals(infoVagaEsperado,infoVaga);
+		assertEquals(infoVagaEsperado, infoVaga);
 	}
 	
 	@Test
 	public void testAlterarDescricaoVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
-		boolean resultadoAlteracaoDescricao = controlador.alterarDescricaoVaga("01","Desenvolvimento e manutenção de microsserviços Java");
+		boolean resultadoAlteracaoDescricao = controlador.alterarDescricaoVaga("01", "Desenvolvimento e manutenção de microsserviços Java");
 		
 		String infoVaga = controlador.buscarVaga("01").toString();
 		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento e manutenção de microsserviços Java | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoDescricao);
-		assertEquals(infoVagaEsperado,infoVaga);
+		assertEquals(infoVagaEsperado, infoVaga);
 	}
 	
 	@Test
 	public void testAlterarRequisitosVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
-		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsoft");
+		controlador.login("carlos2000@gmail.com", "desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
@@ -281,12 +281,12 @@ public class ControladorTest {
 		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git, Banco de dados, Microserviços | Salario: 3.000,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoRequisitos);
-		assertEquals(infoVagaEsperado,infoVaga);
+		assertEquals(infoVagaEsperado, infoVaga);
 	}
 	
 	@Test
 	public void testAlterarSalarioVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsoft");
 		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -297,13 +297,13 @@ public class ControladorTest {
 		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 2.500,00 | Cidade: São Paulo | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoSalario);
-		assertEquals(infoVagaEsperado,infoVaga);
+		assertEquals(infoVagaEsperado, infoVaga);
 	}
 	
 	@Test
 	public void testAlterarCidadeVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Carlos",19,"11122233345","carlos2000@gmail.com","desenvolvedor123","Microsoft");
-		controlador.login("carlos2000@gmail.com","desenvolvedor123", TipoUsuario.RECRUTADOR);
+		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsoft");
+		controlador.login("carlos2000@gmail.com", "desenvolvedor123", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
@@ -313,12 +313,12 @@ public class ControladorTest {
 		String infoVagaEsperado = "Codigo: 01 | Titulo: Desenvolvedor Java Junior | Descricao: Desenvolvimento de aplicações | Requisitos: Java, Spring Boot, Git | Salario: 3.000,00 | Cidade: Patos | Empresa: Microsoft | Estado: Aberta";
 		
 		assertTrue(resultadoAlteracaoSalario);
-		assertEquals(infoVagaEsperado,infoVaga);
+		assertEquals(infoVagaEsperado, infoVaga);
 	}
 	
 	@Test
 	public void testTentarAbrirVagaJaAbertaComoRecrutador() {
-		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
+		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -330,7 +330,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testFecharVagaComoRecrutador() {
-		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
+		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -342,7 +342,7 @@ public class ControladorTest {
 	
 	@Test
 	public void testAbrirVagaFechadaComoRecrutador() {
-		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
+		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
@@ -356,12 +356,12 @@ public class ControladorTest {
 	
 	@Test
 	public void testRegistrarCandidatura() {
-		controlador.cadastrarRecrutador("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex","KNEX");
+		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
 		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
-		controlador.cadastrarCandidato("Marcos",20,"66677788890","Marcos2020@gmail.com","desenvolvedorknex");
+		controlador.cadastrarCandidato("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex");
 		controlador.login("Marcos2020@gmail.com","desenvolvedorknex", TipoUsuario.CANDIDATO);
 		
 		boolean resultadoRegistroCandidatura = controlador.registrarCandidatura("01");
@@ -372,8 +372,5 @@ public class ControladorTest {
 		
 		assertTrue(resultadoRegistroCandidatura);
 		assertEquals(exibicaoCandidaturasEsperado,exibicaoCandidaturas);
-		
-		// Ajeitar a String de exibicaoCandidaturaEsperado (Obs: de uma olhada no toSummaryString que foi implementado (tá incompleto)
-		
 	}
 }
