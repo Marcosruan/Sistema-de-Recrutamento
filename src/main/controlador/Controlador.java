@@ -5,6 +5,7 @@ import java.util.Set;
 import main.modelos.Candidatura;
 import main.modelos.Sistema;
 import main.modelos.Vaga;
+import main.modelos.enums.TipoUsuario;
 
 public class Controlador {
 	
@@ -22,8 +23,8 @@ public class Controlador {
 		return sistema.cadastrarRecrutador(nome, idade, cpf, email, senha, empresa);
 	}
 	
-	public boolean login(String email, String senha) {
-		return sistema.login(email, senha);
+	public boolean login(String email, String senha, TipoUsuario tipo) {
+		return sistema.login(email, senha, tipo);
 	}
 
 	public String exibirDadosDoUsuario() {
@@ -124,10 +125,6 @@ public class Controlador {
 
 	public String verCurriculo() {
 		return sistema.verCurriculo();
-	}
-
-	public boolean candidatar(String codigo) {
-		return sistema.candidatar(codigo);
 	}
 
 	public boolean cancelarCandidatura(String codigoDaVaga, int idDaCandidatura) {

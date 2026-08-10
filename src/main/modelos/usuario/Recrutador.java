@@ -1,5 +1,7 @@
 package main.modelos.usuario;
 
+import main.modelos.enums.TipoUsuario;
+
 public class Recrutador extends Usuario {
 
 	private String empresa;
@@ -43,6 +45,10 @@ public class Recrutador extends Usuario {
 	@Override
 	public boolean ehPermitidoCadastrarAlterarCurriculo() {
 		return false;
+	}
+	@Override
+	public TipoUsuario getTipo() {
+		return TipoUsuario.RECRUTADOR;
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import main.modelos.enums.StatusCandidatura;
+import main.modelos.enums.TipoUsuario;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Recrutador;
 import main.modelos.usuario.Usuario;
@@ -44,9 +45,10 @@ public class Sistema {
 		}
 	}
 	
-	public boolean login(String email, String senha) {
+	public boolean login(String email, String senha, TipoUsuario tipo) {
 		Usuario usuario = usuarios.get(email);
 		if(usuario == null) return false;
+		if(usuario.getTipo() != tipo) return false;
 		try {
 			if (usuario.autenticar(senha)) {
 				usuarioLogado = usuario;
@@ -226,6 +228,7 @@ public class Sistema {
 			Candidato candidato = (Candidato) usuarioLogado;
 			Candidatura candidatura = new Candidatura(candidato, vaga);
 			candidato.candidatarVaga(candidatura);
+			vaga.setCandidaturas(candidatura);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -259,6 +262,10 @@ public class Sistema {
 		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
 		for(Candidatura c: candidaturasDaVaga) {
 			if(c.getId() == id) {
+				if(c.getStatus() == StatusCandidatura.REPROVADO || c.getStatus() == StatusCandidatura.CANCELADA) {
+					return null;
+				}
+				
 				return c;
 			}
 		}
@@ -316,6 +323,7 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
@@ -326,6 +334,7 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.CANCELADA);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
@@ -464,21 +473,6 @@ public class Sistema {
 	
 	public int calcularTotalVagas() {
 		return vagas.size();
-	}
-
-	public boolean candidatar(String codigo) {
-		try {
-			Vaga vaga = buscarVaga(codigo);
-			if(vaga == null) return false;
-			Candidato usuarioCandidato = (Candidato) usuarioLogado;
-			Candidatura novaCandidatura = new Candidatura(usuarioCandidato, vaga);
-			usuarioCandidato.setCandidaturas(novaCandidatura);
-			vaga.setCandidaturas(novaCandidatura);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
 	}
 
 	public String verCurriculo() {

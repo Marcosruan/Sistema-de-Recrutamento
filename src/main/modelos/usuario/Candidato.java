@@ -5,6 +5,7 @@ import java.util.List;
 
 import main.modelos.Candidatura;
 import main.modelos.Curriculo;
+import main.modelos.enums.TipoUsuario;
 
 public class Candidato extends Usuario {
 	
@@ -81,10 +82,6 @@ public class Candidato extends Usuario {
 		return candidaturas;
 	}
 
-	public void setCandidaturas(Candidatura candidatura) {
-		this.candidaturas.add(candidatura);
-	}
-
 	public String visualizarCandidaturas() {
 		if(candidaturas.size() == 0) return "Sem candidaturas registrada!";
 		List<String> TextoCandidaturas = new ArrayList<String>();
@@ -110,5 +107,10 @@ public class Candidato extends Usuario {
 	@Override
 	public boolean ehPermitidoCadastrarAlterarCurriculo() {
 		return true;
+	}
+
+	@Override
+	public TipoUsuario getTipo() {
+		return TipoUsuario.CANDIDATO;
 	}
 }

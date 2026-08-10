@@ -28,25 +28,31 @@ public class Curriculo {
 			throw new IllegalArgumentException();
 		}
 	}
+	
 	public void adicionarFormacao(String formacao) throws IllegalArgumentException{
 		validaString(formacao);
 		formacoes.add(formacao);
 	}
+	
 	public void adicionarExperiencia(String experiencia) throws IllegalArgumentException{
 		validaString(experiencia);
 		this.experiencia = experiencia;
 	}
+	
 	public void adicionarHabilidade(String habilidade) {
 		validaString(habilidade);
 		habilidades.add(habilidade);
 	}
+	
 	public void adicionarIdiomas(String idioma) {
 		idiomas.add(idioma);
 	}
+	
 	public void editarExperiencia(String experiencia) throws IllegalArgumentException{
 		validaString(experiencia);
 		this.experiencia = experiencia;
 	}
+	
 	public void editarFormacao(String formacaoAntiga, String formacaoNova) throws IllegalArgumentException{
 		validaString(formacaoAntiga);
 		validaString(formacaoNova);
@@ -57,6 +63,7 @@ public class Curriculo {
 	        throw new IllegalArgumentException("Formação não encontrada para edição.");
 	    }
 	}
+	
 	public void editarHabilidade(String habilidadeAntiga, String habilidadeNova) throws IllegalArgumentException {
 		validaString(habilidadeAntiga);
 		validaString(habilidadeNova);
@@ -78,6 +85,7 @@ public class Curriculo {
 	        throw new IllegalArgumentException("Formação não encontrada para edição.");
 	    }
 	}
+	
 	@Override
 	public String toString() {
 		String curriculo = "";
@@ -150,6 +158,7 @@ public class Curriculo {
 		return curriculo;
 				
 	}
+	
 	private static List<String> quebrarTexto(String texto, String delimitador, int tamanhoMaximo) {
 	    List<String> linhas = new ArrayList<String>();
 
