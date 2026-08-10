@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import main.modelos.enums.StatusCandidatura;
+import main.modelos.enums.TipoUsuario;
 import main.modelos.usuario.Candidato;
 import main.modelos.usuario.Recrutador;
 import main.modelos.usuario.Usuario;
@@ -43,9 +45,10 @@ public class Sistema {
 		}
 	}
 	
-	public boolean login(String email, String senha) {
+	public boolean login(String email, String senha, TipoUsuario tipo) {
 		Usuario usuario = usuarios.get(email);
 		if(usuario == null) return false;
+		if(usuario.getTipo() != tipo) return false;
 		try {
 			if (usuario.autenticar(senha)) {
 				usuarioLogado = usuario;
@@ -56,11 +59,6 @@ public class Sistema {
 			System.out.println(e.getMessage());
 			return false;
 		}
-	}
-	public boolean logout() {
-		if(usuarioLogado == null) return false;
-		usuarioLogado = null;
-		return true;
 	}
 	
 	public String exibirDadosDoUsuario() {
@@ -98,10 +96,11 @@ public class Sistema {
 		}
 	}
 	
-	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
+	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
 		if(!usuarioLogado.ehPermitidoCadastrarVagas()) return false;
 		try {
-			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, empresa);
+			Recrutador recrutador = (Recrutador) usuarioLogado;
+			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, recrutador.getEmpresa());
 			vagas.put(codigo, novaVaga);
 			return true;
 		} catch (IllegalArgumentException e) {
@@ -117,11 +116,11 @@ public class Sistema {
 		
 		String logDeVagas = "";
 		
-		for(Map.Entry<String, Vaga> v : vagas.entrySet()) {
-			logDeVagas += v.toString();
+		for(Map.Entry<String, Vaga> vaga : vagas.entrySet()) {
+			logDeVagas += vaga.getValue().toString() + "\n";
 		}
 		
-		return logDeVagas;
+		return logDeVagas.trim();
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
@@ -215,26 +214,28 @@ public class Sistema {
 			return false;
 		}
 	}
+	
 	public Vaga buscarVaga(String codigo) {
 		if(calcularTotalUsuarios() == 0) return null;
 		return vagas.get(codigo);
 	}
+	
 	public boolean registrarCandidatura(String codigo) {
 		if(vagas.size() == 0) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
-			Candidatura candidatura = new Candidatura(candidato,vaga);
+			Candidatura candidatura = new Candidatura(candidato, vaga);
 			candidato.candidatarVaga(candidatura);
+			vaga.setCandidaturas(candidatura);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-		
 	}
-	public String verCadidaturas(String codigo) {
-		
+	
+	public String verCadidaturasPorVaga(String codigo) {
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return "Vaga não foi encontrada!";
 		
@@ -246,7 +247,9 @@ public class Sistema {
 		List<String> logCandidaturas = new ArrayList<String>();
 		
 		for(Candidatura c: candidaturasDaVaga) {
-			logCandidaturas.add(c.toString());
+			if (c.getStatus() != StatusCandidatura.CANCELADA) {
+				logCandidaturas.add(c.toString());				
+			}
 		}
 		
 		return String.join("\n", logCandidaturas);
@@ -258,11 +261,27 @@ public class Sistema {
 		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
 		for(Candidatura c: candidaturasDaVaga) {
 			if(c.getId() == id) {
+				if(c.getStatus() == StatusCandidatura.REPROVADO || c.getStatus() == StatusCandidatura.CANCELADA) {
+					return null;
+				}
+				
 				return c;
 			}
 		}
 		
 		return null;
+	}
+	
+	public String getCandidaturaDoCandidato() {
+		Candidato usuarioCandidato = (Candidato) usuarioLogado;
+		List<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
+		String texto = "";
+		for (Candidatura c: candidaturas) {
+			if (c.getStatus() != StatusCandidatura.CANCELADA) {
+				texto += c.toString() + "\n";				
+			}
+		}
+		return texto.trim();
 	}
 	
 	public boolean colocarCandidaturaEmAnalise(String codigo, int id) {
@@ -303,13 +322,155 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
+	}
+	
+	public boolean cancelarCandidatura(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) {
+			return false;
+		}
+		
+		candidatura.alterarStatus(StatusCandidatura.CANCELADA);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
+		return true;
+	}
+	
+
+	public boolean cadastrarCurriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			Curriculo curriculo = new Curriculo(formacoes, experiencia, habilidades, idiomas, candidato);
+			candidato.cadastrarCurriculo(curriculo);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public boolean adicionarExperienciaCurriculo(String experiencia) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.adicionarExperienciaCurriculo(experiencia);
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+	
+	public boolean adicionarFormacaoCurriculo(String Formacao) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.adicionarFormacaoCurriculo(Formacao);;
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+	
+	public boolean adicionarHabilidadeCurriculo(String habilidade) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.adicionarHabilidadeCurriculo(habilidade);
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+	
+	public boolean adicionarIdiomaCurriculo(String idioma) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.adicionarIdiomasCurriculo(idioma);;
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+
+	public boolean editarFormacoesCurriculo(String formacaoAntiga,String formacaoNova) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.editarFormacaoCurriculo(formacaoAntiga, formacaoNova);
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+
+	public boolean editarHabilidadesCurriculo(String habilidadeAntiga,String habilidadeNova) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.editarHabilidadeCurriculo(habilidadeAntiga, habilidadeNova);;
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+
+	public boolean editarIdiomasCurriculo(String idiomaAntiga,String idiomaNovo) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
+		try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			candidato.editarIdiomasCurriculo(idiomaAntiga, idiomaNovo);
+			return true;
+		} catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		} 
+		return false;
+	}
+
+	public String exibirCurriculo() {
+		  try {
+			Candidato candidato = (Candidato) usuarioLogado;
+			return candidato.getCurriculo().toString();
+		  }catch (IllegalStateException e) {
+				System.out.println(e.getMessage());
+				return "Nenhum curriculo cadastrado.";
+		  }
+		
 	}
 	public int calcularTotalUsuarios() {
 		return usuarios.size();
 	}
+	
 	public int calcularTotalVagas() {
 		return vagas.size();
 	}
-	
+
 }
