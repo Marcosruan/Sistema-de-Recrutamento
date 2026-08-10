@@ -265,6 +265,10 @@ public class Sistema {
 		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
 		for(Candidatura c: candidaturasDaVaga) {
 			if(c.getId() == id) {
+				if(c.getStatus() == StatusCandidatura.REPROVADO || c.getStatus() == StatusCandidatura.CANCELADA) {
+					return null;
+				}
+				
 				return c;
 			}
 		}
@@ -322,6 +326,7 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
@@ -332,6 +337,7 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.CANCELADA);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
