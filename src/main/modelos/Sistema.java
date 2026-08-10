@@ -119,11 +119,11 @@ public class Sistema {
 		
 		String logDeVagas = "";
 		
-		for(Map.Entry<String, Vaga> v : vagas.entrySet()) {
-			logDeVagas += v.toString();
+		for(Map.Entry<String, Vaga> vaga : vagas.entrySet()) {
+			logDeVagas += vaga.getValue().toString() + "\n";
 		}
 		
-		return logDeVagas;
+		return logDeVagas.trim();
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
