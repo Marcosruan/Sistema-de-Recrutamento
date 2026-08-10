@@ -233,7 +233,6 @@ public class Sistema {
 		} catch (Exception e) {
 			return false;
 		}
-		
 	}
 	
 	public String verCadidaturasPorVaga(String codigo) {
@@ -262,6 +261,10 @@ public class Sistema {
 		List<Candidatura> candidaturasDaVaga = vaga.getCandidaturas();
 		for(Candidatura c: candidaturasDaVaga) {
 			if(c.getId() == id) {
+				if(c.getStatus() == StatusCandidatura.REPROVADO || c.getStatus() == StatusCandidatura.CANCELADA) {
+					return null;
+				}
+				
 				return c;
 			}
 		}
@@ -319,6 +322,7 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.REPROVADO);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
@@ -329,11 +333,13 @@ public class Sistema {
 		}
 		
 		candidatura.alterarStatus(StatusCandidatura.CANCELADA);
+		Candidatura.setTotalCandidaturasAtivas(Candidatura.getTotalCandidaturasAtivas()-1);
 		return true;
 	}
 	
-	public boolean cadastrarCurriculo(Set<String> formacoes, String experiencia, Set<String> habilidades, Set<String> idiomas) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+
+	public boolean cadastrarCurriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			Curriculo curriculo = new Curriculo(formacoes, experiencia, habilidades, idiomas, candidato);
@@ -345,7 +351,7 @@ public class Sistema {
 	}
 	
 	public boolean adicionarExperienciaCurriculo(String experiencia) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarExperienciaCurriculo(experiencia);
@@ -360,7 +366,7 @@ public class Sistema {
 	}
 	
 	public boolean adicionarFormacaoCurriculo(String Formacao) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarFormacaoCurriculo(Formacao);;
@@ -375,7 +381,7 @@ public class Sistema {
 	}
 	
 	public boolean adicionarHabilidadeCurriculo(String habilidade) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarHabilidadeCurriculo(habilidade);
@@ -390,7 +396,7 @@ public class Sistema {
 	}
 	
 	public boolean adicionarIdiomaCurriculo(String idioma) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarIdiomasCurriculo(idioma);;
@@ -403,9 +409,9 @@ public class Sistema {
 		} 
 		return false;
 	}
-	
-	public boolean editarFormacoesCurriculo(String formacaoAntiga, String formacaoNova) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+
+	public boolean editarFormacoesCurriculo(String formacaoAntiga,String formacaoNova) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.editarFormacaoCurriculo(formacaoAntiga, formacaoNova);
@@ -418,9 +424,9 @@ public class Sistema {
 		} 
 		return false;
 	}
-	
-	public boolean editarHabilidadesCurriculo(String habilidadeAntiga, String habilidadeNova) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+
+	public boolean editarHabilidadesCurriculo(String habilidadeAntiga,String habilidadeNova) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.editarHabilidadeCurriculo(habilidadeAntiga, habilidadeNova);;
@@ -433,9 +439,9 @@ public class Sistema {
 		} 
 		return false;
 	}
-	
-	public boolean editarIdiomasCurriculo(String idiomaAntiga, String idiomaNovo) {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+
+	public boolean editarIdiomasCurriculo(String idiomaAntiga,String idiomaNovo) {
+		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.editarIdiomasCurriculo(idiomaAntiga, idiomaNovo);
@@ -448,19 +454,17 @@ public class Sistema {
 		} 
 		return false;
 	}
-	
-	public boolean excluirCurriculo() {
-		if(!usuarioLogado.ehPermitidoCadastrarAlterarCurriculo()) return false;
+
+	public String exibirCurriculo() {
 		  try {
 			Candidato candidato = (Candidato) usuarioLogado;
-			candidato.deletarCurriculo();
-			return true;
+			return candidato.getCurriculo().toString();
 		  }catch (IllegalStateException e) {
 				System.out.println(e.getMessage());
-				return false;
+				return "Nenhum curriculo cadastrado.";
 		  }
+		
 	}
-	
 	public int calcularTotalUsuarios() {
 		return usuarios.size();
 	}
@@ -469,8 +473,4 @@ public class Sistema {
 		return vagas.size();
 	}
 
-	public String verCurriculo() {
-		Candidato usuarioCandidato = (Candidato) usuarioLogado;
-		return usuarioCandidato.getCurriculo().toString();
-	}
 }

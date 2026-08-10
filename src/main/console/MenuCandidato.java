@@ -94,7 +94,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 				cadastrarCurriculo();
 				break;
 			case 2:
-				System.out.println(controlador.verCurriculo());
+				System.out.println(controlador.exibirCurriculo());
 				break;
 			case 3:
 				adicionarFormacao();

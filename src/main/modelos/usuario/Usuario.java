@@ -24,31 +24,37 @@ public abstract class Usuario {
 		this.email = email;
 		this.senha = senha;
 	}
+	
 	private void validarNome(String texto) throws IllegalArgumentException {
 		if(texto == null || texto.isBlank()) {
 			throw new IllegalArgumentException("Nome inválido!");
 		}
 	}
+	
 	private void validarIdade(int idade) {
 		if(idade <= 14 || idade > 100) {
 			throw new IllegalArgumentException("Idade inválida. É preciso ter entre 14 e 100 anos.");
 		}
 	}
+	
 	private void validarCPF(String texto) throws IllegalArgumentException {
 		if (texto == null || texto.isBlank()) {
 			throw new IllegalArgumentException("CPF inválido!");
 		}
 	}
+	
 	private void validarEmail(String texto) throws IllegalArgumentException {
 		if (texto == null || texto.isBlank()) {
 			throw new IllegalArgumentException("Email inválido!");
 		}
 	}
+	
 	private void validarSenha(String texto) throws IllegalArgumentException {
 		if (texto == null || texto.isBlank()) {
 			throw new IllegalArgumentException("Senha inválida!");
 		}
 	}
+	
 	public boolean autenticar(String senha) {
 		if(this.senha.equals(senha)) return true;
 		return false;
@@ -90,7 +96,7 @@ public abstract class Usuario {
 	
 	public abstract boolean ehPermitidoAlterarVagas();
 	
-	public abstract boolean ehPermitidoCadastrarAlterarCurriculo();
+	public abstract boolean ehPermitidoManipularCurriculo();
 	
 	@Override
 	public String toString() {
@@ -118,5 +124,7 @@ public abstract class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
+	
 	public abstract TipoUsuario getTipo();
+	
 }
