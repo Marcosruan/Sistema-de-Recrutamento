@@ -82,10 +82,6 @@ public class Candidato extends Usuario {
 		return candidaturas;
 	}
 
-	public void setCandidaturas(Candidatura candidatura) {
-		this.candidaturas.add(candidatura);
-	}
-
 	public String visualizarCandidaturas() {
 		if(candidaturas.size() == 0) return "Sem candidaturas registrada!";
 		List<String> TextoCandidaturas = new ArrayList<String>();
@@ -114,7 +110,7 @@ public class Candidato extends Usuario {
 	}
 
 	@Override
-	protected TipoUsuario getTipo() {
+	public TipoUsuario getTipo() {
 		return TipoUsuario.CANDIDATO;
 	}
 }

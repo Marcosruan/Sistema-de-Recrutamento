@@ -228,6 +228,7 @@ public class Sistema {
 			Candidato candidato = (Candidato) usuarioLogado;
 			Candidatura candidatura = new Candidatura(candidato, vaga);
 			candidato.candidatarVaga(candidatura);
+			vaga.setCandidaturas(candidatura);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -466,21 +467,6 @@ public class Sistema {
 	
 	public int calcularTotalVagas() {
 		return vagas.size();
-	}
-
-	public boolean candidatar(String codigo) {
-		try {
-			Vaga vaga = buscarVaga(codigo);
-			if(vaga == null) return false;
-			Candidato usuarioCandidato = (Candidato) usuarioLogado;
-			Candidatura novaCandidatura = new Candidatura(usuarioCandidato, vaga);
-			usuarioCandidato.setCandidaturas(novaCandidatura);
-			vaga.setCandidaturas(novaCandidatura);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
 	}
 
 	public String verCurriculo() {

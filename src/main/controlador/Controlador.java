@@ -127,10 +127,6 @@ public class Controlador {
 		return sistema.verCurriculo();
 	}
 
-	public boolean candidatar(String codigo) {
-		return sistema.candidatar(codigo);
-	}
-
 	public boolean cancelarCandidatura(String codigoDaVaga, int idDaCandidatura) {
 		return sistema.cancelarCandidatura(codigoDaVaga, idDaCandidatura);
 	}

@@ -280,7 +280,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	
 	private void candidatar() {
 		String codigo = Main.lerTexto("\nDigite o codigo da vaga: ");
-		boolean resultado = controlador.candidatar(codigo);
+		boolean resultado = controlador.registrarCandidatura(codigo);
 		if(resultado) {
 			System.out.println("Candidatura realizada com sucesso.");
 		} else {
@@ -291,7 +291,6 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	private void cancelarCandidatura() {
 		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
 		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
-		controlador.reprovarCandidatura(codigoDaVaga, idDaCandidatura);
 		boolean resultado = controlador.cancelarCandidatura(codigoDaVaga, idDaCandidatura);
 		if(resultado) {
 			System.out.println("Candidatura cancelada.");

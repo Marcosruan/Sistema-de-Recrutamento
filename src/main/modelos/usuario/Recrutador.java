@@ -47,7 +47,7 @@ public class Recrutador extends Usuario {
 		return false;
 	}
 	@Override
-	protected TipoUsuario getTipo() {
+	public TipoUsuario getTipo() {
 		return TipoUsuario.RECRUTADOR;
 	}
 
