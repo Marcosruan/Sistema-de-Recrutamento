@@ -12,46 +12,33 @@ public abstract class Usuario {
 	protected String email;
 	protected String senha;
 	
-	public Usuario(String nome, int idade, String cpf, String email, String senha) {
-		validarNome(nome);
+	public Usuario(String nome, int idade, String cpf, String email, String senha) throws IllegalArgumentException {
+		validarString(nome, "Nome inválido!");
 		validarIdade(idade);
 		validarCPF(cpf);
-		validarEmail(email);
-		validarSenha(senha);
+		validarString(email, "Email inválido!");
+		validarString(senha, "Senha inválida!");
 		this.nome = nome;
 		this.idade = idade;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
 	}
-	
-	private void validarNome(String texto) throws IllegalArgumentException {
-		if(texto == null || texto.isBlank()) {
-			throw new IllegalArgumentException("Nome inválido!");
+	private void validarString(String texto,String mensagem) throws IllegalArgumentException {
+		if (texto == null || texto.isBlank()) {
+			throw new IllegalArgumentException(mensagem);
 		}
 	}
 	
 	private void validarIdade(int idade) throws IllegalArgumentException{
-		if(idade <= 14 || idade > 100) {
-			throw new IllegalArgumentException("Idade inválida. É preciso ter entre 14 e 100 anos.");
+		if(idade < 18 || idade > 100) {
+			throw new IllegalArgumentException("Idade inválida. É preciso ter entre 18 e 100 anos.");
 		}
 	}
 	
 	private void validarCPF(String texto) throws IllegalArgumentException {
-		if (texto == null || texto.isBlank()) {
-			throw new IllegalArgumentException("CPF inválido!");
-		}
-	}
-	
-	private void validarEmail(String texto) throws IllegalArgumentException {
-		if (texto == null || texto.isBlank()) {
-			throw new IllegalArgumentException("Email inválido!");
-		}
-	}
-	
-	private void validarSenha(String texto) throws IllegalArgumentException {
-		if (texto == null || texto.isBlank()) {
-			throw new IllegalArgumentException("Senha inválida!");
+		if (texto == null || texto.isBlank() || texto.length() != 11) {
+			throw new IllegalArgumentException("CPF inválido. Deve possuir exatamente 11 digitos!");
 		}
 	}
 	
@@ -69,7 +56,7 @@ public abstract class Usuario {
 	}
 	
 	public void setNome(String nome) throws IllegalArgumentException{
-		validarNome(nome);
+		validarString(nome,"Nome inválido!");
 		this.nome = nome;
 	}
 	
@@ -78,7 +65,7 @@ public abstract class Usuario {
 	}
 
 	public void setSenha(String senha) throws IllegalArgumentException{
-		validarSenha(senha);
+		validarString(senha,"Senha inválido!");
 		if(senha.equals(this.senha)) {
 			throw new IllegalArgumentException("Nova senha igual a anterior");
 		}

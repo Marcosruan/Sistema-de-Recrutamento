@@ -15,7 +15,7 @@ public class Curriculo {
 	private Set<String> idiomas;
 	private Candidato candidatoDono;
 	
-	public Curriculo(Set<String> formacoes, String experiencia, Set<String> habilidades, Set<String> idiomas, Candidato candidatoDono) {
+	public Curriculo(Set<String> formacoes, String experiencia, Set<String> habilidades, Set<String> idiomas, Candidato candidatoDono)  throws IllegalArgumentException{
 		this.formacoes = new HashSet<String>(formacoes);
 		this.experiencia = experiencia;
 		this.habilidades = new HashSet<String>(habilidades);
@@ -23,24 +23,24 @@ public class Curriculo {
 		this.candidatoDono = candidatoDono;
 	}
 	
-	private void validaString(String texto) throws IllegalArgumentException {
+	private void validarString(String texto,String mensagem) throws IllegalArgumentException {
 		if (texto == null || texto.isBlank()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(mensagem);
 		}
 	}
 	
 	public void adicionarFormacao(String formacao) throws IllegalArgumentException{
-		validaString(formacao);
+		validarString(formacao,"Formação inválida!");
 		formacoes.add(formacao);
 	}
 	
 	public void adicionarExperiencia(String experiencia) throws IllegalArgumentException{
-		validaString(experiencia);
+		validarString(experiencia,"Experiência inválida!");
 		this.experiencia += " " + experiencia;
 	}
 	
 	public void adicionarHabilidade(String habilidade) {
-		validaString(habilidade);
+		validarString(habilidade,"Habilidade inválida!");
 		habilidades.add(habilidade);
 	}
 	
@@ -49,13 +49,13 @@ public class Curriculo {
 	}
 	
 	public void editarExperiencia(String experiencia) throws IllegalArgumentException{
-		validaString(experiencia);
+		validarString(experiencia,"Experiência inválida!");
 		this.experiencia = experiencia;
 	}
 	
 	public void editarFormacao(String formacaoAntiga, String formacaoNova) throws IllegalArgumentException{
-		validaString(formacaoAntiga);
-		validaString(formacaoNova);
+		validarString(formacaoAntiga,"Formação a ser substituída é inválida!");
+		validarString(formacaoNova,"Formação nova é inválida!");
 		if (this.formacoes.contains(formacaoAntiga)) {
 	        this.formacoes.remove(formacaoAntiga);
 	        this.formacoes.add(formacaoNova);
@@ -65,8 +65,8 @@ public class Curriculo {
 	}
 	
 	public void editarHabilidade(String habilidadeAntiga, String habilidadeNova) throws IllegalArgumentException {
-		validaString(habilidadeAntiga);
-		validaString(habilidadeNova);
+		validarString(habilidadeAntiga,"Habilidade a ser substituída é inválida!");
+		validarString(habilidadeNova,"HAbilidade nova é inválida!");
 		if (this.habilidades.contains(habilidadeAntiga)) {
 	        this.habilidades.remove(habilidadeAntiga);
 	        this.habilidades.add(habilidadeNova);
@@ -76,8 +76,8 @@ public class Curriculo {
 	}
 	
 	public void editarIdiomas(String IdiomaAntigo, String idiomaNovo) throws IllegalArgumentException{
-		validaString(IdiomaAntigo);
-		validaString(idiomaNovo);
+		validarString(IdiomaAntigo,"Idioma antigo a ser substituído inválido!");
+		validarString(idiomaNovo,"Idioma novo é inválido!");
 		if (this.idiomas.contains(IdiomaAntigo)) {
 	        this.idiomas.remove(IdiomaAntigo);
 	        this.idiomas.add(idiomaNovo);
