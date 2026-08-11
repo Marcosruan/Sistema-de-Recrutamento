@@ -126,6 +126,16 @@ public class ControladorTest {
 	}
 	
 	@Test
+	public void testFalhaLoginPorTipoIncorreto() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		
+		boolean resultado = controlador.login("jonnas1000@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
+		
+		assertFalse(resultado);
+
+	}
+	
+	@Test
 	public void testLoginValido() {
 		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
 		
