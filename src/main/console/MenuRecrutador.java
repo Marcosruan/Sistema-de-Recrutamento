@@ -220,10 +220,11 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	private void exibirMenuCandidatura() {
 		System.out.println("\n=== Menu Candidatura ===");
 		System.out.println("1 - Ver candidaturas");
-		System.out.println("2 - Colocar candidatura em análise");
-		System.out.println("3 - Marcar entrevista de candidato");
-		System.out.println("4 - Aprovar candidatura");
-		System.out.println("5 - Reprovar candidatura");
+		System.out.println("2 - Ver currículo do candidato");
+		System.out.println("3 - Colocar candidatura em análise");
+		System.out.println("4 - Marcar entrevista de candidato");
+		System.out.println("5 - Aprovar candidatura");
+		System.out.println("6 - Reprovar candidatura");
 		System.out.println("0 - Sair");
 	}
 	
@@ -238,15 +239,18 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 				verCandidaturas();
 				break;
 			case 2:
-				candidaturaEmAnalise();
+				verCurriculoDoCandidato();
 				break;
 			case 3:
-				marcarEntrevista();
+				candidaturaEmAnalise();
 				break;
 			case 4:
-				aprovarCandidatura();
+				marcarEntrevista();
 				break;
 			case 5:
+				aprovarCandidatura();
+				break;
+			case 6:
 				reprovarCandidatura();
 				break;
 			default:
@@ -254,6 +258,14 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 		}
 	}
 	
+	private void verCurriculoDoCandidato() {
+		String codigoDaVaga = Main.lerTexto("\nInforme o codigo da vaga: ");
+		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
+		
+		String resultado = controlador.exibirCurriculoDoCandidato(codigoDaVaga, idDaCandidatura);
+		System.out.println(resultado);
+	}
+
 	private void verCandidaturas() {
 		String codigoDaVaga = Main.lerTexto("\nInforme o codigo da vaga: ");
 		System.out.println("Candidaturas para esta vaga: ");

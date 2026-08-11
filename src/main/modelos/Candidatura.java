@@ -5,18 +5,24 @@ import main.modelos.usuario.Candidato;
 
 public class Candidatura {
 	
-	private StatusCandidatura status;
-	private Candidato candidato;
-	private Vaga vaga;
-	private int id;
+	private static int contadorId = 0;
+    
+    private int id;
+    private StatusCandidatura status;
+    private Candidato candidato;
+    private Vaga vaga;
 
-	
-	public Candidatura(Candidato candidato, Vaga vaga) {
-		this.status = StatusCandidatura.EM_ANALISE;
-		this.candidato = candidato;
-		this.vaga = vaga;
-		this.id = vaga.getTotalDeCandidaturas();
-	}
+    public Candidatura(Candidato candidato, Vaga vaga) {
+        contadorId++; 
+        this.id = contadorId;
+        this.status = StatusCandidatura.EM_ANALISE;
+        this.candidato = candidato;
+        this.vaga = vaga;
+    }
+
+    public int getId() {
+        return id;
+    }
 
 	public Candidato getCandidato() {
 		return candidato;
@@ -33,12 +39,6 @@ public class Candidatura {
 	public void setVaga(Vaga vaga) {
 		this.vaga = vaga;
 	}
-	
-	public int getId() {
-		return id;
-	}
-
-
 
 	public StatusCandidatura alterarStatus(StatusCandidatura novoStatus) {
 		this.status = novoStatus;

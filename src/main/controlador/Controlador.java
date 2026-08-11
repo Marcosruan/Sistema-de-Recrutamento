@@ -163,4 +163,8 @@ public class Controlador {
 			Set<String> idiomas) {
 		return sistema.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	}
+	
+	public String exibirCurriculoDoCandidato(String codigo, int id) {
+		return sistema.exibirCurriculoDoCandidato(codigo, id);
+	}
 }

@@ -98,6 +98,7 @@ public class Sistema {
 	
 	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
 		if(!usuarioLogado.ehPermitidoCadastrarVagas()) return false;
+		if(vagas.containsKey(codigo)) return false;
 		try {
 			Recrutador recrutador = (Recrutador) usuarioLogado;
 			Vaga novaVaga = new Vaga(codigo, titulo, descricao, requisitos, salario, cidade, recrutador.getEmpresa());
@@ -224,6 +225,7 @@ public class Sistema {
 		if(vagas.size() == 0) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
+		if(!vaga.getAberta()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			Candidatura candidatura = new Candidatura(candidato, vaga);
@@ -255,6 +257,13 @@ public class Sistema {
 		return String.join("\n", logCandidaturas);
 	}
 	
+	public String exibirCurriculoDoCandidato(String codigo, int id) {
+		Candidatura candidatura = getCandidatura(codigo, id);
+		if(candidatura == null) return "Candidatura não registrada"; 
+		Candidato candidato = (Candidato) candidatura.getCandidato();
+		return candidato.getCurriculo().toString();
+	}
+	
 	public Candidatura getCandidatura(String codigo, int id) {
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return null;
@@ -275,10 +284,11 @@ public class Sistema {
 	public String getCandidaturaDoCandidato() {
 		Candidato usuarioCandidato = (Candidato) usuarioLogado;
 		List<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
+		if (candidaturas.size() == 0) return "Nenhuma candidatura cadastrada.";
 		String texto = "";
-		for (Candidatura c: candidaturas) {
-			if (c.getStatus() != StatusCandidatura.CANCELADA) {
-				texto += c.toString() + "\n";				
+		for (Candidatura candidatura: candidaturas) {
+			if (candidatura.getStatus() != StatusCandidatura.CANCELADA) {
+				texto += candidatura.toString() + "\n";				
 			}
 		}
 		return texto.trim();
@@ -340,6 +350,7 @@ public class Sistema {
 		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
+			if (candidato.getCurriculo() != null) return false;
 			Curriculo curriculo = new Curriculo(formacoes, experiencia, habilidades, idiomas, candidato);
 			candidato.cadastrarCurriculo(curriculo);
 			return true;
@@ -456,8 +467,9 @@ public class Sistema {
 	public String exibirCurriculo() {
 		  try {
 			Candidato candidato = (Candidato) usuarioLogado;
+			if (candidato.getCurriculo() == null) return "Nenhum curriculo cadastrado.";
 			return candidato.getCurriculo().toString();
-		  }catch (IllegalStateException e) {
+		  } catch (IllegalStateException e) {
 				System.out.println(e.getMessage());
 				return "Nenhum curriculo cadastrado.";
 		  }

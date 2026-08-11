@@ -94,9 +94,9 @@ public class Curriculo {
 			    |                  CURRICULO                     |
 			    ==================================================
 			    """;
-		curriculo += String.format("| Nome: %s%n", candidatoDono.getNome());
-		curriculo += String.format("| Idade: %d%n", candidatoDono.getIdade());
-		curriculo += String.format("| Email: %s%n", candidatoDono.getEmail());
+		curriculo += String.format("| Nome: %s\n", candidatoDono.getNome());
+		curriculo += String.format("| Idade: %d\n", candidatoDono.getIdade());
+		curriculo += String.format("| Email: %s\n", candidatoDono.getEmail());
 		curriculo += "----------------------------------------\n";
 
 		List<String> experienciaFormatada = quebrarTexto(experiencia, " ", 40 - 14);

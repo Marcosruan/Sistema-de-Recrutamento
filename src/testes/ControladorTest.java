@@ -376,6 +376,7 @@ public class ControladorTest {
 		assertTrue(resultadoRegistroCandidatura);
 		assertEquals(exibicaoCandidaturasEsperado,exibicaoCandidaturas);
 	}
+	
 	@Test
 	public void testCadastrarCurriculoComoCandidato() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -402,6 +403,7 @@ public class ControladorTest {
 		
 	    assertTrue(resultado);
 	}
+	
 	@Test
 	public void exibirCurriculoCandidato() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -446,6 +448,7 @@ public class ControladorTest {
 	    
 	    assertEquals(esperado,resultado);
 	}
+	
 	@Test
 	public void testAdicionarExperienciaCurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -502,6 +505,7 @@ public class ControladorTest {
 	    assertTrue(resultadoAdicao);
 	    assertEquals(infoCurriculoEsperado,infoCurriculo);
 	}
+	
 	@Test
 	public void testAdicionarFormacaoCurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -552,6 +556,7 @@ public class ControladorTest {
 	    assertTrue(resultadoAdicao);
 	    assertEquals(infoCurriculoEsperado,infoCurriculo);
 	}
+	
 	@Test
 	public void testAdicionarHabilidadeurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -602,6 +607,7 @@ public class ControladorTest {
 	    assertTrue(resultadoAdicao);
 	    assertEquals(infoCurriculoEsperado,infoCurriculo);
 	}
+	
 	@Test
 	public void testAdicionarIdiomaCurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -651,6 +657,7 @@ public class ControladorTest {
 	    assertTrue(resultadoAdicao);
 	    assertEquals(infoCurriculoEsperado,infoCurriculo);
 	}
+	
 	@Test
 	public void testEditarFormacoesCurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
@@ -702,6 +709,7 @@ public class ControladorTest {
 	    assertTrue(resultadoEdicao);
 	    assertEquals(infoCurriculoEsperado,infoCurriculo);
 	}
+	
 	@Test
 	public void testEditarHabilidadesCurriculo() {
 		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
