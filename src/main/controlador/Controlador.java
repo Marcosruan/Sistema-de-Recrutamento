@@ -3,9 +3,9 @@ package main.controlador;
 import java.util.Set;
 
 import main.modelos.Candidatura;
-import main.modelos.Sistema;
 import main.modelos.Vaga;
 import main.modelos.enums.TipoUsuario;
+import main.modelos.sistema.Sistema;
 
 public class Controlador {
 	

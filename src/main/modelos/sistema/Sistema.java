@@ -1,4 +1,4 @@
-package main.modelos;
+package main.modelos.sistema;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import main.modelos.Candidatura;
+import main.modelos.Curriculo;
+import main.modelos.Vaga;
 import main.modelos.enums.StatusCandidatura;
 import main.modelos.enums.TipoUsuario;
 import main.modelos.usuario.Candidato;
