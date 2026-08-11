@@ -228,7 +228,7 @@ public class Sistema {
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			Candidatura candidatura = new Candidatura(candidato, vaga);
-			candidato.candidatarVaga(candidatura);
+			if (!candidato.candidatarVaga(candidatura)) return false;
 			vaga.setCandidaturas(candidatura);
 			return true;
 		} catch (Exception e) {
@@ -288,8 +288,8 @@ public class Sistema {
 	
 	public String getCandidaturaDoCandidato() {
 		Candidato usuarioCandidato = (Candidato) usuarioLogado;
-		List<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
-		if (candidaturas.size() == 0) return "Nenhuma candidatura cadastrada.";
+		Set<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
+		if (candidaturas.isEmpty()) return "Nenhuma candidatura cadastrada.";
 		String texto = "";
 		for (Candidatura candidatura: candidaturas) {
 			if (candidatura.getStatus() != StatusCandidatura.CANCELADA) {

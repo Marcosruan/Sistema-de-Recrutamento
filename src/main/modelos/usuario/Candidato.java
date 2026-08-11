@@ -1,5 +1,7 @@
 package main.modelos.usuario;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +12,11 @@ import main.modelos.enums.TipoUsuario;
 public class Candidato extends Usuario {
 	
 	private Curriculo curriculo;
-	private List<Candidatura> candidaturas;
+	private Set<Candidatura> candidaturas;
 
 	public Candidato(String nome, int idade, String cpf, String email, String senha) throws IllegalArgumentException {
 		super(nome, idade, cpf, email, senha);
-		this.candidaturas = new ArrayList<Candidatura>();
+		this.candidaturas = new HashSet<Candidatura>();
 	}
 	
 	private void validarCurriculo() throws IllegalStateException{
@@ -74,21 +76,21 @@ public class Candidato extends Usuario {
 		return curriculo;
 	}
 	
-	public void candidatarVaga(Candidatura candidatura) throws IllegalArgumentException, IllegalStateException {
-		candidaturas.add(candidatura);
+	public boolean candidatarVaga(Candidatura candidatura) throws IllegalArgumentException, IllegalStateException {
+		return candidaturas.add(candidatura);
 	}
 	
-	public List<Candidatura> getCandidaturas() {
+	public Set<Candidatura> getCandidaturas() {
 		return candidaturas;
 	}
 
 	public String visualizarCandidaturas() {
-		if(candidaturas.size() == 0) return "Sem candidaturas registrada!";
-		List<String> TextoCandidaturas = new ArrayList<String>();
+		if(candidaturas.isEmpty()) return "Sem candidaturas registradas!";
+		List<String> textoCandidaturas = new ArrayList<String>();
 		for(Candidatura candidatura: candidaturas) {
-			TextoCandidaturas.add(candidatura.toString());
+			textoCandidaturas.add(candidatura.toString());
 		}
-		return String.join("\n", TextoCandidaturas);
+		return String.join("\n", textoCandidaturas);
 	}
 
 	@Override
