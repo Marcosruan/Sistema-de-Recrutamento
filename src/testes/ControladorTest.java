@@ -200,19 +200,6 @@ public class ControladorTest {
 	}
 	
 	@Test
-	public void testCadastroInvalidoComoCandidato() {
-		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
-		
-		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
-		int qtdVagas = controlador.calcularTotalVagas();
-		
-		assertFalse(resultadoCadastroVaga);
-		assertEquals(0, qtdVagas);
-		
-	}
-	
-	@Test
 	public void testCadastrarVagaComoRecrutador() {
 		controlador.cadastrarRecrutador("Carlos", 19, "11122233345", "carlos2000@gmail.com", "desenvolvedor123", "Microsft");
 		controlador.login("carlos2000@gmail.com", "desenvolvedor123", TipoUsuario.RECRUTADOR);

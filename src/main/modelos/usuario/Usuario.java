@@ -92,12 +92,6 @@ public abstract class Usuario {
 	
 	public abstract String toSummaryString();
 	
-	public abstract boolean ehPermitidoCadastrarVagas();
-	
-	public abstract boolean ehPermitidoAlterarVagas();
-	
-	public abstract boolean ehPermitidoManipularCurriculo();
-	
 	@Override
 	public String toString() {
 		return String.format("Nome: %s | Idade: %d | CPF: %s | Email: %s | Senha: %s",

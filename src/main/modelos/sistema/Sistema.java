@@ -100,7 +100,6 @@ public class Sistema {
 	}
 	
 	public boolean cadastrarVaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade) {
-		if(!usuarioLogado.ehPermitidoCadastrarVagas()) return false;
 		if(vagas.containsKey(codigo)) return false;
 		try {
 			Recrutador recrutador = (Recrutador) usuarioLogado;
@@ -128,7 +127,6 @@ public class Sistema {
 	}
 	
 	public boolean alterarTituloVaga(String codigo, String novoTitulo) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {	
@@ -141,7 +139,6 @@ public class Sistema {
 	}
 	
 	public boolean alterarDescricaoVaga(String codigo, String novoDescricao) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {
@@ -154,7 +151,6 @@ public class Sistema {
 	}
 	
 	public boolean alterarRequisitosVaga(String codigo, String novoRequisitos) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {
@@ -167,7 +163,6 @@ public class Sistema {
 	}
 	
 	public boolean alterarSalarioVaga(String codigo, double novoSalario) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {
@@ -180,7 +175,6 @@ public class Sistema {
 	}
 	
 	public boolean alterarCidadeVaga(String codigo, String novoCidade) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {
@@ -193,7 +187,6 @@ public class Sistema {
 	}
 	
 	public boolean abrirVaga(String codigo) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		if(vaga.getAberta()) return false;
@@ -207,7 +200,6 @@ public class Sistema {
 	}
 	
 	public boolean fecharVaga(String codigo) {
-		if(!usuarioLogado.ehPermitidoAlterarVagas()) return false;
 		Vaga vaga = buscarVaga(codigo);
 		if(vaga == null) return false;
 		try {
@@ -350,7 +342,6 @@ public class Sistema {
 	
 
 	public boolean cadastrarCurriculo(Set<String> formacoes,String experiencia,Set<String> habilidades,Set<String> idiomas) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			if (candidato.getCurriculo() != null) return false;
@@ -363,7 +354,6 @@ public class Sistema {
 	}
 	
 	public boolean adicionarExperienciaCurriculo(String experiencia) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarExperienciaCurriculo(experiencia);
@@ -378,7 +368,6 @@ public class Sistema {
 	}
 	
 	public boolean adicionarFormacaoCurriculo(String Formacao) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarFormacaoCurriculo(Formacao);;
@@ -393,7 +382,6 @@ public class Sistema {
 	}
 	
 	public boolean adicionarHabilidadeCurriculo(String habilidade) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarHabilidadeCurriculo(habilidade);
@@ -408,7 +396,6 @@ public class Sistema {
 	}
 	
 	public boolean adicionarIdiomaCurriculo(String idioma) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.adicionarIdiomasCurriculo(idioma);;
@@ -423,7 +410,6 @@ public class Sistema {
 	}
 
 	public boolean editarFormacoesCurriculo(String formacaoAntiga,String formacaoNova) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.editarFormacaoCurriculo(formacaoAntiga, formacaoNova);
@@ -438,7 +424,6 @@ public class Sistema {
 	}
 
 	public boolean editarHabilidadesCurriculo(String habilidadeAntiga,String habilidadeNova) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.editarHabilidadeCurriculo(habilidadeAntiga, habilidadeNova);;
@@ -453,7 +438,6 @@ public class Sistema {
 	}
 
 	public boolean editarIdiomasCurriculo(String idiomaAntiga,String idiomaNovo) {
-		if(!usuarioLogado.ehPermitidoManipularCurriculo()) return false;
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			candidato.editarIdiomasCurriculo(idiomaAntiga, idiomaNovo);
