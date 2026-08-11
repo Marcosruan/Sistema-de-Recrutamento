@@ -253,10 +253,16 @@ public class Sistema {
 	}
 	
 	public String exibirCurriculoDoCandidato(String codigo, int id) {
-		Candidatura candidatura = getCandidatura(codigo, id);
-		if(candidatura == null) return "Candidatura não registrada"; 
-		Candidato candidato = (Candidato) candidatura.getCandidato();
-		return candidato.getCurriculo().toString();
+		try {
+			Candidatura candidatura = getCandidatura(codigo, id);
+			if(candidatura == null) return "Candidatura não registrada"; 
+			Candidato candidato = (Candidato) candidatura.getCandidato();
+			if (candidato.getCurriculo() == null) return "Nenhum curriculo cadastrado.";
+			return candidato.getCurriculo().toString();
+	  } catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+			return "Nenhum curriculo cadastrado.";
+	  }
 	}
 	
 	public Candidatura getCandidatura(String codigo, int id) {
