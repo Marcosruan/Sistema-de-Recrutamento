@@ -12,7 +12,7 @@ public class Recrutador extends Usuario {
 		this.empresa = empresa;
 	}
 	
-	public void validarEmpresa(String texto) {
+	public void validarEmpresa(String texto) throws IllegalArgumentException{
 		if(texto == null || texto.isBlank()) {
 			throw new IllegalArgumentException("Nome de empresa inválido");
 		}
