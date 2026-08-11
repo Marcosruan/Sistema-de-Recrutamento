@@ -11,6 +11,7 @@ public class Recrutador extends Usuario {
 		validarEmpresa(empresa);
 		this.empresa = empresa;
 	}
+	
 	public void validarEmpresa(String texto) {
 		if(texto == null || texto.isBlank()) {
 			throw new IllegalArgumentException("Nome de empresa inválido");
@@ -30,22 +31,12 @@ public class Recrutador extends Usuario {
 	public String toString() {
 		return super.toString() + String.format(" | Empresa: %s",empresa);
 	}
+	
 	@Override
 	public String toSummaryString() {
 		return "[Recrutador] Nome: " + getNome() + " | Email: " + getEmail() + " | Empresa: " + getEmpresa();
 	}
-	@Override
-	public boolean ehPermitidoCadastrarVagas() {
-		return true;
-	}
-	@Override
-	public boolean ehPermitidoAlterarVagas() {
-		return true;
-	}
-	@Override
-	public boolean ehPermitidoCadastrarAlterarCurriculo() {
-		return false;
-	}
+
 	@Override
 	public TipoUsuario getTipo() {
 		return TipoUsuario.RECRUTADOR;

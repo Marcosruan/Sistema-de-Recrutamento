@@ -3,9 +3,9 @@ package main.controlador;
 import java.util.Set;
 
 import main.modelos.Candidatura;
-import main.modelos.Sistema;
 import main.modelos.Vaga;
 import main.modelos.enums.TipoUsuario;
+import main.modelos.sistema.Sistema;
 
 public class Controlador {
 	
@@ -114,7 +114,7 @@ public class Controlador {
 	public boolean reprovarCandidatura(String codigo, int id) {
 		return sistema.reprovarCandidatura(codigo, id);
 	}
-	
+
 	public int calcularTotalUsuarios() {
 		return sistema.calcularTotalUsuarios();
 	}
@@ -123,8 +123,8 @@ public class Controlador {
 		return sistema.calcularTotalVagas();
 	}
 
-	public String verCurriculo() {
-		return sistema.verCurriculo();
+	public String exibirCurriculo() {
+		return sistema.exibirCurriculo();
 	}
 
 	public boolean cancelarCandidatura(String codigoDaVaga, int idDaCandidatura) {
@@ -144,7 +144,7 @@ public class Controlador {
 	}
 
 	public boolean adicionarIdioma(String idioma) {
-		return sistema.adicionarExperienciaCurriculo(idioma);
+		return sistema.adicionarIdiomaCurriculo(idioma);
 	}
 
 	public boolean editarFormacao(String formacaoAntiga, String formacaoNova) {
@@ -162,5 +162,9 @@ public class Controlador {
 	public boolean cadastrarCurriculo(Set<String> formacoes, String experiencia, Set<String> habilidades,
 			Set<String> idiomas) {
 		return sistema.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	}
+	
+	public String exibirCurriculoDoCandidato(String codigo, int id) {
+		return sistema.exibirCurriculoDoCandidato(codigo, id);
 	}
 }

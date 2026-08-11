@@ -1,12 +1,13 @@
 package main.console;
 
-import main.Main;
+import java.util.Scanner;
+
 import main.controlador.Controlador;
 import main.modelos.enums.TipoUsuario;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
 
 public class SistemaConsole {
-	
+	private static Scanner scanner = new Scanner(System.in);
 	private Controlador controlador;
 	private EstrategiaMenuUsuario estrategia;
 	
@@ -19,7 +20,7 @@ public class SistemaConsole {
 		int opcao = 0;
 		do {
 			exibirMenu();
-			opcao = Main.lerInteiro("Sua escolha: ");
+			opcao = lerInteiro("Sua escolha: ");
 			switch (opcao) {
 			case 1 -> cadastrarUsuario();
 			case 2 -> fazerLogin();
@@ -27,13 +28,14 @@ public class SistemaConsole {
 			default -> System.out.println("Opção inválida.");
 			}
 		} while(opcao != 0);
+		scanner.close();
 	}
 	
 	private void fazerLogin() {
 		TipoUsuario tipo = escolherTipo() == 1 ? TipoUsuario.CANDIDATO : TipoUsuario.RECRUTADOR;
 		System.out.println("\n=== Login ===");
-		String email = Main.lerTexto("E-mail: ");
-		String senha = Main.lerTexto("Senha: ");
+		String email = lerTexto("E-mail: ");
+		String senha = lerTexto("Senha: ");
 		boolean sucesso = controlador.login(email, senha, tipo);
 		if (sucesso) {
 			estrategia.menu();
@@ -51,7 +53,7 @@ public class SistemaConsole {
 		int opcao = 0;
 		do {
 			exibirTipos();
-			opcao = Main.lerInteiro("Sua escolha: ");
+			opcao = lerInteiro("Sua escolha: ");
 			switch (opcao) {
 			case 1 -> mudarEstrategia(new MenuCandidato(controlador));
 			case 2 -> mudarEstrategia(new MenuRecrutador(controlador));
@@ -77,5 +79,38 @@ public class SistemaConsole {
 	
 	private void mudarEstrategia(EstrategiaMenuUsuario estrategia) {
 		this.estrategia = estrategia;
+	}
+	
+	public static int lerInteiro(String mensagem) {
+		while (true) {
+			System.out.print(mensagem);
+			String entrada = scanner.nextLine();
+
+			try {
+				return Integer.parseInt(entrada);
+
+			} catch (NumberFormatException e) {
+				System.out.println("Digite um numero inteiro valido.");
+			}
+		}
+	}
+	
+	public static double lerDouble(String mensagem) {
+		while (true) {
+			System.out.print(mensagem);
+			String entrada = scanner.nextLine();
+
+			try {
+				return Double.parseDouble(entrada);
+
+			} catch (NumberFormatException e) {
+				System.out.println("Digite um numero real valido.");
+			}
+		}
+	}
+
+	public static String lerTexto(String mensagem) {
+		System.out.print(mensagem);
+		return scanner.nextLine();
 	}
 }

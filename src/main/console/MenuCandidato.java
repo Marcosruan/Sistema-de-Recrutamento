@@ -3,7 +3,6 @@ package main.console;
 import java.util.HashSet;
 import java.util.Set;
 
-import main.Main;
 import main.controlador.Controlador;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
 
@@ -18,11 +17,11 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	@Override
 	public void cadastrar() {
 		System.out.println("\n=== Cadastro ===");
-		String nome = Main.lerTexto("Digite o nome: ");
-		int idade = Main.lerInteiro("Digite a idade: ");
-		String cpf = Main.lerTexto("Digite o cpf: ");
-		String email = Main.lerTexto("Digite o email: ");
-		String senha = Main.lerTexto("Digite a senha: ");	
+		String nome = SistemaConsole.lerTexto("Digite o nome: ");
+		int idade = SistemaConsole.lerInteiro("Digite a idade: ");
+		String cpf = SistemaConsole.lerTexto("Digite o cpf: ");
+		String email = SistemaConsole.lerTexto("Digite o email: ");
+		String senha = SistemaConsole.lerTexto("Digite a senha: ");	
 		
 		boolean resultado = controlador.cadastrarCandidato(nome, idade, cpf, email, senha);
 		
@@ -39,7 +38,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 		
 		do {
 			exibirMenu();
-			opcao = Main.lerInteiro("Sua escolha: ");
+			opcao = SistemaConsole.lerInteiro("Sua escolha: ");
 			switch(opcao) {
 				case 0:
 					System.out.println("Voltando...");
@@ -85,7 +84,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void opcoesDeCurriculo() {
-		int opcao = Main.lerInteiro("Selecione uma opcao: ");
+		int opcao = SistemaConsole.lerInteiro("Selecione uma opcao: ");
 		switch(opcao) {
 			case 0:
 				System.out.println("Voltando...");
@@ -94,7 +93,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 				cadastrarCurriculo();
 				break;
 			case 2:
-				System.out.println(controlador.verCurriculo());
+				System.out.println(controlador.exibirCurriculo());
 				break;
 			case 3:
 				adicionarFormacao();
@@ -125,7 +124,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	private void cadastrarCurriculo() {
 		System.out.println();
 		Set<String> formacoes = cadastrarFormacoes();
-		String experiencia = Main.lerTexto("Digite a experiência: ");
+		String experiencia = SistemaConsole.lerTexto("Digite a experiência: ");
 		Set<String> habilidades = cadastrarHabilidades();
 		Set<String> idiomas = cadastrarIdiomas();
 		
@@ -141,9 +140,9 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 		String opcao = "";
 		Set<String> formacoes = new HashSet<String>();
 		do {
-			String formacao = Main.lerTexto("Digite a formação: ");
+			String formacao = SistemaConsole.lerTexto("Digite a formação: ");
 			formacoes.add(formacao);
-			opcao = Main.lerTexto("Deseja adicionar mais formações? (N/S) ");
+			opcao = SistemaConsole.lerTexto("Deseja adicionar mais formações? (N/S) ");
 		} while(opcao.equalsIgnoreCase("S"));
 		
 		return formacoes;
@@ -153,9 +152,9 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 		String opcao = "";
 		Set<String> habilidades = new HashSet<String>();
 		do {
-			String habilidade = Main.lerTexto("Digite a habilidade: ");
+			String habilidade = SistemaConsole.lerTexto("Digite a habilidade: ");
 			habilidades.add(habilidade);
-			opcao = Main.lerTexto("Deseja adicionar mais habilidades? (N/S) ");
+			opcao = SistemaConsole.lerTexto("Deseja adicionar mais habilidades? (N/S) ");
 		} while(opcao.equalsIgnoreCase("S"));
 		
 		return habilidades;
@@ -165,16 +164,16 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 		String opcao = "";
 		Set<String> idiomas = new HashSet<String>();
 		do {
-			String idioma = Main.lerTexto("Digite o idioma: ");
+			String idioma = SistemaConsole.lerTexto("Digite o idioma: ");
 			idiomas.add(idioma);
-			opcao = Main.lerTexto("Deseja adicionar mais idiomas? (N/S) ");
+			opcao = SistemaConsole.lerTexto("Deseja adicionar mais idiomas? (N/S) ");
 		} while(opcao.equalsIgnoreCase("S"));
 		
 		return idiomas;
 	}
 
 	private void adicionarFormacao() {
-		String formacao = Main.lerTexto("\nDigite a formação: ");
+		String formacao = SistemaConsole.lerTexto("\nDigite a formação: ");
 		boolean resultado = controlador.adicionarFormacao(formacao);
 		if(resultado) {
 			System.out.println("Formação adicionada com sucesso.");
@@ -184,8 +183,8 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarFormacao() {
-		String formacaoAntiga = Main.lerTexto("\nDigite a formação que deseja alterar: ");
-		String formacaoNova = Main.lerTexto("Digite a nova formação: ");
+		String formacaoAntiga = SistemaConsole.lerTexto("\nDigite a formação que deseja alterar: ");
+		String formacaoNova = SistemaConsole.lerTexto("Digite a nova formação: ");
 		boolean resultado = controlador.editarFormacao(formacaoAntiga, formacaoNova);
 		if(resultado) {
 			System.out.println("Formação alterada com sucesso.");
@@ -195,7 +194,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarExperiencia() {
-		String experiencia = Main.lerTexto("\nDigite a nova experiência: ");
+		String experiencia = SistemaConsole.lerTexto("\nDigite a nova experiência: ");
 		boolean resultado = controlador.editarExperiencia(experiencia);
 		if(resultado) {
 			System.out.println("Experiência alterada com sucesso.");
@@ -205,7 +204,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void adicionarHabilidades() {
-		String habilidade = Main.lerTexto("\nDigite a habilidade: ");
+		String habilidade = SistemaConsole.lerTexto("\nDigite a habilidade: ");
 		boolean resultado = controlador.adicionarHabilidade(habilidade);
 		if(resultado) {
 			System.out.println("Habilidade adicionada com sucesso.");
@@ -215,8 +214,8 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 		
 	private void alterarHabilidades() {
-		String habilidadeAntiga = Main.lerTexto("\nDigite a habilidade que deseja alterar: ");
-		String habilidadeNova = Main.lerTexto("Digite a nova habilidade: ");
+		String habilidadeAntiga = SistemaConsole.lerTexto("\nDigite a habilidade que deseja alterar: ");
+		String habilidadeNova = SistemaConsole.lerTexto("Digite a nova habilidade: ");
 		boolean resultado = controlador.editarHabilidade(habilidadeAntiga, habilidadeNova);
 		if(resultado) {
 			System.out.println("Habilidade alterada com sucesso.");
@@ -226,7 +225,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void adicionarIdiomas() {
-		String idioma = Main.lerTexto("\nDigite o idioma: ");
+		String idioma = SistemaConsole.lerTexto("\nDigite o idioma: ");
 		boolean resultado = controlador.adicionarIdioma(idioma);
 		if(resultado) {
 			System.out.println("Idioma adicionado com sucesso.");
@@ -236,8 +235,8 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarIdiomas() {
-		String idiomaAntigo = Main.lerTexto("\nDigite o idioma que deseja alterar: ");
-		String idiomaNova = Main.lerTexto("Digite o novo idioma: ");
+		String idiomaAntigo = SistemaConsole.lerTexto("\nDigite o idioma que deseja alterar: ");
+		String idiomaNova = SistemaConsole.lerTexto("Digite o novo idioma: ");
 		boolean resultado = controlador.editarIdioma(idiomaAntigo, idiomaNova);
 		if(resultado) {
 			System.out.println("Idioma alterado com sucesso.");
@@ -256,7 +255,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 
 	private void opcoesDeCandidatura() {
-		int opcao = Main.lerInteiro("Selecione uma opcao: ");
+		int opcao = SistemaConsole.lerInteiro("Selecione uma opcao: ");
 		switch(opcao) {
 			case 0:
 				System.out.println("Voltando...");
@@ -279,7 +278,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void candidatar() {
-		String codigo = Main.lerTexto("\nDigite o codigo da vaga: ");
+		String codigo = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
 		boolean resultado = controlador.registrarCandidatura(codigo);
 		if(resultado) {
 			System.out.println("Candidatura realizada com sucesso.");
@@ -289,8 +288,8 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void cancelarCandidatura() {
-		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
-		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
+		String codigoDaVaga = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
+		int idDaCandidatura = SistemaConsole.lerInteiro("Digite o id da candidatura: ");
 		boolean resultado = controlador.cancelarCandidatura(codigoDaVaga, idDaCandidatura);
 		if(resultado) {
 			System.out.println("Candidatura cancelada.");
@@ -308,7 +307,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void opcoesDeDadosPessoais() {
-		int opcao = Main.lerInteiro("Selecione uma opcao: ");
+		int opcao = SistemaConsole.lerInteiro("Selecione uma opcao: ");
 		switch(opcao) {
 			case 0:
 				System.out.println("Voltando...");
@@ -328,7 +327,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 
 	private void alterarNome() {
-		String novoNome = Main.lerTexto("Digite o novo nome: ");
+		String novoNome = SistemaConsole.lerTexto("Digite o novo nome: ");
 		
 		boolean resultdao = controlador.alterarNome(novoNome);
 		if(resultdao) {
@@ -339,7 +338,7 @@ public class MenuCandidato implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarSenha() {
-		String novaSenha = Main.lerTexto("Digite a nova senha: ");
+		String novaSenha = SistemaConsole.lerTexto("Digite a nova senha: ");
 
 		boolean resultado = controlador.alterarSenha(novaSenha);
 		if(resultado) {

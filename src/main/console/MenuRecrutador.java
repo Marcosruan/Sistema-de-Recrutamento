@@ -1,6 +1,5 @@
 package main.console;
 
-import main.Main;
 import main.controlador.Controlador;
 import main.modelos.interfaces.EstrategiaMenuUsuario;
 
@@ -15,12 +14,12 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	@Override
 	public void cadastrar() {
 		System.out.println("\n=== Cadastro ===");
-		String nome = Main.lerTexto("Digite o nome: ");
-		int idade = Main.lerInteiro("Digite a idade: ");
-		String cpf = Main.lerTexto("Digite o cpf: ");
-		String email = Main.lerTexto("Digite o email: ");
-		String senha = Main.lerTexto("Digite a senha: ");
-		String empresa = Main.lerTexto("Digite a empresa: ");
+		String nome = SistemaConsole.lerTexto("Digite o nome: ");
+		int idade = SistemaConsole.lerInteiro("Digite a idade: ");
+		String cpf = SistemaConsole.lerTexto("Digite o cpf: ");
+		String email = SistemaConsole.lerTexto("Digite o email: ");
+		String senha = SistemaConsole.lerTexto("Digite a senha: ");
+		String empresa = SistemaConsole.lerTexto("Digite a empresa: ");
 		
 		boolean resultado = controlador.cadastrarRecrutador(nome, idade, cpf, email, senha, empresa);
 		
@@ -37,7 +36,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 		
 		do {
 			exibirMenu();
-			opcao = Main.lerInteiro("Sua escolha: ");
+			opcao = SistemaConsole.lerInteiro("Sua escolha: ");
 			switch(opcao) {
 				case 0:
 					System.out.println("Voltando...");
@@ -83,7 +82,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void opcoesDeVaga() {
-		int opcao = Main.lerInteiro("Selecione uma opcao: ");
+		int opcao = SistemaConsole.lerInteiro("Selecione uma opcao: ");
 		switch(opcao) {
 			case 0:
 				System.out.println("Voltando...");
@@ -121,12 +120,12 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void cadastrarVaga() {
-		String codigo = Main.lerTexto("\nDigite o codigo: ");
-		String titulo = Main.lerTexto("Digite o titulo: ");
-		String descricao = Main.lerTexto("Digite a descricao: ");
-		String requisitos = Main.lerTexto("Digite os requisitos: ");
-		double salario = Main.lerDouble("Digite o salario: ");
-		String cidade = Main.lerTexto("Digite a cidade: ");
+		String codigo = SistemaConsole.lerTexto("\nDigite o codigo: ");
+		String titulo = SistemaConsole.lerTexto("Digite o titulo: ");
+		String descricao = SistemaConsole.lerTexto("Digite a descricao: ");
+		String requisitos = SistemaConsole.lerTexto("Digite os requisitos: ");
+		double salario = SistemaConsole.lerDouble("Digite o salario: ");
+		String cidade = SistemaConsole.lerTexto("Digite a cidade: ");
 		
 		boolean resultado = controlador.cadastrarVaga(codigo, titulo, descricao, requisitos, salario, cidade);
 		
@@ -138,7 +137,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void abrirVaga() {
-		String codigo = Main.lerTexto("\nDigite o codigo da vaga: ");
+		String codigo = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
 		boolean resulatado = controlador.abrirVaga(codigo);
 		if(resulatado){
 			System.out.println("Vaga aberta");
@@ -148,7 +147,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void fecharVaga() {
-		String codigo = Main.lerTexto("\nDigite o codigo da vaga: ");
+		String codigo = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
 		boolean resulatado = controlador.fecharVaga(codigo);
 		if(resulatado){
 			System.out.println("Vaga fechada");
@@ -158,8 +157,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarTitulo() {
-		String codigo = Main.lerTexto("\nCodigo da vaga: ");
-		String novoTitulo = Main.lerTexto("Digite o novo titulo: ");
+		String codigo = SistemaConsole.lerTexto("\nCodigo da vaga: ");
+		String novoTitulo = SistemaConsole.lerTexto("Digite o novo titulo: ");
 		boolean resultado = controlador.alterarTituloVaga(codigo, novoTitulo);
 		
 		if(resultado) {
@@ -170,8 +169,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarDescricao() {
-		String codigo = Main.lerTexto("\nCodigo da vaga: ");
-		String novaDescricao = Main.lerTexto("Digite a nova descrição: ");
+		String codigo = SistemaConsole.lerTexto("\nCodigo da vaga: ");
+		String novaDescricao = SistemaConsole.lerTexto("Digite a nova descrição: ");
 		boolean resultado = controlador.alterarDescricaoVaga(codigo, novaDescricao);
 		
 		if(resultado) {
@@ -182,8 +181,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void alterarRequisitos() {
-		String codigo = Main.lerTexto("\nCodigo da vaga: ");
-		String novosRequisitos = Main.lerTexto("Digite os novos requisitos: ");
+		String codigo = SistemaConsole.lerTexto("\nCodigo da vaga: ");
+		String novosRequisitos = SistemaConsole.lerTexto("Digite os novos requisitos: ");
 		boolean resultado = controlador.alterarRequisitosVaga(codigo, novosRequisitos);
 		
 		if(resultado) {
@@ -194,8 +193,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void alterarSalario() {
-		String codigo = Main.lerTexto("\nCodigo da vaga: ");
-		double novoSalario = Main.lerDouble("Digite o novo salário: ");
+		String codigo = SistemaConsole.lerTexto("\nCodigo da vaga: ");
+		double novoSalario = SistemaConsole.lerDouble("Digite o novo salário: ");
 		boolean resultado = controlador.alterarSalarioVaga(codigo, novoSalario);
 		
 		if(resultado) {
@@ -206,8 +205,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void alterarCidade() {
-		String codigo = Main.lerTexto("\nCodigo da vaga: ");
-		String novaCidade = Main.lerTexto("Digite a nova cidade: ");
+		String codigo = SistemaConsole.lerTexto("\nCodigo da vaga: ");
+		String novaCidade = SistemaConsole.lerTexto("Digite a nova cidade: ");
 		boolean resultado = controlador.alterarCidadeVaga(codigo, novaCidade);
 		
 		if(resultado) {
@@ -220,15 +219,16 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	private void exibirMenuCandidatura() {
 		System.out.println("\n=== Menu Candidatura ===");
 		System.out.println("1 - Ver candidaturas");
-		System.out.println("2 - Colocar candidatura em análise");
-		System.out.println("3 - Marcar entrevista de candidato");
-		System.out.println("4 - Aprovar candidatura");
-		System.out.println("5 - Reprovar candidatura");
+		System.out.println("2 - Ver currículo do candidato");
+		System.out.println("3 - Colocar candidatura em análise");
+		System.out.println("4 - Marcar entrevista de candidato");
+		System.out.println("5 - Aprovar candidatura");
+		System.out.println("6 - Reprovar candidatura");
 		System.out.println("0 - Sair");
 	}
 	
 	private void opcoesDeCandidatura() {
-		int opcao = Main.lerInteiro("Digite sua opcao: ");
+		int opcao = SistemaConsole.lerInteiro("Digite sua opcao: ");
 		
 		switch(opcao) {
 			case 0:
@@ -238,15 +238,18 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 				verCandidaturas();
 				break;
 			case 2:
-				candidaturaEmAnalise();
+				verCurriculoDoCandidato();
 				break;
 			case 3:
-				marcarEntrevista();
+				candidaturaEmAnalise();
 				break;
 			case 4:
-				aprovarCandidatura();
+				marcarEntrevista();
 				break;
 			case 5:
+				aprovarCandidatura();
+				break;
+			case 6:
 				reprovarCandidatura();
 				break;
 			default:
@@ -254,15 +257,23 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 		}
 	}
 	
+	private void verCurriculoDoCandidato() {
+		String codigoDaVaga = SistemaConsole.lerTexto("\nInforme o codigo da vaga: ");
+		int idDaCandidatura = SistemaConsole.lerInteiro("Digite o id da candidatura: ");
+		
+		String resultado = controlador.exibirCurriculoDoCandidato(codigoDaVaga, idDaCandidatura);
+		System.out.println(resultado);
+	}
+
 	private void verCandidaturas() {
-		String codigoDaVaga = Main.lerTexto("\nInforme o codigo da vaga: ");
+		String codigoDaVaga = SistemaConsole.lerTexto("\nInforme o codigo da vaga: ");
 		System.out.println("Candidaturas para esta vaga: ");
 		System.out.println(controlador.verCandidaturasPorVaga(codigoDaVaga));
 	}
 	
 	private void candidaturaEmAnalise() {
-		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
-		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
+		String codigoDaVaga = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
+		int idDaCandidatura = SistemaConsole.lerInteiro("Digite o id da candidatura: ");
 		
 		boolean resultado = controlador.colocarCandidaturaEmAnalise(codigoDaVaga, idDaCandidatura);
 		if(resultado) {
@@ -273,8 +284,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void marcarEntrevista() {
-		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
-		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
+		String codigoDaVaga = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
+		int idDaCandidatura = SistemaConsole.lerInteiro("Digite o id da candidatura: ");
 
 		boolean resultado = controlador.marcarEntrevista(codigoDaVaga, idDaCandidatura);
 		if(resultado) {
@@ -285,8 +296,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void aprovarCandidatura() {
-		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
-		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
+		String codigoDaVaga = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
+		int idDaCandidatura = SistemaConsole.lerInteiro("Digite o id da candidatura: ");
 
 		boolean resultado = controlador.aprovarCandidatura(codigoDaVaga, idDaCandidatura);
 		if(resultado) {
@@ -297,8 +308,8 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void reprovarCandidatura() {
-		String codigoDaVaga = Main.lerTexto("\nDigite o codigo da vaga: ");
-		int idDaCandidatura = Main.lerInteiro("Digite o id da candidatura: ");
+		String codigoDaVaga = SistemaConsole.lerTexto("\nDigite o codigo da vaga: ");
+		int idDaCandidatura = SistemaConsole.lerInteiro("Digite o id da candidatura: ");
 
 		boolean resultado = controlador.reprovarCandidatura(codigoDaVaga, idDaCandidatura);
 		if(resultado) {
@@ -318,7 +329,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void opcoesDeDadosPessoais() {
-		int opcao = Main.lerInteiro("Digite sua opcao: ");
+		int opcao = SistemaConsole.lerInteiro("Digite sua opcao: ");
 		
 		switch(opcao) {
 			case 0:
@@ -342,7 +353,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarNome() {
-		String novoNome = Main.lerTexto("\nDigite o novo nome: ");
+		String novoNome = SistemaConsole.lerTexto("\nDigite o novo nome: ");
 		
 		boolean resultdao = controlador.alterarNome(novoNome);
 		if(resultdao) {
@@ -353,7 +364,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 	
 	private void alterarSenha() {
-		String novaSenha = Main.lerTexto("\nDigite a nova senha: ");
+		String novaSenha = SistemaConsole.lerTexto("\nDigite a nova senha: ");
 
 		boolean resultado = controlador.alterarSenha(novaSenha);
 		if(resultado) {
@@ -364,7 +375,7 @@ public class MenuRecrutador implements EstrategiaMenuUsuario {
 	}
 
 	private void alterarEmpresa() {
-		String novaEmpresa = Main.lerTexto("\nDigite a nova empresa: ");
+		String novaEmpresa = SistemaConsole.lerTexto("\nDigite a nova empresa: ");
 
 		boolean resultado = controlador.alterarEmpresa(novaEmpresa);
 		if(resultado) {

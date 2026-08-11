@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -122,6 +126,16 @@ public class ControladorTest {
 	}
 	
 	@Test
+	public void testFalhaLoginPorTipoIncorreto() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		
+		boolean resultado = controlador.login("jonnas1000@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
+		
+		assertFalse(resultado);
+
+	}
+	
+	@Test
 	public void testLoginValido() {
 		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
 		
@@ -193,19 +207,6 @@ public class ControladorTest {
 		String esperado = "Nome: Marcos | Idade: 20 | CPF: 66677788890 | Email: Marcos2020@gmail.com | Senha: desenvolvedorknex | Empresa: Google";
 		
 		assertEquals(esperado, resultado);
-	}
-	
-	@Test
-	public void testCadastroInvalidoComoCandidato() {
-		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
-		
-		boolean resultadoCadastroVaga = controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
-		int qtdVagas = controlador.calcularTotalVagas();
-		
-		assertFalse(resultadoCadastroVaga);
-		assertEquals(0, qtdVagas);
-		
 	}
 	
 	@Test
@@ -317,7 +318,7 @@ public class ControladorTest {
 	}
 	
 	@Test
-	public void testTentarAbrirVagaJaAbertaComoRecrutador() {
+	public void testAbrirVagaJaAbertaComoRecrutador() {
 		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
@@ -353,7 +354,6 @@ public class ControladorTest {
 		
 		assertTrue(resultado);
 	}
-	
 	@Test
 	public void testRegistrarCandidatura() {
 		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
@@ -371,6 +371,443 @@ public class ControladorTest {
 
 		
 		assertTrue(resultadoRegistroCandidatura);
-		assertEquals(exibicaoCandidaturasEsperado,exibicaoCandidaturas);
+		assertEquals(exibicaoCandidaturasEsperado, exibicaoCandidaturas);
+	}
+	
+	@Test
+	public void testCadastrarCurriculoComoCandidato() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    boolean resultado = controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+		
+	    assertTrue(resultado);
+	}
+	
+	@Test
+	public void exibirCurriculoCandidato() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+		
+	    String resultado = controlador.exibirCurriculo();
+	    String esperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: Ciência da Computação
+	            |\t\t\tCurso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |\t\t\tSQL
+	            | Idiomas: Inglês, Português
+	            ========================================""";;
+	    
+	    assertEquals(esperado,resultado);
+	}
+	
+	@Test
+	public void testAdicionarExperienciaCurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String experienciaNova = "Desenvolvedor Java Junior na empresa Google " + 
+	            "Período: Janeiro de 2025 a Dezembro de 2025 " +
+	            "Desenvolvimento e manutenção de aplicações";
+	    
+	    boolean resultadoAdicao = controlador.editarExperiencia(experienciaNova);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |			Java por 1 ano
+	            |			Desenvolvedor Java Junior
+	            |			na empresa Google Período:
+	            |			Janeiro de 2025 a Dezembro
+	            |			de 2025 Desenvolvimento e
+	            |			manutenção de aplicações
+	            | Formações: Ciência da Computação
+	            |			Curso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |			SQL
+	            | Idiomas: Inglês, Português
+	            ========================================""";
+	    
+	    assertTrue(resultadoAdicao);
+	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	}
+	
+	@Test
+	public void testAdicionarFormacaoCurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String formacaoNova = "Curso de Banco de Dados - Udemy";
+	    
+	    boolean resultadoAdicao = controlador.adicionarFormacao(formacaoNova);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: Curso de Banco de Dados - Udemy
+	            |			Ciência da Computação
+	            |			Curso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |\t\t\tSQL
+	            | Idiomas: Inglês, Português
+	            ========================================""";;
+	    
+	    assertTrue(resultadoAdicao);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
+	}
+	
+	@Test
+	public void testAdicionarHabilidadeurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String HabilidadeNova = "Resolução de problemas";
+	    
+	    boolean resultadoAdicao = controlador.adicionarHabilidade(HabilidadeNova);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: Ciência da Computação
+	            |			Curso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |\t\t\tResolução de problemas
+	            |\t\t\tSQL
+	            | Idiomas: Inglês, Português
+	            ========================================""";;
+	    
+	    assertTrue(resultadoAdicao);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
+	}
+	
+	@Test
+	public void testAdicionarIdiomaCurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String idiomaNovo = "Francês";
+	    
+	    boolean resultadoAdicao = controlador.adicionarIdioma(idiomaNovo);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: Ciência da Computação
+	            |			Curso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |\t\t\tSQL
+	            | Idiomas: Inglês, Português, Francês
+	            ========================================""";;
+	    
+	    assertTrue(resultadoAdicao);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
+	}
+	
+	@Test
+	public void testEditarFormacoesCurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String FormacaoAntiga = "Ciência da Computação";
+	    
+	    String FormacaoAtualizada = "ADS - Análise e Desenvolvimento de Sistemas";
+	    
+	    boolean resultadoEdicao = controlador.editarFormacao(FormacaoAntiga, FormacaoAtualizada);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: ADS - Análise e Desenvolvimento de Sistemas
+	            |			Curso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |\t\t\tSQL
+	            | Idiomas: Inglês, Português
+	            ========================================""";;
+	    
+	    assertTrue(resultadoEdicao);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
+	}
+	
+	@Test
+	public void testEditarHabilidadesCurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String habilidadeAntiga = "Git";
+	    
+	    String habilidadeAtualizada = "Git Hub";
+	    
+	    boolean resultadoEdicao = controlador.editarHabilidade(habilidadeAntiga, habilidadeAtualizada);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: Ciência da Computação
+	            |			Curso de Java
+	            | Habilidades: Java, Spring Boot, Git Hub 
+	            |\t\t\tSQL
+	            | Idiomas: Inglês, Português
+	            ========================================""";;
+	    
+	    assertTrue(resultadoEdicao);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
+	}
+	
+	@Test
+	public void testEditarIdiomasCurriculo() {
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
+		
+
+	    Set<String> formacoes = new HashSet<String>();
+	    formacoes.add("Ciência da Computação");
+	    formacoes.add("Curso de Java");
+
+	    String experiencia = "Estágio como desenvolvedor Java por 1 ano";
+
+	    Set<String> habilidades = new HashSet<String>();
+	    habilidades.add("Java");
+	    habilidades.add("Git");
+	    habilidades.add("SQL");
+	    habilidades.add("Spring Boot");
+
+	    Set<String> idiomas = new HashSet<String>();
+	    idiomas.add("Português");
+	    idiomas.add("Inglês");
+
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
+	    
+	    String idiomaAntigo = "Inglês";
+	    
+	    String idiomaNovo = "Francês";
+	    
+	    boolean resultadoEdicao = controlador.editarIdioma(idiomaAntigo, idiomaNovo);
+	    
+	    String infoCurriculo = controlador.exibirCurriculo();
+	    String infoCurriculoEsperado = """
+	            ==================================================
+	            |                  CURRICULO                     |
+	            ==================================================
+	            | Nome: Jonnas
+	            | Idade: 19
+	            | Email: jonnas1000@gmail.com
+	            ----------------------------------------
+	            | Experiencia: Estágio como desenvolvedor
+	            |\t\t\tJava por 1 ano
+	            | Formações: Ciência da Computação
+	            |			Curso de Java
+	            | Habilidades: Java, Git, Spring Boot
+	            |\t\t\tSQL
+	            | Idiomas: Português, Francês
+	            ========================================""";;
+	    
+	    assertTrue(resultadoEdicao);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 }

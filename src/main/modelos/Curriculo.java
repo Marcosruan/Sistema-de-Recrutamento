@@ -36,7 +36,7 @@ public class Curriculo {
 	
 	public void adicionarExperiencia(String experiencia) throws IllegalArgumentException{
 		validaString(experiencia);
-		this.experiencia = experiencia;
+		this.experiencia += " " + experiencia;
 	}
 	
 	public void adicionarHabilidade(String habilidade) {
@@ -56,9 +56,9 @@ public class Curriculo {
 	public void editarFormacao(String formacaoAntiga, String formacaoNova) throws IllegalArgumentException{
 		validaString(formacaoAntiga);
 		validaString(formacaoNova);
-		if (this.habilidades.contains(formacaoAntiga)) {
-	        this.habilidades.remove(formacaoAntiga);
-	        this.habilidades.add(formacaoNova);
+		if (this.formacoes.contains(formacaoAntiga)) {
+	        this.formacoes.remove(formacaoAntiga);
+	        this.formacoes.add(formacaoNova);
 	    } else {
 	        throw new IllegalArgumentException("Formação não encontrada para edição.");
 	    }
@@ -78,9 +78,9 @@ public class Curriculo {
 	public void editarIdiomas(String IdiomaAntigo, String idiomaNovo) throws IllegalArgumentException{
 		validaString(IdiomaAntigo);
 		validaString(idiomaNovo);
-		if (this.habilidades.contains(IdiomaAntigo)) {
-	        this.habilidades.remove(IdiomaAntigo);
-	        this.habilidades.add(idiomaNovo);
+		if (this.idiomas.contains(IdiomaAntigo)) {
+	        this.idiomas.remove(IdiomaAntigo);
+	        this.idiomas.add(idiomaNovo);
 	    } else {
 	        throw new IllegalArgumentException("Formação não encontrada para edição.");
 	    }
@@ -94,11 +94,11 @@ public class Curriculo {
 			    |                  CURRICULO                     |
 			    ==================================================
 			    """;
-		curriculo += String.format("| Nome: %s%n", candidatoDono.getNome());
-		curriculo += String.format("| Idade: %d%n", candidatoDono.getIdade());
-		curriculo += String.format("| Email: %s%n", candidatoDono.getEmail());
+		curriculo += String.format("| Nome: %s\n", candidatoDono.getNome());
+		curriculo += String.format("| Idade: %d\n", candidatoDono.getIdade());
+		curriculo += String.format("| Email: %s\n", candidatoDono.getEmail());
 		curriculo += "----------------------------------------\n";
-		
+
 		List<String> experienciaFormatada = quebrarTexto(experiencia, " ", 40 - 14);
 		
 		for (int i = 0; i < experienciaFormatada.size(); i++) {
@@ -112,8 +112,9 @@ public class Curriculo {
 		                 "\n";
 		    }
 		}
-		
-		List<String> formacoesFormatada = quebrarTexto(String.join(", "), ", ", 40 - 13);
+
+		List<String> formacoesFormatada = quebrarTexto(String.join(", ",formacoes), ", ", 40 - 13);
+
 		for (int i = 0; i < formacoesFormatada.size(); i++) {
 		    if (i == 0) {
 		        curriculo += ("| Formações: ") +
@@ -168,7 +169,9 @@ public class Curriculo {
 	    for (String palavra : palavras) {
 
 	        if (linhaAtual.length() + palavra.length() + 1 > tamanhoMaximo) {
-	            linhas.add(linhaAtual);
+	            if (!linhaAtual.isEmpty()) {
+	                linhas.add(linhaAtual);
+	            }
 	            linhaAtual = "";
 	        }
 

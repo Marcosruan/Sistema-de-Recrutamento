@@ -14,6 +14,7 @@ public class Vaga {
 	private String empresa;
 	private boolean aberta;
 	private List<Candidatura> candidaturas;
+	private int totalDeCandidaturas = 0;
 
 	public Vaga(String codigo, String titulo, String descricao, String requisitos, double salario, String cidade, String empresa) {
 		this.codigo = codigo;
@@ -25,6 +26,7 @@ public class Vaga {
 		this.empresa = empresa;
 		this.aberta = true;
 		this.candidaturas = new ArrayList<Candidatura>();
+		totalDeCandidaturas++;
 	}
 
 	public void abrirVaga() {
@@ -89,6 +91,10 @@ public class Vaga {
 	
 	public void setCandidaturas(Candidatura candidatura) {
 		this.candidaturas.add(candidatura);
+	}
+	
+	public int getTotalDeCandidaturas() {
+		return totalDeCandidaturas;
 	}
 	
 	@Override
