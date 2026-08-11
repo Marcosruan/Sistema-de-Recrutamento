@@ -31,7 +31,7 @@ public abstract class Usuario {
 		}
 	}
 	
-	private void validarIdade(int idade) {
+	private void validarIdade(int idade) throws IllegalArgumentException{
 		if(idade <= 14 || idade > 100) {
 			throw new IllegalArgumentException("Idade inválida. É preciso ter entre 14 e 100 anos.");
 		}
