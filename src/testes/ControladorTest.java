@@ -318,7 +318,7 @@ public class ControladorTest {
 	}
 	
 	@Test
-	public void testTentarAbrirVagaJaAbertaComoRecrutador() {
+	public void testAbrirVagaJaAbertaComoRecrutador() {
 		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
@@ -371,13 +371,13 @@ public class ControladorTest {
 
 		
 		assertTrue(resultadoRegistroCandidatura);
-		assertEquals(exibicaoCandidaturasEsperado,exibicaoCandidaturas);
+		assertEquals(exibicaoCandidaturasEsperado, exibicaoCandidaturas);
 	}
 	
 	@Test
 	public void testCadastrarCurriculoComoCandidato() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -396,14 +396,14 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    boolean resultado = controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    boolean resultado = controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 		
 	    assertTrue(resultado);
 	}
 	
 	@Test
 	public void exibirCurriculoCandidato() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
 		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
 		
 
@@ -423,7 +423,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 		
 	    String resultado = controlador.exibirCurriculo();
 	    String esperado = """
@@ -448,8 +448,8 @@ public class ControladorTest {
 	
 	@Test
 	public void testAdicionarExperienciaCurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -468,7 +468,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String experienciaNova = "Desenvolvedor Java Junior na empresa Google " + 
 	            "Período: Janeiro de 2025 a Dezembro de 2025 " +
@@ -505,8 +505,8 @@ public class ControladorTest {
 	
 	@Test
 	public void testAdicionarFormacaoCurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -525,7 +525,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String formacaoNova = "Curso de Banco de Dados - Udemy";
 	    
@@ -551,13 +551,13 @@ public class ControladorTest {
 	            ========================================""";;
 	    
 	    assertTrue(resultadoAdicao);
-	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 	
 	@Test
 	public void testAdicionarHabilidadeurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -576,7 +576,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String HabilidadeNova = "Resolução de problemas";
 	    
@@ -602,13 +602,13 @@ public class ControladorTest {
 	            ========================================""";;
 	    
 	    assertTrue(resultadoAdicao);
-	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 	
 	@Test
 	public void testAdicionarIdiomaCurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -627,7 +627,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String idiomaNovo = "Francês";
 	    
@@ -652,13 +652,13 @@ public class ControladorTest {
 	            ========================================""";;
 	    
 	    assertTrue(resultadoAdicao);
-	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 	
 	@Test
 	public void testEditarFormacoesCurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -677,7 +677,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String FormacaoAntiga = "Ciência da Computação";
 	    
@@ -704,13 +704,13 @@ public class ControladorTest {
 	            ========================================""";;
 	    
 	    assertTrue(resultadoEdicao);
-	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 	
 	@Test
 	public void testEditarHabilidadesCurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -729,7 +729,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String habilidadeAntiga = "Git";
 	    
@@ -756,13 +756,13 @@ public class ControladorTest {
 	            ========================================""";;
 	    
 	    assertTrue(resultadoEdicao);
-	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 	
 	@Test
 	public void testEditarIdiomasCurriculo() {
-		controlador.cadastrarCandidato("Jonnas",19,"55511133300","jonnas1000@gmail.com","desenvolvedorJunior");
-		controlador.login("jonnas1000@gmail.com","desenvolvedorJunior",TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Jonnas", 19, "55511133300", "jonnas1000@gmail.com", "desenvolvedorJunior");
+		controlador.login("jonnas1000@gmail.com", "desenvolvedorJunior", TipoUsuario.CANDIDATO);
 		
 
 	    Set<String> formacoes = new HashSet<String>();
@@ -781,7 +781,7 @@ public class ControladorTest {
 	    idiomas.add("Português");
 	    idiomas.add("Inglês");
 
-	    controlador.cadastrarCurriculo(formacoes,experiencia,habilidades,idiomas);
+	    controlador.cadastrarCurriculo(formacoes, experiencia, habilidades, idiomas);
 	    
 	    String idiomaAntigo = "Inglês";
 	    
@@ -808,6 +808,6 @@ public class ControladorTest {
 	            ========================================""";;
 	    
 	    assertTrue(resultadoEdicao);
-	    assertEquals(infoCurriculoEsperado,infoCurriculo);
+	    assertEquals(infoCurriculoEsperado, infoCurriculo);
 	}
 }
