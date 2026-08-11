@@ -354,20 +354,21 @@ public class ControladorTest {
 		
 		assertTrue(resultado);
 	}
+	
 	@Test
 	public void testRegistrarCandidatura() {
 		controlador.cadastrarRecrutador("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex", "KNEX");
 		controlador.login("Marcos2020@gmail.com", "desenvolvedorknex", TipoUsuario.RECRUTADOR);
 		
-		controlador.cadastrarVaga("01", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
+		controlador.cadastrarVaga("1", "Desenvolvedor Java Junior", "Desenvolvimento de aplicações", "Java, Spring Boot, Git", 3000.00, "São Paulo");
 		
-		controlador.cadastrarCandidato("Marcos", 20, "66677788890", "Marcos2020@gmail.com", "desenvolvedorknex");
-		controlador.login("Marcos2020@gmail.com","desenvolvedorknex", TipoUsuario.CANDIDATO);
+		controlador.cadastrarCandidato("Marcos", 20, "66677788890", "Ruan2020@gmail.com", "desenvolvedorknex");
+		controlador.login("Ruan2020@gmail.com","desenvolvedorknex", TipoUsuario.CANDIDATO);
 		
-		boolean resultadoRegistroCandidatura = controlador.registrarCandidatura("01");
+		boolean resultadoRegistroCandidatura = controlador.registrarCandidatura("1");
 		
-		String exibicaoCandidaturas = controlador.verCandidaturasPorVaga("01");
-		String exibicaoCandidaturasEsperado = "1# [Desenvolvedor Java Junior] Candidatura de: [Candidato] Nome: Marcos | Email: Marcos2020@gmail.com\nStatus da cadidatura: Em análise";
+		String exibicaoCandidaturas = controlador.verCandidaturasPorVaga("1");
+		String exibicaoCandidaturasEsperado = "1# [Desenvolvedor Java Junior] Candidatura de: [Candidato] Nome: Marcos | Email: Ruan2020@gmail.com\nStatus da cadidatura: Em análise";
 
 		
 		assertTrue(resultadoRegistroCandidatura);

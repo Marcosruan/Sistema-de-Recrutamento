@@ -28,6 +28,8 @@ public class Sistema {
 	
 	public boolean cadastrarCandidato(String nome, int idade, String cpf, String email, String senha) {
 		try {
+			Usuario usuarioExiste = usuarios.get(email);
+			if (usuarioExiste != null) return false;
 			Usuario novoUsuario = new Candidato(nome, idade, cpf, email, senha);
 			usuarios.put(email, novoUsuario);
 			return true;
@@ -39,6 +41,8 @@ public class Sistema {
 	
 	public boolean cadastrarRecrutador(String nome, int idade, String cpf, String email, String senha, String empresa) {
 		try {
+			Usuario usuarioExiste = usuarios.get(email);
+			if (usuarioExiste != null) return false;
 			Usuario novoUsuario = new Recrutador(nome, idade, cpf, email, senha, empresa);
 			usuarios.put(email, novoUsuario);
 			return true;
@@ -224,7 +228,7 @@ public class Sistema {
 		try {
 			Candidato candidato = (Candidato) usuarioLogado;
 			Candidatura candidatura = new Candidatura(candidato, vaga);
-			candidato.candidatarVaga(candidatura);
+			if (!candidato.candidatarVaga(candidatura)) return false;
 			vaga.setCandidaturas(candidatura);
 			return true;
 		} catch (Exception e) {
@@ -253,10 +257,16 @@ public class Sistema {
 	}
 	
 	public String exibirCurriculoDoCandidato(String codigo, int id) {
-		Candidatura candidatura = getCandidatura(codigo, id);
-		if(candidatura == null) return "Candidatura não registrada"; 
-		Candidato candidato = (Candidato) candidatura.getCandidato();
-		return candidato.getCurriculo().toString();
+		try {
+			Candidatura candidatura = getCandidatura(codigo, id);
+			if(candidatura == null) return "Candidatura não registrada"; 
+			Candidato candidato = (Candidato) candidatura.getCandidato();
+			if (candidato.getCurriculo() == null) return "Nenhum curriculo cadastrado.";
+			return candidato.getCurriculo().toString();
+	  } catch (IllegalStateException e) {
+			System.out.println(e.getMessage());
+			return "Nenhum curriculo cadastrado.";
+	  }
 	}
 	
 	public Candidatura getCandidatura(String codigo, int id) {
@@ -278,8 +288,8 @@ public class Sistema {
 	
 	public String getCandidaturaDoCandidato() {
 		Candidato usuarioCandidato = (Candidato) usuarioLogado;
-		List<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
-		if (candidaturas.size() == 0) return "Nenhuma candidatura cadastrada.";
+		Set<Candidatura> candidaturas = usuarioCandidato.getCandidaturas();
+		if (candidaturas.isEmpty()) return "Nenhuma candidatura cadastrada.";
 		String texto = "";
 		for (Candidatura candidatura: candidaturas) {
 			if (candidatura.getStatus() != StatusCandidatura.CANCELADA) {
